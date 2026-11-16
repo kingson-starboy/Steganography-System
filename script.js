@@ -19,7 +19,7 @@
   ];
 
   let currentSlideIndex = 0;
-  let isPaused = false;
+  let isPaused = true; // Start in Explore Mode so visitors can explore at their own pace
   let slideTimer = null;
   let slideStartTime = Date.now();
   let remainingTime = SLIDE_DURATION;
@@ -54,7 +54,15 @@
     }
 
     goToSlide(currentSlideIndex, false);
-    startSlideTimer();
+
+    // Initialize in Explore Mode
+    if (pauseResumeBtn) {
+      pauseResumeBtn.innerHTML = `<span>Auto Play</span><i style="font-style:normal;">▶</i>`;
+    }
+    if (autoStatusIndicator) {
+      autoStatusIndicator.classList.add('paused');
+      autoStatusIndicator.title = "Explore Mode (Click Auto Play to auto-tour)";
+    }
 
     // Event Listeners for Controls
     if (pauseResumeBtn) {
@@ -140,6 +148,8 @@
       slideStartTime = Date.now();
       if (!isPaused) {
         startSlideTimer();
+      } else {
+        if (progressBar) progressBar.style.width = '0%';
       }
     }
   }
@@ -186,27 +196,26 @@
     isPaused = !isPaused;
 
     if (isPaused) {
-      // Calculate remaining time
-      const elapsed = Date.now() - slideStartTime;
-      remainingTime = Math.max(500, remainingTime - elapsed);
       clearTimeout(slideTimer);
       cancelAnimationFrame(progressAnimationId);
+      if (progressBar) progressBar.style.width = '0%';
 
       if (pauseResumeBtn) {
-        pauseResumeBtn.innerHTML = `<span>▶ Resume</span><i style="font-style:normal;">▶</i>`;
+        pauseResumeBtn.innerHTML = `<span>Auto Play</span><i style="font-style:normal;">▶</i>`;
       }
       if (autoStatusIndicator) {
         autoStatusIndicator.classList.add('paused');
-        autoStatusIndicator.title = "Presentation Paused";
+        autoStatusIndicator.title = "Explore Mode Active";
       }
     } else {
       if (pauseResumeBtn) {
-        pauseResumeBtn.innerHTML = `<span>⏸ Pause</span><i style="font-style:normal;">⏸</i>`;
+        pauseResumeBtn.innerHTML = `<span>Pause</span><i style="font-style:normal;">⏸</i>`;
       }
       if (autoStatusIndicator) {
         autoStatusIndicator.classList.remove('paused');
         autoStatusIndicator.title = "Auto Presentation Active";
       }
+      remainingTime = SLIDE_DURATION;
       startSlideTimer();
     }
   }
