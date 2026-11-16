@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="partyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#ff4b72" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#12011b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="champagneGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff4b8"/>
+      <stop offset="50%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+    <linearGradient id="glassStem" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#d4af37" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="cBloom">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" rx="30" fill="#140220"/>
+  <circle cx="300" cy="300" r="270" fill="url(#partyGlow)"/>
+
+  <!-- Festive Golden Fairy Lights Hanging -->
+  <path d="M 0 60 Q 150 120 300 70 Q 450 120 600 60" fill="none" stroke="#d4af37" stroke-width="2" opacity="0.6"/>
+  <g fill="#ffd700" filter="url(#cBloom)">
+    <circle cx="75" cy="85" r="6"/><circle cx="150" cy="98" r="7"/><circle cx="225" cy="88" r="6"/>
+    <circle cx="300" cy="70" r="8"/><circle cx="375" cy="88" r="6"/><circle cx="450" cy="98" r="7"/><circle cx="525" cy="85" r="6"/>
+  </g>
+
+  <!-- Left Champagne Flute Clinking -->
+  <g transform="translate(230, 310) rotate(18)">
+    <!-- Glass bowl -->
+    <path d="M -22 -120 L 22 -120 L 16 0 C 16 30 -16 30 -16 0 Z" fill="rgba(255, 255, 255, 0.15)" stroke="url(#champagneGold)" stroke-width="2.5"/>
+    <!-- Liquid inside -->
+    <path d="M -18 -80 L 18 -80 L 14 0 C 14 22 -14 22 -14 0 Z" fill="url(#champagneGold)" opacity="0.85"/>
+    <!-- Stem and Base -->
+    <line x1="0" y1="25" x2="0" y2="120" stroke="url(#glassStem)" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="0" cy="120" rx="32" ry="8" fill="url(#champagneGold)"/>
+  </g>
+
+  <!-- Right Champagne Flute Clinking -->
+  <g transform="translate(370, 310) rotate(-18)">
+    <!-- Glass bowl -->
+    <path d="M -22 -120 L 22 -120 L 16 0 C 16 30 -16 30 -16 0 Z" fill="rgba(255, 255, 255, 0.15)" stroke="url(#champagneGold)" stroke-width="2.5"/>
+    <!-- Liquid inside -->
+    <path d="M -18 -80 L 18 -80 L 14 0 C 14 22 -14 22 -14 0 Z" fill="url(#champagneGold)" opacity="0.85"/>
+    <!-- Stem and Base -->
+    <line x1="0" y1="25" x2="0" y2="120" stroke="url(#glassStem)" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="0" cy="120" rx="32" ry="8" fill="url(#champagneGold)"/>
+  </g>
+
+  <!-- Clinking Cheers Spark Burst -->
+  <g transform="translate(300, 240)" filter="url(#cBloom)">
+    <circle cx="0" cy="0" r="16" fill="#ffffff"/>
+    <circle cx="0" cy="0" r="28" fill="#ffd700" opacity="0.6"/>
+    <!-- Rays -->
+    <line x1="0" y1="-45" x2="0" y2="45" stroke="#fff" stroke-width="3"/>
+    <line x1="-45" y1="0" x2="45" y2="0" stroke="#fff" stroke-width="3"/>
+    <line x1="-32" y1="-32" x2="32" y2="32" stroke="#ffd700" stroke-width="2.5"/>
+    <line x1="-32" y1="32" x2="32" y2="-32" stroke="#ffd700" stroke-width="2.5"/>
+  </g>
+
+  <!-- Effervescent Bubbles & Confetti -->
+  <g fill="#ffd700" filter="url(#cBloom)">
+    <circle cx="280" cy="190" r="5"/><circle cx="315" cy="170" r="6"/><circle cx="295" cy="140" r="4"/><circle cx="330" cy="130" r="5"/>
+    <circle cx="270" cy="110" r="7"/><circle cx="310" cy="95" r="5"/>
+  </g>
+
+  <!-- Confetti ribbons & streamers -->
+  <path d="M 90 200 Q 140 280 110 360 Q 90 420 130 480" fill="none" stroke="#ff758c" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 510 200 Q 460 280 490 360 Q 510 420 470 480" fill="none" stroke="#ba68c8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 160 450 Q 220 420 280 460" fill="none" stroke="#ffd700" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 440 450 Q 380 420 320 460" fill="none" stroke="#ffd700" stroke-width="4" stroke-linecap="round"/>
+</svg>

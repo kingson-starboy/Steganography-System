@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 580" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#420952"/>
+      <stop offset="100%" stop-color="#992265"/>
+    </linearGradient>
+    <radialGradient id="glowRad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="mBloom">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Dark Rich Card Background -->
+  <rect width="500" height="580" rx="24" fill="#180426"/>
+
+  <!-- Inner Picture Frame Area -->
+  <rect x="35" y="35" width="430" height="390" rx="18" fill="url(#bgGrad)"/>
+  <circle cx="250" cy="230" r="160" fill="url(#glowRad)"/>
+
+  <!-- Icon Scene based on type -->
+  
+<g transform="translate(250, 220)" filter="url(#mBloom)">
+  <!-- Compass Rose -->
+  <circle cx="0" cy="0" r="75" fill="none" stroke="#ffd700" stroke-width="3"/>
+  <circle cx="0" cy="0" r="65" fill="#4a154b" opacity="0.6"/>
+  <!-- Points -->
+  <polygon points="0,-60 14,0 0,-10" fill="#ffd700"/>
+  <polygon points="0,-60 -14,0 0,-10" fill="#cca328"/>
+  <polygon points="0,60 14,0 0,10" fill="#cca328"/>
+  <polygon points="0,60 -14,0 0,10" fill="#ffd700"/>
+  <polygon points="60,0 0,14 10,0" fill="#ffd700"/>
+  <polygon points="60,0 0,-14 10,0" fill="#cca328"/>
+  <polygon points="-60,0 0,14 -10,0" fill="#cca328"/>
+  <polygon points="-60,0 0,-14 -10,0" fill="#ffd700"/>
+  <circle cx="0" cy="0" r="10" fill="#ffffff"/>
+</g>
+
+
+  <!-- Lower Title / Caption area with gold & cursive text -->
+  <text x="250" y="475" font-family="'Great Vibes', 'Playfair Display', cursive, serif" font-size="34" fill="#ffd700" text-anchor="middle" font-weight="600">Adventures & Joy</text>
+  <text x="250" y="520" font-family="'Montserrat', sans-serif" font-size="14" fill="#e0b8ff" text-anchor="middle" letter-spacing="2">Every Journey Becomes Unforgettable</text>
+
+  <!-- Sparkles -->
+  <g fill="#ffd700" filter="url(#mBloom)">
+    <circle cx="65" cy="65" r="3"/><circle cx="435" cy="65" r="3"/>
+    <circle cx="70" cy="395" r="2.5"/><circle cx="430" cy="395" r="2.5"/>
+  </g>
+</svg>

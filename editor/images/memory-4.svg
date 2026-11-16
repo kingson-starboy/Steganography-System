@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 580" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#280742"/>
+      <stop offset="100%" stop-color="#631070"/>
+    </linearGradient>
+    <radialGradient id="glowRad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="mBloom">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Dark Rich Card Background -->
+  <rect width="500" height="580" rx="24" fill="#180426"/>
+
+  <!-- Inner Picture Frame Area -->
+  <rect x="35" y="35" width="430" height="390" rx="18" fill="url(#bgGrad)"/>
+  <circle cx="250" cy="230" r="160" fill="url(#glowRad)"/>
+
+  <!-- Icon Scene based on type -->
+  
+<g transform="translate(250, 220)" filter="url(#mBloom)">
+  <!-- Interlocking Hearts -->
+  <path d="M -35 -20 C -55 -55 -95 -25 -95 10 C -95 45 -45 80 -35 90 C -25 80 25 45 25 10 C 25 -25 -15 -55 -35 -20 Z" fill="#ff4f7e" opacity="0.8"/>
+  <path d="M 25 -30 C 5 -65 -35 -35 -35 0 C -35 35 15 70 25 80 C 35 70 85 35 85 0 C 85 -35 45 -65 25 -30 Z" fill="#d946ef" opacity="0.8"/>
+  <!-- Butterfly on Top -->
+  <ellipse cx="0" cy="-60" rx="3" ry="12" fill="#ffd700"/>
+  <path d="M 0 -65 C -25 -85 -35 -60 0 -58 Z" fill="#ffe082"/>
+  <path d="M 0 -65 C 25 -85 35 -60 0 -58 Z" fill="#ffe082"/>
+  <circle cx="0" cy="-30" r="8" fill="#ffffff"/>
+</g>
+
+
+  <!-- Lower Title / Caption area with gold & cursive text -->
+  <text x="250" y="475" font-family="'Great Vibes', 'Playfair Display', cursive, serif" font-size="34" fill="#ffd700" text-anchor="middle" font-weight="600">Moments of Magic</text>
+  <text x="250" y="520" font-family="'Montserrat', sans-serif" font-size="14" fill="#e0b8ff" text-anchor="middle" letter-spacing="2">Sweet Laughter & Golden Memories</text>
+
+  <!-- Sparkles -->
+  <g fill="#ffd700" filter="url(#mBloom)">
+    <circle cx="65" cy="65" r="3"/><circle cx="435" cy="65" r="3"/>
+    <circle cx="70" cy="395" r="2.5"/><circle cx="430" cy="395" r="2.5"/>
+  </g>
+</svg>

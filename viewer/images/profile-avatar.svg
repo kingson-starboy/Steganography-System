@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="avatarGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#ff758c" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#140222" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="haloGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0aa"/>
+      <stop offset="50%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+    <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a154b"/>
+      <stop offset="50%" stop-color="#2a0845"/>
+      <stop offset="100%" stop-color="#120220"/>
+    </linearGradient>
+    <linearGradient id="skinTone" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffe3d1"/>
+      <stop offset="100%" stop-color="#f5cbb0"/>
+    </linearGradient>
+    <filter id="pBloom">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" rx="30" fill="#150325"/>
+  <circle cx="300" cy="300" r="270" fill="url(#avatarGlow)"/>
+
+  <!-- Radiant Golden Mandala Halo Ring -->
+  <circle cx="300" cy="300" r="220" fill="none" stroke="url(#haloGold)" stroke-width="3" stroke-dasharray="10 8" filter="url(#pBloom)"/>
+  <circle cx="300" cy="300" r="235" fill="none" stroke="#ff758c" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Floral Tiara / Crown Base -->
+  <!-- Neck and Shoulders Silhouette -->
+  <path d="M 230 450 C 230 400 250 370 270 360 L 330 360 C 350 370 370 400 370 450 C 390 470 460 520 480 570 L 120 570 C 140 520 210 470 230 450 Z" fill="url(#skinTone)"/>
+  <!-- Elegant Evening Dress Gown -->
+  <path d="M 180 500 C 230 470 270 490 300 490 C 330 490 370 470 420 500 L 480 570 L 120 570 Z" fill="url(#hairGrad)" stroke="url(#haloGold)" stroke-width="3"/>
+
+  <!-- Beautiful Long Wavy Hair Behind -->
+  <path d="M 190 270 C 170 350 160 450 200 520 C 220 460 210 380 230 310 Z" fill="url(#hairGrad)"/>
+  <path d="M 410 270 C 430 350 440 450 400 520 C 380 460 390 380 370 310 Z" fill="url(#hairGrad)"/>
+
+  <!-- Face Profile / Frontal Grace -->
+  <ellipse cx="300" cy="270" rx="80" ry="105" fill="url(#skinTone)"/>
+
+  <!-- Front Hair Style -->
+  <path d="M 220 250 C 220 170 260 140 300 140 C 340 140 380 170 380 250 C 360 210 330 190 300 190 C 270 190 240 210 220 250 Z" fill="url(#hairGrad)"/>
+  <!-- Flowing Locks -->
+  <path d="M 220 240 C 205 300 215 360 225 400 C 235 340 230 280 225 240 Z" fill="#2a0845"/>
+  <path d="M 380 240 C 395 300 385 360 375 400 C 365 340 370 280 375 240 Z" fill="#2a0845"/>
+
+  <!-- Golden Crown of Stars and Gems -->
+  <g filter="url(#pBloom)" transform="translate(300, 145)">
+    <path d="M -70 10 L -45 -25 L -20 0 L 0 -40 L 20 0 L 45 -25 L 70 10 Z" fill="url(#haloGold)" stroke="#d4af37" stroke-width="2"/>
+    <circle cx="0" cy="-40" r="6" fill="#ffffff"/>
+    <circle cx="-45" cy="-25" r="4.5" fill="#ff758c"/>
+    <circle cx="45" cy="-25" r="4.5" fill="#ff758c"/>
+    <circle cx="-70" cy="10" r="3.5" fill="#ffffff"/>
+    <circle cx="70" cy="10" r="3.5" fill="#ffffff"/>
+  </g>
+
+  <!-- Gentle Sparkles & Rose Accents -->
+  <g fill="#ffd700" filter="url(#pBloom)">
+    <circle cx="170" cy="200" r="3"/><circle cx="430" cy="200" r="3"/>
+    <circle cx="150" cy="380" r="4"/><circle cx="450" cy="380" r="4"/>
+    <path d="M 300 80 Q 308 80 308 72 Q 308 80 316 80 Q 308 80 308 88 Q 308 80 300 80"/>
+  </g>
+</svg>

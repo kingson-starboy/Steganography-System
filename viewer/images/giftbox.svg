@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="boxGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#ff758c" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#140222" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="boxBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a0f66"/>
+      <stop offset="50%" stop-color="#731963"/>
+      <stop offset="100%" stop-color="#2a053b"/>
+    </linearGradient>
+    <linearGradient id="boxLid" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8c25aa"/>
+      <stop offset="50%" stop-color="#ba38da"/>
+      <stop offset="100%" stop-color="#691685"/>
+    </linearGradient>
+    <linearGradient id="ribbonGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff1a8"/>
+      <stop offset="50%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+    <filter id="gBloom">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" rx="30" fill="#140222"/>
+  <circle cx="300" cy="320" r="260" fill="url(#boxGlow)"/>
+
+  <!-- Shadow below box -->
+  <ellipse cx="300" cy="510" rx="190" ry="25" fill="#0b0014" opacity="0.7"/>
+
+  <!-- Main Box Body -->
+  <rect x="150" y="290" width="300" height="200" rx="14" fill="url(#boxBody)" stroke="#ba38da" stroke-width="2"/>
+
+  <!-- Vertical Ribbon on Body -->
+  <rect x="275" y="290" width="50" height="200" fill="url(#ribbonGold)" filter="url(#gBloom)"/>
+  <!-- Horizontal Ribbon on Body -->
+  <rect x="150" y="375" width="300" height="40" fill="url(#ribbonGold)"/>
+
+  <!-- Box Lid -->
+  <rect x="130" y="235" width="340" height="65" rx="12" fill="url(#boxLid)" stroke="#ffd700" stroke-width="2"/>
+  <!-- Vertical Ribbon on Lid -->
+  <rect x="275" y="235" width="50" height="65" fill="url(#ribbonGold)"/>
+
+  <!-- Giant Ornate Ribbon Bow on Top -->
+  <g transform="translate(300, 235)" filter="url(#gBloom)">
+    <!-- Left Loop -->
+    <path d="M 0 0 C -60 -70 -130 -40 -120 10 C -110 50 -30 20 0 0 Z" fill="url(#ribbonGold)" stroke="#d4af37" stroke-width="2"/>
+    <path d="M 0 0 C -45 -50 -100 -30 -90 10 C -80 35 -20 15 0 0 Z" fill="#ffd700" opacity="0.6"/>
+    <!-- Right Loop -->
+    <path d="M 0 0 C 60 -70 130 -40 120 10 C 110 50 30 20 0 0 Z" fill="url(#ribbonGold)" stroke="#d4af37" stroke-width="2"/>
+    <path d="M 0 0 C 45 -50 100 -30 90 10 C 80 35 20 15 0 0 Z" fill="#ffd700" opacity="0.6"/>
+    <!-- Hanging Tails -->
+    <path d="M -15 10 C -50 40 -80 80 -100 120 C -75 100 -50 70 0 25 Z" fill="url(#ribbonGold)"/>
+    <path d="M 15 10 C 50 40 80 80 100 120 C 75 100 50 70 0 25 Z" fill="url(#ribbonGold)"/>
+    <!-- Center Knot -->
+    <ellipse cx="0" cy="5" rx="22" ry="18" fill="url(#ribbonGold)" stroke="#b8860b" stroke-width="2"/>
+    <circle cx="0" cy="5" r="8" fill="#ffffff" opacity="0.8"/>
+  </g>
+
+  <!-- Sparkles leaping out of gift box -->
+  <g fill="#ffd700" filter="url(#gBloom)">
+    <circle cx="120" cy="190" r="4"/><circle cx="480" cy="180" r="4.5"/><circle cx="160" cy="130" r="5"/><circle cx="440" cy="120" r="5"/>
+    <path d="M 220 90 Q 230 90 230 80 Q 230 90 240 90 Q 230 90 230 100 Q 230 90 220 90"/>
+    <path d="M 370 80 Q 380 80 380 70 Q 380 80 390 80 Q 380 80 380 90 Q 380 80 370 80"/>
+  </g>
+</svg>

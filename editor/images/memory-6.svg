@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 580" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#210338"/>
+      <stop offset="100%" stop-color="#5e1075"/>
+    </linearGradient>
+    <radialGradient id="glowRad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="mBloom">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Dark Rich Card Background -->
+  <rect width="500" height="580" rx="24" fill="#180426"/>
+
+  <!-- Inner Picture Frame Area -->
+  <rect x="35" y="35" width="430" height="390" rx="18" fill="url(#bgGrad)"/>
+  <circle cx="250" cy="230" r="160" fill="url(#glowRad)"/>
+
+  <!-- Icon Scene based on type -->
+  
+<g transform="translate(250, 220)" filter="url(#mBloom)">
+  <!-- Infinity symbol wrapped in roses and gold -->
+  <path d="M -30 0 C -60 -40 -100 0 -50 40 C 0 0 0 0 50 -40 C 100 0 60 40 30 0 C 0 -40 0 -40 -30 0 Z" fill="none" stroke="#ffd700" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="-55" cy="0" r="14" fill="#ff4f7e"/>
+  <circle cx="55" cy="0" r="14" fill="#ba68c8"/>
+  <circle cx="0" cy="0" r="10" fill="#ffffff"/>
+</g>
+
+
+  <!-- Lower Title / Caption area with gold & cursive text -->
+  <text x="250" y="475" font-family="'Great Vibes', 'Playfair Display', cursive, serif" font-size="34" fill="#ffd700" text-anchor="middle" font-weight="600">Endless Love</text>
+  <text x="250" y="520" font-family="'Montserrat', sans-serif" font-size="14" fill="#e0b8ff" text-anchor="middle" letter-spacing="2">Surrounded By Warmth & Blessings</text>
+
+  <!-- Sparkles -->
+  <g fill="#ffd700" filter="url(#mBloom)">
+    <circle cx="65" cy="65" r="3"/><circle cx="435" cy="65" r="3"/>
+    <circle cx="70" cy="395" r="2.5"/><circle cx="430" cy="395" r="2.5"/>
+  </g>
+</svg>

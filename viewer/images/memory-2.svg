@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 580" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0b40"/>
+      <stop offset="100%" stop-color="#4d1685"/>
+    </linearGradient>
+    <radialGradient id="glowRad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd700" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="mBloom">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Dark Rich Card Background -->
+  <rect width="500" height="580" rx="24" fill="#180426"/>
+
+  <!-- Inner Picture Frame Area -->
+  <rect x="35" y="35" width="430" height="390" rx="18" fill="url(#bgGrad)"/>
+  <circle cx="250" cy="230" r="160" fill="url(#glowRad)"/>
+
+  <!-- Icon Scene based on type -->
+  
+<g transform="translate(250, 220)" filter="url(#mBloom)">
+  <!-- Big Golden Crescent Moon -->
+  <path d="M 40 -60 A 80 80 0 1 0 40 70 A 65 65 0 1 1 40 -60 Z" fill="#ffd700"/>
+  <!-- Sleeping Stars -->
+  <circle cx="-40" cy="-20" r="6" fill="#ffffff"/>
+  <circle cx="50" cy="10" r="5" fill="#ff80ab"/>
+  <circle cx="-10" cy="45" r="7" fill="#ffd700"/>
+  <!-- Shooting Star Ray -->
+  <line x1="-80" y1="-70" x2="-20" y2="-20" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="-120" y1="-30" x2="-60" y2="10" stroke="#ffd700" stroke-width="3" stroke-linecap="round"/>
+</g>
+
+
+  <!-- Lower Title / Caption area with gold & cursive text -->
+  <text x="250" y="475" font-family="'Great Vibes', 'Playfair Display', cursive, serif" font-size="34" fill="#ffd700" text-anchor="middle" font-weight="600">Chasing Dreams</text>
+  <text x="250" y="520" font-family="'Montserrat', sans-serif" font-size="14" fill="#e0b8ff" text-anchor="middle" letter-spacing="2">Reaching Higher Towards The Stars</text>
+
+  <!-- Sparkles -->
+  <g fill="#ffd700" filter="url(#mBloom)">
+    <circle cx="65" cy="65" r="3"/><circle cx="435" cy="65" r="3"/>
+    <circle cx="70" cy="395" r="2.5"/><circle cx="430" cy="395" r="2.5"/>
+  </g>
+</svg>

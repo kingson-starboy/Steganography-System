@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Sri Shananmathi! ✨ Royal Birthday Celebration</title>
+  <meta name="description" content="A luxurious, heartfelt birthday celebration website for Sri Shananmathi, born on 21 November 2007.">
+  
+  <!-- Favicon Icon -->
+  <link rel="icon" href="images/cake.svg" type="image/svg+xml">
+  
+  <!-- Common Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Viewer / Consumer Experience: Clean presentation without editing controls */
+    .letter-toolbar, .letter-editing-hint, .gallery-controls-bar,
+    .upload-photo-btn, .avatar-edit-badge, .avatar-action-btn,
+    .polaroid-change-overlay, .polaroid-reset-photo-btn,
+    .photo-delete-btn, .custom-photo-badge, .music-change-btn,
+    .add-memory-card, #add-memory-card { 
+      display: none !important; 
+    }
+    .profile-avatar-wrapper { 
+      cursor: default !important; 
+    }
+    .profile-avatar-wrapper:hover .avatar-hover-overlay { 
+      opacity: 0 !important; 
+    }
+    .polaroid-photo-frame { 
+      cursor: pointer !important; 
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glowing Background Gradient -->
+  <div class="ambient-background"></div>
+
+  <!-- Interactive Floating Background Particles Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Celebratory Confetti Cannon Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ===================================================================
+       NAVIGATION BAR
+       =================================================================== -->
+  <header class="navbar" role="banner">
+    <a href="#home" class="nav-brand" aria-label="Sri Shananmathi Home">
+      <span class="tiara-icon">👑</span>
+      <span>Sri Shananmathi</span>
+    </a>
+
+    <!-- Desktop & Mobile Navigation Links -->
+    <ul class="nav-menu" id="nav-menu" role="navigation">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#wishes" class="nav-link">Wishes</a></li>
+      <li><a href="#gallery" class="nav-link">Gallery</a></li>
+      <li><a href="#memories" class="nav-link">Memories</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#surprise" class="nav-link">Surprise</a></li>
+    </ul>
+
+    <!-- Navigation Action Controls (Play Music & Mobile Menu) -->
+    <div class="nav-actions">
+      <button class="music-btn" id="music-toggle-btn" aria-label="Toggle Birthday Music">
+        <div class="music-equalizer">
+          <span></span><span></span><span></span>
+        </div>
+        <span class="music-label">Play Music</span>
+      </button>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       MAIN CONTAINER (6 FULLSCREEN SECTIONS - MANUAL NAVIGATION)
+       =================================================================== -->
+  <main class="presentation-container" role="main">
+
+    <!-- ---------------------------------------------------------------
+         PAGE 1: HOME
+         --------------------------------------------------------------- -->
+    <section id="home" class="page-section active" aria-labelledby="home-heading">
+      <div class="home-content">
+        <!-- Date of Birth Glowing Badge -->
+        <div class="dob-badge">
+          <span>✨</span>
+          <span>Date of Birth: 21 November 2007</span>
+          <span>✨</span>
+        </div>
+
+        <!-- Main Birthday Heading -->
+        <h1 id="home-heading" class="cursive-title hero-birthday-title">
+          Happy Birthday Sri Shananmathi!
+        </h1>
+
+        <p class="section-subtitle">
+          Celebrating <span>A Truly Radiant & Beautiful Soul</span>
+        </p>
+
+        <!-- Visual Centerpiece: Birthday Cake, Candles, Balloons, Flowers & Gift -->
+        <div class="hero-visual-wrapper">
+          <img src="images/balloons.svg" alt="Dreamy Balloons" class="floating-home-balloons">
+          <img src="images/flowers.svg" alt="Opulent Rose Bouquet" class="floating-home-flowers">
+          
+          <img src="images/cake.svg" 
+               alt="Sri Shananmathi's Birthday Cake with Candles" 
+               class="hero-cake-img" 
+               id="hero-cake-interactive" 
+               title="Click to blow out candles and make a birthday wish!">
+               
+          <div class="cake-click-hint" id="cake-hint-text">
+            🎂 Click the cake to make a wish & blow candles!
+          </div>
+        </div>
+
+        <!-- Warm Welcome Birthday Message -->
+        <div class="welcome-message-box">
+          <p>
+            Welcome to a magical realm curated especially to celebrate <strong>YOU</strong>, Sri Shananmathi! 
+            May your special day sparkle with boundless laughter, infinite joy, and every dream your beautiful 
+            heart cherishes. Click the buttons below or navigate at your own pace!
+          </p>
+        </div>
+
+        <!-- Action Call to Explore -->
+        <div class="cta-btn-group">
+          <a href="#wishes" class="cta-btn gold" id="explore-btn">
+            <span>Next: Read Wishes</span>
+            <span>▶</span>
+          </a>
+          <a href="#surprise" class="cta-btn secondary">
+            <span>Jump to Surprise Gift</span>
+            <span>🎁</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         PAGE 2: BIRTHDAY WISHES
+         --------------------------------------------------------------- -->
+    <section id="wishes" class="page-section" aria-labelledby="wishes-heading">
+      <h2 id="wishes-heading" class="cursive-title">Heartfelt Birthday Wishes</h2>
+      <p class="section-subtitle">Golden blessings crafted for <span>Sri Shananmathi</span></p>
+
+      <div class="wishes-grid">
+        <!-- Card 1: Happiness -->
+        <article class="wish-card">
+          <div class="wish-icon-box">💖</div>
+          <h3>Happiness & Sunshine</h3>
+          <p>
+            May every single second of your year ahead be wrapped in warm sunshine, pure genuine smiles, 
+            and laughter that echoes straight from the soul. May sorrow never find your doorstep.
+          </p>
+          <div class="wish-card-footer">
+            <span>Boundless Joy</span>
+            <span>✨ Always & Forever</span>
+          </div>
+        </article>
+
+        <!-- Card 2: Success -->
+        <article class="wish-card">
+          <div class="wish-icon-box">⭐</div>
+          <h3>Success & Brilliance</h3>
+          <p>
+            May your extraordinary intellect and talents shine like constellations in the night sky, 
+            opening golden doors to triumph and bringing fulfillment to every ambition you pursue.
+          </p>
+          <div class="wish-card-footer">
+            <span>Golden Milestones</span>
+            <span>🌟 Shine Bright</span>
+          </div>
+        </article>
+
+        <!-- Card 3: Dreams -->
+        <article class="wish-card">
+          <div class="wish-icon-box">🪄</div>
+          <h3>Dreams & Magic</h3>
+          <p>
+            Never stop believing in the breathtaking magic of your dreams. May you soar to heights unimagined 
+            and find that reality becomes even sweeter than your fondest imaginations.
+          </p>
+          <div class="wish-card-footer">
+            <span>Limitless Wonder</span>
+            <span>🌙 Reach High</span>
+          </div>
+        </article>
+
+        <!-- Card 4: Health & Harmony -->
+        <article class="wish-card">
+          <div class="wish-icon-box">🌸</div>
+          <h3>Health & Serenity</h3>
+          <p>
+            Wishing you vibrant health, glowing vitality, inner tranquility, and serene peace in mind, body, 
+            and spirit through every season of your life.
+          </p>
+          <div class="wish-card-footer">
+            <span>Inner Harmony</span>
+            <span>🌺 Blooming Grace</span>
+          </div>
+        </article>
+
+        <!-- Card 5: Blessings & Love -->
+        <article class="wish-card">
+          <div class="wish-icon-box">🎁</div>
+          <h3>Divine Blessings & Love</h3>
+          <p>
+            May divine grace, protection, warm companionship, and unconditional affection accompany you on 
+            every step of your journey. You are deeply cherished by all who know you.
+          </p>
+          <div class="wish-card-footer">
+            <span>Heartfelt Love</span>
+            <span>🕊️ Sacred Blessings</span>
+          </div>
+        </article>
+
+        <!-- Card 6: Eternal Radiance -->
+        <article class="wish-card">
+          <div class="wish-icon-box">👑</div>
+          <h3>Eternal Radiance</h3>
+          <p>
+            Continue to be the kind, compassionate, radiant, and inspiring young woman you are today. The world 
+            is undeniably a brighter, more wonderful place with you in it!
+          </p>
+          <div class="wish-card-footer">
+            <span>True Royalty</span>
+            <span>💎 Queen of Hearts</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="cta-btn-group" style="margin-top: 2.5rem;">
+        <a href="#gallery" class="cta-btn gold">
+          <span>Next: View Photo Gallery</span>
+          <span>▶</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         PAGE 3: PHOTO GALLERY
+         --------------------------------------------------------------- -->
+    <section id="gallery" class="page-section" aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading" class="cursive-title">Celebration Photo Gallery</h2>
+      <p class="section-subtitle">Moments of splendor, flowers, cakes & <span>golden memories</span></p>
+
+      <div class="gallery-grid">
+        <!-- Gallery 1: Cake -->
+        <div class="gallery-item" data-title="The Royal Birthday Cake" data-subtitle="Lavish purple, pink and gold layers crowned with glowing candles">
+          <img src="images/cake.svg" alt="Birthday Cake">
+          <div class="gallery-overlay">
+            <h4>Royal Birthday Cake</h4>
+            <p>Golden candles & purple floral tiers</p>
+          </div>
+        </div>
+
+        <!-- Gallery 2: Flowers -->
+        <div class="gallery-item" data-title="Opulent Bouquet of Roses" data-subtitle="Velvet roses, golden sprigs and sweet fragrance for Sri Shananmathi">
+          <img src="images/flowers.svg" alt="Velvet Rose Bouquet">
+          <div class="gallery-overlay">
+            <h4>Bouquet of Velvet Roses</h4>
+            <p>Blush pink, violet & gold ribbon</p>
+          </div>
+        </div>
+
+        <!-- Gallery 3: Balloons -->
+        <div class="gallery-item" data-title="Celebration Balloon Flight" data-subtitle="Shimmering metallic gold, violet and rose balloons soaring high">
+          <img src="images/balloons.svg" alt="Celebration Balloons">
+          <div class="gallery-overlay">
+            <h4>Joyful Balloon Skies</h4>
+            <p>Floating wishes into the heavens</p>
+          </div>
+        </div>
+
+        <!-- Gallery 4: Sunset -->
+        <div class="gallery-item" data-title="Dreamy Twilight Sunset" data-subtitle="Golden dusk reflections, serenity and starry purple skies">
+          <img src="images/sunset.svg" alt="Dreamy Twilight Sunset">
+          <div class="gallery-overlay">
+            <h4>Dreamy Sunset Glow</h4>
+            <p>Serene twilight over calm waters</p>
+          </div>
+        </div>
+
+        <!-- Gallery 5: Celebration Toast -->
+        <div class="gallery-item" data-title="Midnight Birthday Cheers" data-subtitle="Sparkling glasses, golden confetti showers and festive joy">
+          <img src="images/celebration.svg" alt="Sparkling Celebration Toast">
+          <div class="gallery-overlay">
+            <h4>Sparkling Cheers</h4>
+            <p>Raise a toast to 21 November 2007</p>
+          </div>
+        </div>
+
+        <!-- Gallery 6: Royal Avatar -->
+        <div class="gallery-item" data-title="Portrait of Grace" data-subtitle="Crowned with stars and surrounded by a radiant golden halo">
+          <img src="images/profile-avatar.svg" alt="Portrait of Sri Shananmathi">
+          <div class="gallery-overlay">
+            <h4>Radiant Tiara & Halo</h4>
+            <p>Elegance and royal birthday charm</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-btn-group" style="margin-top: 2.5rem;">
+        <a href="#memories" class="cta-btn gold">
+          <span>Next: View Polaroid Memories</span>
+          <span>▶</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         PAGE 4: MEMORIES (POLAROID FRAMES)
+         --------------------------------------------------------------- -->
+    <section id="memories" class="page-section" aria-labelledby="memories-heading">
+      <h2 id="memories-heading" class="cursive-title">Treasured Memories</h2>
+      <p class="section-subtitle">Polaroid snapshots of love, wonder & <span>priceless smiles</span></p>
+
+      <div class="memories-container">
+        <div class="polaroid-grid">
+          <!-- Memory 1: The Brightest Smile -->
+          <div class="polaroid-card">
+            <div class="polaroid-photo-frame">
+              <img src="images/memory-1.svg" alt="The Brightest Smile" id="memory-img-1">
+            </div>
+            <div class="polaroid-caption">
+              <h4>The Brightest Smile</h4>
+              <p>Laughter that turns ordinary moments into pure gold.</p>
+            </div>
+          </div>
+
+          <!-- Memory 2: Chasing Stars -->
+          <div class="polaroid-card">
+            <div class="polaroid-photo-frame">
+              <img src="images/memory-2.svg" alt="Chasing Stars" id="memory-img-2">
+            </div>
+            <div class="polaroid-caption">
+              <h4>Chasing Stars</h4>
+              <p>Looking up at constellations and dreaming boundless dreams.</p>
+            </div>
+          </div>
+
+          <!-- Memory 3: Joyful Journeys -->
+          <div class="polaroid-card">
+            <div class="polaroid-photo-frame">
+              <img src="images/memory-3.svg" alt="Joyful Journeys" id="memory-img-3">
+            </div>
+            <div class="polaroid-caption">
+              <h4>Joyful Journeys</h4>
+              <p>Every step filled with wonder, curiosity, and fun.</p>
+            </div>
+          </div>
+
+          <!-- Memory 4: Moments of Magic -->
+          <div class="polaroid-card">
+            <div class="polaroid-photo-frame">
+              <img src="images/memory-4.svg" alt="Moments of Magic" id="memory-img-4">
+            </div>
+            <div class="polaroid-caption">
+              <h4>Moments of Magic</h4>
+              <p>Cozy conversations, warm hugs, and sweet serenity.</p>
+            </div>
+          </div>
+
+          <!-- Memory 5: Radiant & Bold -->
+          <div class="polaroid-card">
+            <div class="polaroid-photo-frame">
+              <img src="images/memory-5.svg" alt="Radiant & Bold" id="memory-img-5">
+            </div>
+            <div class="polaroid-caption">
+              <h4>Radiant & Bold</h4>
+              <p>Walking with grace, poise, courage and infinite confidence.</p>
+            </div>
+          </div>
+
+          <!-- Memory 6: Endless Love -->
+          <div class="polaroid-card">
+            <div class="polaroid-photo-frame">
+              <img src="images/memory-6.svg" alt="Endless Love" id="memory-img-6">
+            </div>
+            <div class="polaroid-caption">
+              <h4>Endless Love</h4>
+              <p>Surrounded by warmth, cherished friendships, and adoration.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-btn-group" style="margin-top: 2.5rem;">
+        <a href="#about" class="cta-btn gold">
+          <span>Next: Read About Sri Shananmathi</span>
+          <span>▶</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         PAGE 5: ABOUT SRI SHANANMATHI (INSTAGRAM PROFILE AVATAR)
+         --------------------------------------------------------------- -->
+    <section id="about" class="page-section" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="cursive-title">About Sri Shananmathi</h2>
+      <p class="section-subtitle">Celebrating the birthday queen • <span>21 November 2007</span></p>
+
+      <div class="about-wrapper">
+        <div class="profile-card">
+          <!-- Profile Avatar Column with Instagram-Style Story Ring -->
+          <div class="profile-avatar-col">
+            <div class="profile-avatar-wrapper" id="profile-avatar-trigger">
+              <!-- Vibrant Instagram Story Gradient Ring -->
+              <div class="instagram-story-ring"></div>
+              
+              <!-- Crown on Top of Avatar -->
+              <div class="avatar-crown-badge">👑</div>
+
+              <!-- Profile Avatar Picture Frame -->
+              <div class="profile-avatar-frame">
+                <img src="images/profile-avatar.svg" alt="Sri Shananmathi Profile Portrait" id="profile-avatar-img">
+              </div>
+            </div>
+
+            <div class="dob-badge" style="margin-top: 1rem; margin-bottom: 0;">
+              <span>👑 Birthday Queen</span>
+            </div>
+          </div>
+
+          <!-- Profile Details Column -->
+          <div class="profile-details-col">
+            <h3 class="profile-name">Sri Shananmathi</h3>
+            <div class="profile-title-tag">The Star of 21 November</div>
+
+            <!-- Profile Info Grid -->
+            <div class="profile-info-grid">
+              <div class="info-item">
+                <span class="info-item-icon">🎂</span>
+                <div class="info-item-text">
+                  <span class="info-item-label">Date of Birth</span>
+                  <span class="info-item-val">21 November 2007</span>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <span class="info-item-icon">🎉</span>
+                <div class="info-item-text">
+                  <span class="info-item-label">Celebration Day</span>
+                  <span class="info-item-val">21 November</span>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <span class="info-item-icon">♏</span>
+                <div class="info-item-text">
+                  <span class="info-item-label">Zodiac Sign</span>
+                  <span class="info-item-val">Scorpio (Passionate & Intuitive)</span>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <span class="info-item-icon">💎</span>
+                <div class="info-item-text">
+                  <span class="info-item-label">Birth Gem</span>
+                  <span class="info-item-val">Golden Citrine & Topaz</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Quote -->
+            <div class="profile-quote-box">
+              "She is clothed in strength and dignity, leaving a trail of glitter, kindness, 
+              and unforgettable laughter wherever she walks."
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-btn-group" style="margin-top: 2.5rem;">
+        <a href="#surprise" class="cta-btn gold">
+          <span>Next: Unwrap The Surprise Gift</span>
+          <span>🎁</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------------
+         PAGE 6: SPECIAL SURPRISE
+         --------------------------------------------------------------- -->
+    <section id="surprise" class="page-section" aria-labelledby="surprise-heading">
+      <div class="surprise-content">
+        <div class="dob-badge">
+          <span>🎁 Exclusive Gift For Sri Shananmathi</span>
+        </div>
+
+        <h2 id="surprise-heading" class="cursive-title">A Special Surprise Awaits!</h2>
+        <p class="section-subtitle">Wrapped with royal purple ribbon, golden sparkles & <span>endless love</span></p>
+
+        <!-- 3D Interactive Animated Gift Box -->
+        <div class="gift-stage-wrapper">
+          <div class="surprise-glow-circle"></div>
+          <div class="interactive-gift-box" id="interactive-gift-box" title="Click to unlock your birthday surprise!">
+            <img src="images/giftbox.svg" alt="Animated Birthday Gift Box" class="gift-svg-img">
+          </div>
+        </div>
+
+        <!-- Open Surprise Button -->
+        <button class="open-surprise-btn" id="open-surprise-btn">
+          <span>Open Your Surprise</span>
+          <span>🎁</span>
+        </button>
+
+        <div class="cta-btn-group" style="margin-top: 2.5rem;">
+          <a href="#home" class="cta-btn secondary">
+            <span>Return to Start (Home)</span>
+            <span>↺</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================
+       MANUAL NAVIGATION CONTROLLER BAR (BOTTOM DOCK)
+       =================================================================== -->
+  <footer class="presentation-controller" role="toolbar" aria-label="Page Navigation Controls">
+    <!-- Progress Indicator showing current section out of 6 -->
+    <div class="countdown-progress-track">
+      <div class="countdown-progress-bar" id="slide-progress-bar"></div>
+    </div>
+
+    <!-- Slide Information Indicators -->
+    <div class="ctrl-info">
+      <span class="slide-counter" id="slide-counter">01 / 06</span>
+      <span class="slide-title-label" id="slide-title-label">• Home</span>
+      <button class="autoplay-toggle-btn" id="autoplay-toggle-btn" title="Toggle automatic slideshow">
+        ▶ Auto-Play: OFF
+      </button>
+    </div>
+
+    <!-- Manual Navigation Buttons: Prev and Next -->
+    <div class="ctrl-buttons">
+      <button class="ctrl-btn" id="prev-btn" title="Previous Page (Left Arrow)">
+        <i style="font-style:normal;">◀</i>
+        <span>Previous</span>
+      </button>
+
+      <button class="ctrl-btn primary" id="next-btn" title="Next Page (Right Arrow)">
+        <span>Next Page</span>
+        <i style="font-style:normal;">▶</i>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ===================================================================
+       PHOTO LIGHTBOX MODAL
+       =================================================================== -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo View">
+    <div class="lightbox-content-box">
+      <button class="lightbox-close-btn" id="lightbox-close" aria-label="Close Lightbox">✕</button>
+      <img src="" alt="" class="lightbox-img" id="lightbox-img">
+      <h3 class="lightbox-caption" id="lightbox-caption"></h3>
+      <p class="lightbox-subcaption" id="lightbox-subcaption"></p>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       SPECIAL SURPRISE REVEAL MODAL (BIRTHDAY LETTER)
+       =================================================================== -->
+  <div class="surprise-card-reveal" id="surprise-card-reveal" role="dialog" aria-modal="true" aria-label="Birthday Surprise Message">
+    <div class="royal-proclamation-card">
+      <button class="proclamation-close-btn" id="proclamation-close-btn" aria-label="Close Surprise Message">✕</button>
+      <div class="royal-crown-icon">👑</div>
+
+      <!-- Letter Header / Greeting -->
+      <h3 class="proclamation-title" id="proclamation-greeting">Dearest Sri Shananmathi,</h3>
+      <div class="proclamation-date" id="proclamation-subtitle">A Special Message • 21 November 2007</div>
+
+      <!-- Letter Body -->
+      <div class="proclamation-message" id="proclamation-body">
+        <p>
+          On the extraordinary day of <strong>21 November 2007</strong>, a truly remarkable, 
+          compassionate, and sparkling soul was gifted to this world.
+        </p>
+        <br>
+        <p>
+          You bring warmth into every space you enter, your laughter is contagious, and your kindness 
+          leaves an indelible imprint on everyone blessed to know you. May this year shower you with 
+          unshakable happiness, remarkable achievements, radiant health, and friendships as true and pure 
+          as gold.
+        </p>
+        <br>
+        <p>
+          Always remember: You are capable of moving mountains, you are deeply cherished, and you deserve 
+          every beautiful blessing the universe has in store!
+        </p>
+      </div>
+
+      <!-- Sign-off -->
+      <div class="proclamation-signoff" id="proclamation-signoff">
+        Happy Birthday, Sri Shananmathi! 🎂✨💖
+      </div>
+
+      <div style="margin-top: 1.8rem;">
+        <button class="celebrate-again-btn" id="celebrate-again-btn">
+          <span>Shower More Confetti! 🎊</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Viewer Data and Script -->
+  <script src="viewer-data.js" onerror="window.BIRTHDAY_DATA = {};"></script>
+  <script src="viewer-script.js"></script>
+</body>
+</html>
