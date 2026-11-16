@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Happy Birthday Sri Shananmathi! ✨</title>
+  <link rel="icon" href="images/cake.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="standalone">
+
+  <div class="ambient-background"></div>
+  <canvas id="particle-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <header class="navbar" role="banner">
+    <a href="index.html#home" class="nav-brand">
+      <span class="tiara-icon">👑</span>
+      <span>Sri Shananmathi</span>
+    </a>
+
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="home.html" class="nav-link active">Home</a></li>
+      <li><a href="wishes.html" class="nav-link">Wishes</a></li>
+      <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+      <li><a href="memories.html" class="nav-link">Memories</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="surprise.html" class="nav-link">Surprise</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="music-btn" id="music-toggle-btn">
+        <div class="music-equalizer">
+          <span></span><span></span><span></span>
+        </div>
+        <span class="music-label">Play Music</span>
+      </button>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+    </div>
+  </header>
+
+  <main class="standalone-container">
+    <section class="page-section active" style="display:flex;">
+      <div class="home-content">
+        <div class="dob-badge">
+          <span>✨</span>
+          <span>Date of Birth: 21 November 2007</span>
+          <span>✨</span>
+        </div>
+
+        <h1 class="cursive-title hero-birthday-title">
+          Happy Birthday Sri Shananmathi!
+        </h1>
+
+        <p class="section-subtitle">
+          Celebrating <span>A Truly Radiant & Beautiful Soul</span>
+        </p>
+
+        <div class="hero-visual-wrapper">
+          <img src="images/balloons.svg" alt="Dreamy Balloons" class="floating-home-balloons">
+          <img src="images/flowers.svg" alt="Opulent Rose Bouquet" class="floating-home-flowers">
+          <img src="images/cake.svg" alt="Sri Shananmathi's Birthday Cake with Candles" class="hero-cake-img" id="hero-cake-interactive">
+          <div class="cake-click-hint" id="cake-hint-text">
+            🎂 Click the cake to make a wish & blow candles!
+          </div>
+        </div>
+
+        <div class="welcome-message-box">
+          <p>
+            Welcome to a magical realm curated especially to celebrate <strong>YOU</strong>, Sri Shananmathi! 
+            May your special day sparkle with boundless laughter, infinite joy, and every dream your beautiful 
+            heart cherishes. Step in, let the music play, and let this royal celebration unfold!
+          </p>
+        </div>
+
+        <div class="cta-btn-group">
+          <a href="wishes.html" class="cta-btn gold">
+            <span>Explore Wishes</span>
+            <span>✨</span>
+          </a>
+          <a href="index.html" class="cta-btn secondary">
+            <span>Launch Auto Presentation</span>
+            <span>🎬</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="standalone-footer">
+      <p>Celebrating Sri Shananmathi • Born 21 November 2007 • <a href="index.html">View Presentation Mode</a></p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

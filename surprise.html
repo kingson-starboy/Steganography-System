@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Surprise - Sri Shananmathi ✨</title>
+  <link rel="icon" href="images/cake.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="standalone">
+
+  <div class="ambient-background"></div>
+  <canvas id="particle-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <header class="navbar" role="banner">
+    <a href="index.html#surprise" class="nav-brand">
+      <span class="tiara-icon">👑</span>
+      <span>Sri Shananmathi</span>
+    </a>
+
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="home.html" class="nav-link">Home</a></li>
+      <li><a href="wishes.html" class="nav-link">Wishes</a></li>
+      <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+      <li><a href="memories.html" class="nav-link">Memories</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="surprise.html" class="nav-link active">Surprise</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="music-btn" id="music-toggle-btn">
+        <div class="music-equalizer">
+          <span></span><span></span><span></span>
+        </div>
+        <span class="music-label">Play Music</span>
+      </button>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+    </div>
+  </header>
+
+  <main class="standalone-container">
+    <section class="page-section active" style="display:flex;">
+      <div class="surprise-content">
+        <div class="dob-badge">
+          <span>🎁 Exclusive Gift For Sri Shananmathi</span>
+        </div>
+
+        <h1 class="cursive-title">A Special Surprise Awaits!</h1>
+        <p class="section-subtitle">Wrapped with royal purple ribbon, golden sparkles & <span>endless love</span></p>
+
+        <div class="gift-stage-wrapper">
+          <div class="surprise-glow-circle"></div>
+          <div class="interactive-gift-box" id="interactive-gift-box" title="Click to unlock your birthday surprise!">
+            <img src="images/giftbox.svg" alt="Animated Birthday Gift Box" class="gift-svg-img">
+          </div>
+        </div>
+
+        <button class="open-surprise-btn" id="open-surprise-btn">
+          <span>Open Your Surprise</span>
+          <span>🎁</span>
+        </button>
+
+        <div class="cta-btn-group" style="margin-top: 3rem;">
+          <a href="index.html" class="cta-btn secondary">
+            <span>Watch Full Animated Presentation</span>
+            <span>🎬</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="standalone-footer">
+      <p>Celebrating Sri Shananmathi • Born 21 November 2007 • <a href="index.html">View Presentation Mode</a></p>
+    </footer>
+  </main>
+
+  <!-- Special Surprise Reveal Modal -->
+  <div class="surprise-card-reveal" id="surprise-card-reveal">
+    <div class="royal-proclamation-card">
+      <button class="proclamation-close-btn" id="proclamation-close-btn">✕</button>
+      <div class="royal-crown-icon">👑</div>
+      
+      <h2 class="proclamation-title">Dearest Sri Shananmathi,</h2>
+      <div class="proclamation-date">A Special Message • 21 November 2007</div>
+
+      <div class="proclamation-message">
+        <p>
+          On the extraordinary day of <strong>21 November 2007</strong>, a truly remarkable, 
+          compassionate, and sparkling soul was gifted to this world.
+        </p>
+        <br>
+        <p>
+          You bring warmth into every space you enter, your laughter is contagious, and your kindness 
+          leaves an indelible imprint on everyone blessed to know you. May this year shower you with 
+          unshakable happiness, remarkable achievements, radiant health, and friendships as true and pure 
+          as gold.
+        </p>
+        <br>
+        <p>
+          Always remember: You are capable of moving mountains, you are deeply cherished, and you deserve 
+          every beautiful blessing the universe has in store!
+        </p>
+      </div>
+
+      <div class="proclamation-signoff">
+        Happy Birthday, Sri Shananmathi! 🎂✨💖
+      </div>
+
+      <div style="margin-top: 1.8rem;">
+        <button class="celebrate-again-btn" id="celebrate-again-btn">
+          <span>Shower More Confetti! 🎊</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

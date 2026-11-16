@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Gallery - Sri Shananmathi ✨</title>
+  <link rel="icon" href="images/cake.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="standalone">
+
+  <div class="ambient-background"></div>
+  <canvas id="particle-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <header class="navbar" role="banner">
+    <a href="index.html#gallery" class="nav-brand">
+      <span class="tiara-icon">👑</span>
+      <span>Sri Shananmathi</span>
+    </a>
+
+    <ul class="nav-menu" id="nav-menu">
+      <li><a href="home.html" class="nav-link">Home</a></li>
+      <li><a href="wishes.html" class="nav-link">Wishes</a></li>
+      <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+      <li><a href="memories.html" class="nav-link">Memories</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="surprise.html" class="nav-link">Surprise</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="music-btn" id="music-toggle-btn">
+        <div class="music-equalizer">
+          <span></span><span></span><span></span>
+        </div>
+        <span class="music-label">Play Music</span>
+      </button>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+    </div>
+  </header>
+
+  <main class="standalone-container">
+    <section class="page-section active" style="display:flex;">
+      <h1 class="cursive-title">Celebration Photo Gallery</h1>
+      <p class="section-subtitle">Moments of splendor, flowers, cakes & <span>golden twilights</span></p>
+
+      <div class="gallery-grid">
+        <div class="gallery-item" data-title="The Royal Birthday Cake" data-subtitle="Lavish purple, pink and gold layers crowned with glowing candles">
+          <img src="images/cake.svg" alt="Birthday Cake">
+          <div class="gallery-overlay">
+            <h4>Royal Birthday Cake</h4>
+            <p>Golden candles & purple floral tiers</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-title="Opulent Bouquet of Roses" data-subtitle="Velvet roses, golden sprigs and sweet fragrance for Sri Shananmathi">
+          <img src="images/flowers.svg" alt="Velvet Rose Bouquet">
+          <div class="gallery-overlay">
+            <h4>Bouquet of Velvet Roses</h4>
+            <p>Blush pink, violet & gold ribbon</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-title="Celebration Balloon Flight" data-subtitle="Shimmering metallic gold, violet and rose balloons soaring high">
+          <img src="images/balloons.svg" alt="Celebration Balloons">
+          <div class="gallery-overlay">
+            <h4>Joyful Balloon Skies</h4>
+            <p>Floating wishes into the heavens</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-title="Dreamy Twilight Sunset" data-subtitle="Golden dusk reflections, serenity and starry purple skies">
+          <img src="images/sunset.svg" alt="Dreamy Twilight Sunset">
+          <div class="gallery-overlay">
+            <h4>Dreamy Sunset Glow</h4>
+            <p>Serene twilight over calm waters</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-title="Midnight Birthday Cheers" data-subtitle="Sparkling glasses, golden confetti showers and festive joy">
+          <img src="images/celebration.svg" alt="Sparkling Celebration Toast">
+          <div class="gallery-overlay">
+            <h4>Sparkling Cheers</h4>
+            <p>Raise a toast to 21 November 2007</p>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-title="Portrait of Grace" data-subtitle="Crowned with stars and surrounded by a radiant golden halo">
+          <img src="images/profile-avatar.svg" alt="Portrait of Sri Shananmathi">
+          <div class="gallery-overlay">
+            <h4>Radiant Tiara & Halo</h4>
+            <p>Elegance and royal birthday charm</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-btn-group" style="margin-top: 3rem;">
+        <a href="memories.html" class="cta-btn gold">
+          <span>View Polaroid Memories</span>
+          <span>📸</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="standalone-footer">
+      <p>Celebrating Sri Shananmathi • Born 21 November 2007 • <a href="index.html">View Presentation Mode</a></p>
+    </footer>
+  </main>
+
+  <!-- Photo Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <div class="lightbox-content-box">
+      <button class="lightbox-close-btn" id="lightbox-close">✕</button>
+      <img src="" alt="" class="lightbox-img" id="lightbox-img">
+      <h3 class="lightbox-caption" id="lightbox-caption"></h3>
+      <p class="lightbox-subcaption" id="lightbox-subcaption"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

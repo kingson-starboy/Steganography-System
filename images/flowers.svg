@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="flowerBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff758c" stop-opacity="0.25"/>
+      <stop offset="70%" stop-color="#4a0072" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#120220" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="roseRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff758c"/>
+      <stop offset="60%" stop-color="#d61c4e"/>
+      <stop offset="100%" stop-color="#670020"/>
+    </linearGradient>
+    <linearGradient id="rosePurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d884f8"/>
+      <stop offset="60%" stop-color="#8a2be2"/>
+      <stop offset="100%" stop-color="#40006e"/>
+    </linearGradient>
+    <linearGradient id="rosePink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb6c1"/>
+      <stop offset="60%" stop-color="#ff69b4"/>
+      <stop offset="100%" stop-color="#a0185c"/>
+    </linearGradient>
+    <linearGradient id="roseGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0aa"/>
+      <stop offset="50%" stop-color="#e5b842"/>
+      <stop offset="100%" stop-color="#9a6e0c"/>
+    </linearGradient>
+    <linearGradient id="goldRibbon" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#ffe699"/>
+      <stop offset="50%" stop-color="#cca028"/>
+      <stop offset="100%" stop-color="#8c6800"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#48a97c"/>
+      <stop offset="100%" stop-color="#1b4d3e"/>
+    </linearGradient>
+    <filter id="fGlow">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" rx="30" fill="#180424"/>
+  <circle cx="300" cy="280" r="260" fill="url(#flowerBg)"/>
+
+  <!-- Botanical Foliage / Eucalyptus -->
+  <g fill="url(#leafGrad)">
+    <path d="M 230 330 C 180 280 140 250 110 240 C 125 270 160 310 220 340 Z"/>
+    <path d="M 370 330 C 420 280 460 250 490 240 C 475 270 440 310 380 340 Z"/>
+    <path d="M 260 250 C 230 180 200 130 170 110 C 195 135 240 180 270 240 Z"/>
+    <path d="M 340 250 C 370 180 400 130 430 110 C 405 135 360 180 330 240 Z"/>
+  </g>
+
+  <!-- Golden Sprigs -->
+  <g stroke="url(#roseGold)" stroke-width="2.5" fill="none">
+    <path d="M 290 350 Q 210 240 170 180"/>
+    <circle cx="170" cy="180" r="5" fill="#ffd700"/>
+    <circle cx="190" cy="205" r="4" fill="#ffd700"/>
+    <circle cx="215" cy="240" r="4" fill="#ffd700"/>
+
+    <path d="M 310 350 Q 390 240 430 180"/>
+    <circle cx="430" cy="180" r="5" fill="#ffd700"/>
+    <circle cx="410" cy="205" r="4" fill="#ffd700"/>
+    <circle cx="385" cy="240" r="4" fill="#ffd700"/>
+  </g>
+
+  <!-- Stems -->
+  <path d="M 270 360 L 260 520 M 300 370 L 300 530 M 330 360 L 340 520" stroke="#254e38" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Left Rose (Purple Velvet) -->
+  <g transform="translate(190, 260)">
+    <circle cx="0" cy="0" r="62" fill="url(#rosePurple)"/>
+    <path d="M -40 -10 C -45 35 35 45 40 -10 C 30 -40 -30 -40 -40 -10" fill="#6a15a8" opacity="0.85"/>
+    <path d="M -25 -20 C 10 -40 35 0 20 25 C -5 40 -35 20 -25 -20" fill="#932ed6" opacity="0.9"/>
+    <circle cx="0" cy="0" r="16" fill="#cca3f5"/>
+    <circle cx="0" cy="0" r="8" fill="#ffd700" filter="url(#fGlow)"/>
+  </g>
+
+  <!-- Right Rose (Magenta Pink) -->
+  <g transform="translate(410, 260)">
+    <circle cx="0" cy="0" r="62" fill="url(#rosePink)"/>
+    <path d="M -40 -10 C -45 35 35 45 40 -10 C 30 -40 -30 -40 -40 -10" fill="#c2185b" opacity="0.85"/>
+    <path d="M -25 -20 C 10 -40 35 0 20 25 C -5 40 -35 20 -25 -20" fill="#e91e63" opacity="0.9"/>
+    <circle cx="0" cy="0" r="16" fill="#ff80ab"/>
+    <circle cx="0" cy="0" r="8" fill="#ffd700" filter="url(#fGlow)"/>
+  </g>
+
+  <!-- Top Center Rose (Rose Gold / Radiant Pink) -->
+  <g transform="translate(300, 180)">
+    <circle cx="0" cy="0" r="68" fill="url(#roseRed)"/>
+    <path d="M -45 -12 C -50 40 40 50 45 -12 C 35 -45 -35 -45 -45 -12" fill="#aa0e3a" opacity="0.85"/>
+    <path d="M -30 -25 C 12 -45 40 0 25 30 C -6 45 -40 25 -30 -25" fill="#f02868" opacity="0.9"/>
+    <circle cx="0" cy="0" r="18" fill="#ff9ebb"/>
+    <circle cx="0" cy="0" r="9" fill="#ffd700" filter="url(#fGlow)"/>
+  </g>
+
+  <!-- Center Focal Rose (Opulent Royal Violet & Gold core) -->
+  <g transform="translate(300, 295)">
+    <circle cx="0" cy="0" r="75" fill="url(#rosePurple)"/>
+    <path d="M -50 -15 C -55 45 45 55 50 -15 C 40 -50 -40 -50 -50 -15" fill="#58108c" opacity="0.9"/>
+    <path d="M -35 -30 C 15 -50 45 0 28 35 C -7 50 -45 30 -35 -30" fill="#7b1fa2" opacity="0.95"/>
+    <circle cx="0" cy="0" r="22" fill="#ba68c8"/>
+    <circle cx="0" cy="0" r="11" fill="#ffe082" filter="url(#fGlow)"/>
+  </g>
+
+  <!-- Big Gold Ribbon Bouquet Wrap -->
+  <g filter="url(#fGlow)">
+    <ellipse cx="300" cy="425" rx="50" ry="16" fill="url(#goldRibbon)"/>
+    <path d="M 285 435 C 265 470 230 500 210 520 C 235 505 275 480 290 445 Z" fill="url(#goldRibbon)"/>
+    <path d="M 315 435 C 335 470 370 500 390 520 C 365 505 325 480 310 445 Z" fill="url(#goldRibbon)"/>
+    <circle cx="300" cy="425" r="12" fill="#ffd700"/>
+  </g>
+
+  <!-- Magical Sparkles -->
+  <g fill="#ffd700" filter="url(#fGlow)">
+    <circle cx="140" cy="150" r="3"/><circle cx="460" cy="140" r="3.5"/><circle cx="120" cy="380" r="2.5"/><circle cx="480" cy="360" r="3"/>
+    <path d="M 280 90 Q 290 90 290 80 Q 290 90 300 90 Q 290 90 290 100 Q 290 90 280 90"/>
+    <path d="M 450 430 Q 458 430 458 422 Q 458 430 466 430 Q 458 430 458 438 Q 458 430 450 430"/>
+  </g>
+</svg>
