@@ -362,7 +362,6 @@ body.standalone .page-section {
   z-index: 1000;
 }
 
-/* Step progress track showing current section out of 6 */
 .countdown-progress-track {
   position: absolute;
   top: 0;
@@ -806,7 +805,6 @@ body.standalone .page-section {
   letter-spacing: 0.5px;
 }
 
-/* User-uploaded badge and delete button */
 .custom-photo-badge {
   position: absolute;
   top: 12px;
@@ -930,7 +928,7 @@ body.standalone .page-section {
 }
 
 /* ===================================================================
-   SECTION 4: MEMORIES (POLAROID FRAMES & UPLOAD)
+   SECTION 4: MEMORIES (POLAROID FRAMES & IMAGE REPLACEMENT)
    =================================================================== */
 .memories-container {
   max-width: 1180px;
@@ -952,7 +950,6 @@ body.standalone .page-section {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.55), 0 0 15px rgba(255, 215, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
-  cursor: pointer;
   color: #2b0b38;
 }
 
@@ -993,6 +990,7 @@ body.standalone .page-section {
   overflow: hidden;
   margin-bottom: 1rem;
   position: relative;
+  cursor: pointer;
 }
 
 .polaroid-photo-frame img {
@@ -1004,6 +1002,54 @@ body.standalone .page-section {
 
 .polaroid-card:hover .polaroid-photo-frame img {
   transform: scale(1.05);
+}
+
+/* Hover overlay on Polaroid photo frame: Click to replace photo */
+.polaroid-change-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 2, 32, 0.72);
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  color: var(--gold-light);
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.polaroid-photo-frame:hover .polaroid-change-overlay {
+  opacity: 1;
+}
+
+.polaroid-reset-photo-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(20, 2, 32, 0.85);
+  border: 1px solid var(--gold-primary);
+  color: var(--gold-primary);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  cursor: pointer;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.polaroid-reset-photo-btn:hover {
+  background: var(--gold-primary);
+  color: #10021c;
+  transform: scale(1.15);
 }
 
 .polaroid-caption {
@@ -1034,6 +1080,7 @@ body.standalone .page-section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .add-photo-placeholder {
@@ -1058,7 +1105,7 @@ body.standalone .page-section {
 }
 
 /* ===================================================================
-   SECTION 5: ABOUT SRI SHANANMATHI
+   SECTION 5: ABOUT SRI SHANANMATHI (INSTAGRAM PROFILE AVATAR)
    =================================================================== */
 .about-wrapper {
   max-width: 980px;
@@ -1103,15 +1150,54 @@ body.standalone .page-section {
   text-align: center;
 }
 
-.profile-avatar-frame {
+/* Instagram Story Circular Profile Wrapper */
+.profile-avatar-wrapper {
+  position: relative;
   width: 250px;
   height: 250px;
+  margin: 1.6rem auto 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instagram-story-ring {
+  position: absolute;
+  inset: -8px;
   border-radius: 50%;
-  padding: 6px;
-  background: linear-gradient(135deg, var(--gold-primary), var(--pink-primary), var(--violet-bright));
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  box-shadow: 0 0 25px rgba(220, 39, 67, 0.55), 0 0 15px rgba(240, 148, 51, 0.45);
+  animation: igGlowPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes igGlowPulse {
+  0% { transform: scale(1); filter: brightness(1); }
+  100% { transform: scale(1.02); filter: brightness(1.15) drop-shadow(0 0 10px rgba(255, 117, 140, 0.6)); }
+}
+
+.avatar-crown-badge {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  z-index: 10;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+  animation: floatSmall 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.profile-avatar-frame {
   position: relative;
-  margin-bottom: 1.2rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #0e0216;
+  border: 5px solid #0e0216; /* Instagram dark gap between story ring and photo */
+  z-index: 2;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
 }
 
 .profile-avatar-frame img {
@@ -1119,7 +1205,86 @@ body.standalone .page-section {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  background: var(--bg-dark-1);
+  transition: transform 0.35s ease;
+}
+
+.avatar-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 2, 32, 0.68);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  color: var(--gold-light);
+  font-size: 0.88rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.profile-avatar-wrapper:hover .avatar-hover-overlay {
+  opacity: 1;
+}
+
+.profile-avatar-wrapper:hover .profile-avatar-frame img {
+  transform: scale(1.06);
+}
+
+.avatar-edit-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd700, #ff4d79);
+  border: 3px solid #0e0216;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.25s ease;
+}
+
+.profile-avatar-wrapper:hover .avatar-edit-badge {
+  transform: scale(1.15);
+}
+
+.profile-photo-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.avatar-action-btn {
+  background: rgba(45, 10, 69, 0.85);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  color: var(--gold-light);
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.avatar-action-btn:hover {
+  background: rgba(121, 40, 202, 0.5);
+  border-color: var(--gold-primary);
+  transform: translateY(-2px);
+}
+
+.avatar-action-btn.secondary {
+  border-color: rgba(255, 117, 140, 0.4);
+  color: var(--pink-light);
 }
 
 .profile-details-col {
@@ -1197,7 +1362,7 @@ body.standalone .page-section {
 }
 
 /* ===================================================================
-   SECTION 6: SPECIAL SURPRISE
+   SECTION 6: SPECIAL SURPRISE & CUSTOMIZABLE LETTER
    =================================================================== */
 .surprise-content {
   display: flex;
@@ -1302,6 +1467,8 @@ body.standalone .page-section {
   position: relative;
   max-width: 680px;
   width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
   background: linear-gradient(180deg, #27063b 0%, #170224 100%);
   border: 2px solid var(--gold-primary);
   border-radius: 28px;
@@ -1327,6 +1494,7 @@ body.standalone .page-section {
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  z-index: 10;
 }
 
 .proclamation-close-btn:hover {
@@ -1338,6 +1506,88 @@ body.standalone .page-section {
   font-size: 3.5rem;
   margin-bottom: 0.8rem;
   animation: floatSmall 3s ease-in-out infinite;
+}
+
+/* Customizable Letter Toolbar & Editing Styles */
+.letter-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.letter-tool-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.25s ease;
+}
+
+.letter-tool-btn.edit {
+  background: rgba(45, 10, 69, 0.85);
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  color: var(--gold-light);
+}
+
+.letter-tool-btn.edit:hover {
+  background: rgba(121, 40, 202, 0.5);
+  border-color: var(--gold-primary);
+  transform: translateY(-2px);
+}
+
+.letter-tool-btn.save {
+  background: linear-gradient(135deg, #2ed573, #10ac84);
+  border: none;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(46, 213, 115, 0.4);
+}
+
+.letter-tool-btn.save:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.letter-tool-btn.reset {
+  background: rgba(235, 77, 75, 0.2);
+  border: 1px solid rgba(235, 77, 75, 0.6);
+  color: #ff7675;
+}
+
+.letter-tool-btn.reset:hover {
+  background: rgba(235, 77, 75, 0.4);
+}
+
+[contenteditable="true"] {
+  outline: 2px dashed rgba(255, 215, 0, 0.6) !important;
+  outline-offset: 4px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.3rem 0.5rem;
+  transition: all 0.2s ease;
+  cursor: text;
+}
+
+[contenteditable="true"]:focus {
+  outline: 2px solid var(--gold-primary) !important;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.letter-editing-hint {
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1.2rem;
+  display: inline-block;
 }
 
 .proclamation-title {

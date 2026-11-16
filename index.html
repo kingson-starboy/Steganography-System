@@ -314,7 +314,7 @@
     </section>
 
     <!-- ---------------------------------------------------------------
-         PAGE 4: MEMORIES (POLAROID FRAMES & UPLOAD)
+         PAGE 4: MEMORIES (POLAROID FRAMES WITH IN-PLACE PHOTO CUSTOMIZATION)
          --------------------------------------------------------------- -->
     <section id="memories" class="page-section" aria-labelledby="memories-heading">
       <h2 id="memories-heading" class="cursive-title">Treasured Memories</h2>
@@ -323,35 +323,26 @@
       <!-- Memories Controls: Upload photos -->
       <div class="gallery-controls-bar">
         <div class="gallery-controls-text">
-          <span>🎞️</span>
-          <span>Add your own memories (Supports all image formats: JPG, PNG, WEBP, etc.)</span>
+          <span>💡</span>
+          <span><strong>Click on any photo frame below to add your own photo</strong> (The text stays unchanged!)</span>
         </div>
         <div>
           <input type="file" id="memory-file-input" accept="image/*" multiple style="display:none;">
           <button class="upload-photo-btn" id="upload-memory-photo-btn">
-            <span>➕ Add New Memory Photo</span>
+            <span>➕ Add New Memory Card</span>
           </button>
         </div>
       </div>
 
       <div class="memories-container">
         <div class="polaroid-grid">
-          <!-- Upload Polaroid Card -->
-          <div class="polaroid-card add-memory-card" id="add-memory-card" title="Click to upload your own memory photos!">
-            <div class="polaroid-photo-frame add-photo-placeholder">
-              <div class="add-photo-icon">📸 ➕</div>
-              <span>Click or Drag Photos Here</span>
-            </div>
-            <div class="polaroid-caption">
-              <h4>Add Your Memory</h4>
-              <p>Supports all image formats</p>
-            </div>
-          </div>
-
-          <!-- Memory 1 -->
+          <!-- Memory 1: The Brightest Smile -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-1.svg" alt="Radiant Smile Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-1.svg" alt="The Brightest Smile" id="memory-img-1">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>The Brightest Smile</h4>
@@ -359,10 +350,13 @@
             </div>
           </div>
 
-          <!-- Memory 2 -->
+          <!-- Memory 2: Chasing Stars -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-2.svg" alt="Chasing Dreams Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-2.svg" alt="Chasing Stars" id="memory-img-2">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>Chasing Stars</h4>
@@ -370,10 +364,13 @@
             </div>
           </div>
 
-          <!-- Memory 3 -->
+          <!-- Memory 3: Joyful Journeys -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-3.svg" alt="Unforgettable Adventures Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-3.svg" alt="Joyful Journeys" id="memory-img-3">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>Joyful Journeys</h4>
@@ -381,10 +378,13 @@
             </div>
           </div>
 
-          <!-- Memory 4 -->
+          <!-- Memory 4: Moments of Magic -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-4.svg" alt="Moments of Magic Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-4.svg" alt="Moments of Magic" id="memory-img-4">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>Moments of Magic</h4>
@@ -392,10 +392,13 @@
             </div>
           </div>
 
-          <!-- Memory 5 -->
+          <!-- Memory 5: Radiant & Bold -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-5.svg" alt="Radiant & Unstoppable Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-5.svg" alt="Radiant & Bold" id="memory-img-5">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>Radiant & Bold</h4>
@@ -403,14 +406,29 @@
             </div>
           </div>
 
-          <!-- Memory 6 -->
+          <!-- Memory 6: Endless Love -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-6.svg" alt="A Heart Full of Love Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-6.svg" alt="Endless Love" id="memory-img-6">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>Endless Love</h4>
               <p>Surrounded by warmth, cherished friendships, and adoration.</p>
+            </div>
+          </div>
+
+          <!-- Upload Polaroid Card -->
+          <div class="polaroid-card add-memory-card" id="add-memory-card" title="Click to upload an additional memory photo!">
+            <div class="polaroid-photo-frame add-photo-placeholder">
+              <div class="add-photo-icon">📸 ➕</div>
+              <span>Click or Drag Photos Here</span>
+            </div>
+            <div class="polaroid-caption">
+              <h4>Add Your Memory</h4>
+              <p>Supports all image formats</p>
             </div>
           </div>
         </div>
@@ -425,7 +443,7 @@
     </section>
 
     <!-- ---------------------------------------------------------------
-         PAGE 5: ABOUT SRI SHANANMATHI
+         PAGE 5: ABOUT SRI SHANANMATHI (INSTAGRAM PROFILE AVATAR)
          --------------------------------------------------------------- -->
     <section id="about" class="page-section" aria-labelledby="about-heading">
       <h2 id="about-heading" class="cursive-title">About Sri Shananmathi</h2>
@@ -433,11 +451,42 @@
 
       <div class="about-wrapper">
         <div class="profile-card">
-          <!-- Profile Avatar Column -->
+          <!-- Profile Avatar Column with Instagram-Style Story Ring -->
           <div class="profile-avatar-col">
-            <div class="profile-avatar-frame">
-              <img src="images/profile-avatar.svg" alt="Sri Shananmathi Profile Portrait">
+            <div class="profile-avatar-wrapper" id="profile-avatar-trigger" title="Click to customize profile photo (like Instagram)">
+              <!-- Vibrant Instagram Story Gradient Ring -->
+              <div class="instagram-story-ring"></div>
+              
+              <!-- Crown on Top of Avatar -->
+              <div class="avatar-crown-badge">👑</div>
+
+              <!-- Profile Avatar Picture Frame -->
+              <div class="profile-avatar-frame">
+                <img src="images/profile-avatar.svg" alt="Sri Shananmathi Profile Portrait" id="profile-avatar-img">
+                <div class="avatar-hover-overlay">
+                  <span>📷 Change Photo</span>
+                </div>
+              </div>
+
+              <!-- Instagram Style Edit/Camera Badge -->
+              <div class="avatar-edit-badge" title="Upload new profile photo">
+                <span>📷</span>
+              </div>
+
+              <!-- Hidden File Input for Profile Photo -->
+              <input type="file" id="profile-photo-input" accept="image/*" style="display:none;">
             </div>
+
+            <!-- Profile Photo Actions -->
+            <div class="profile-photo-actions">
+              <button class="avatar-action-btn" id="upload-profile-photo-btn">
+                <span>📷 Change Profile Photo</span>
+              </button>
+              <button class="avatar-action-btn secondary" id="reset-profile-photo-btn" style="display:none;">
+                <span>↺ Reset</span>
+              </button>
+            </div>
+
             <div class="dob-badge" style="margin-bottom: 0;">
               <span>👑 Birthday Queen</span>
             </div>
@@ -582,17 +631,37 @@
   </div>
 
   <!-- ===================================================================
-       SPECIAL SURPRISE REVEAL MODAL (ROYAL PROCLAMATION CARD)
+       SPECIAL SURPRISE REVEAL MODAL (USER-CUSTOMIZABLE BIRTHDAY LETTER)
        =================================================================== -->
   <div class="surprise-card-reveal" id="surprise-card-reveal" role="dialog" aria-modal="true" aria-label="Birthday Surprise Message">
     <div class="royal-proclamation-card">
       <button class="proclamation-close-btn" id="proclamation-close-btn" aria-label="Close Surprise Message">✕</button>
       <div class="royal-crown-icon">👑</div>
       
-      <h3 class="proclamation-title">Dearest Sri Shananmathi,</h3>
-      <div class="proclamation-date">A Special Message • 21 November 2007</div>
+      <!-- Letter Customization Toolbar -->
+      <div class="letter-toolbar">
+        <button class="letter-tool-btn edit" id="edit-letter-btn">
+          <span>✏️ Customize Letter</span>
+        </button>
+        <button class="letter-tool-btn save" id="save-letter-btn" style="display:none;">
+          <span>💾 Save Letter</span>
+        </button>
+        <button class="letter-tool-btn reset" id="reset-letter-btn" style="display:none;">
+          <span>↺ Reset Original</span>
+        </button>
+      </div>
 
-      <div class="proclamation-message">
+      <!-- Editing Hint (visible when edit mode is active) -->
+      <div class="letter-editing-hint" id="letter-editing-hint" style="display:none;">
+        ✍️ You can click and type anywhere to edit the letter text! Click "Save Letter" when done.
+      </div>
+
+      <!-- Customizable Letter Header / Greeting -->
+      <h3 class="proclamation-title" id="proclamation-greeting">Dearest Sri Shananmathi,</h3>
+      <div class="proclamation-date" id="proclamation-subtitle">A Special Message • 21 November 2007</div>
+
+      <!-- Customizable Letter Body -->
+      <div class="proclamation-message" id="proclamation-body">
         <p>
           On the extraordinary day of <strong>21 November 2007</strong>, a truly remarkable, 
           compassionate, and sparkling soul was gifted to this world.
@@ -611,7 +680,8 @@
         </p>
       </div>
 
-      <div class="proclamation-signoff">
+      <!-- Customizable Sign-off -->
+      <div class="proclamation-signoff" id="proclamation-signoff">
         Happy Birthday, Sri Shananmathi! 🎂✨💖
       </div>
 

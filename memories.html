@@ -50,37 +50,29 @@
       <h1 class="cursive-title">Treasured Memories</h1>
       <p class="section-subtitle">Polaroid snapshots of love, wonder & <span>priceless smiles</span></p>
 
-      <!-- Upload your own memory photos -->
+      <!-- Memories Controls: Upload photos -->
       <div class="gallery-controls-bar">
         <div class="gallery-controls-text">
-          <span>🎞️</span>
-          <span>Add your own memories (Supports all image formats: JPG, PNG, WEBP, GIF, SVG, etc.)</span>
+          <span>💡</span>
+          <span><strong>Click on any photo frame below to add your own photo</strong> (The text stays unchanged!)</span>
         </div>
         <div>
           <input type="file" id="memory-file-input" accept="image/*" multiple style="display:none;">
           <button class="upload-photo-btn" id="upload-memory-photo-btn">
-            <span>➕ Add New Memory Photo</span>
+            <span>➕ Add New Memory Card</span>
           </button>
         </div>
       </div>
 
       <div class="memories-container">
         <div class="polaroid-grid">
-          <!-- Upload Polaroid Card -->
-          <div class="polaroid-card add-memory-card" id="add-memory-card" title="Click to upload your own memory photos!">
-            <div class="polaroid-photo-frame add-photo-placeholder">
-              <div class="add-photo-icon">📸 ➕</div>
-              <span>Click or Drag Photos Here</span>
-            </div>
-            <div class="polaroid-caption">
-              <h4>Add Your Memory</h4>
-              <p>Supports all image formats</p>
-            </div>
-          </div>
-
+          <!-- Memory 1 -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-1.svg" alt="Radiant Smile Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-1.svg" alt="The Brightest Smile" id="memory-img-1">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>The Brightest Smile</h4>
@@ -88,9 +80,13 @@
             </div>
           </div>
 
+          <!-- Memory 2 -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-2.svg" alt="Chasing Dreams Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-2.svg" alt="Chasing Stars" id="memory-img-2">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>Chasing Stars</h4>
@@ -98,9 +94,13 @@
             </div>
           </div>
 
+          <!-- Memory 3 -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-3.svg" alt="Unforgettable Adventures Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-3.svg" alt="Joyful Journeys" id="memory-img-3">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>Joyful Journeys</h4>
@@ -108,9 +108,13 @@
             </div>
           </div>
 
+          <!-- Memory 4 -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-4.svg" alt="Moments of Magic Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-4.svg" alt="Moments of Magic" id="memory-img-4">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>Moments of Magic</h4>
@@ -118,9 +122,13 @@
             </div>
           </div>
 
+          <!-- Memory 5 -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-5.svg" alt="Radiant & Unstoppable Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-5.svg" alt="Radiant & Bold" id="memory-img-5">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>Radiant & Bold</h4>
@@ -128,13 +136,29 @@
             </div>
           </div>
 
+          <!-- Memory 6 -->
           <div class="polaroid-card">
-            <div class="polaroid-photo-frame">
-              <img src="images/memory-6.svg" alt="A Heart Full of Love Polaroid">
+            <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
+              <img src="images/memory-6.svg" alt="Endless Love" id="memory-img-6">
+              <div class="polaroid-change-overlay">
+                <span>📷 Click to Change Photo</span>
+              </div>
             </div>
             <div class="polaroid-caption">
               <h4>Endless Love</h4>
               <p>Surrounded by warmth, cherished friendships, and adoration.</p>
+            </div>
+          </div>
+
+          <!-- Upload Polaroid Card -->
+          <div class="polaroid-card add-memory-card" id="add-memory-card" title="Click to upload an additional memory photo!">
+            <div class="polaroid-photo-frame add-photo-placeholder">
+              <div class="add-photo-icon">📸 ➕</div>
+              <span>Click or Drag Photos Here</span>
+            </div>
+            <div class="polaroid-caption">
+              <h4>Add Your Memory</h4>
+              <p>Supports all image formats</p>
             </div>
           </div>
         </div>

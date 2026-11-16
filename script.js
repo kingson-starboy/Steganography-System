@@ -1,7 +1,8 @@
 /**
  * SRI SHANANMATHI'S BIRTHDAY CELEBRATION
- * Manual Click-to-Advance Navigation, Universal Photo Uploader (All Formats),
- * Custom Music Changer / Audio Studio, Particles & Surprise Effects.
+ * Manual Click-to-Advance Navigation, In-Place Polaroid Memory Customization (Text Preserved),
+ * Instagram-Style Profile Photo Customization, User-Customizable Birthday Letter,
+ * Custom Music Studio & Background Particles.
  */
 
 (function () {
@@ -50,7 +51,6 @@
       currentSlideIndex = foundIndex;
     }
 
-    // Set initial slide - NO auto timer running!
     goToSlide(currentSlideIndex);
 
     // Manual Next / Prev Buttons
@@ -68,7 +68,7 @@
 
     // Keyboard navigation (Arrow keys)
     document.addEventListener('keydown', (e) => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
       if (e.key === 'ArrowRight' || e.key === 'PageDown') {
         nextSlide();
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
@@ -91,8 +91,8 @@
     function handleSwipe() {
       const diff = touchStartX - touchEndX;
       if (Math.abs(diff) > 60) {
-        if (diff > 0) nextSlide(); // Swiped left -> next
-        else prevSlide(); // Swiped right -> prev
+        if (diff > 0) nextSlide();
+        else prevSlide();
       }
     }
 
@@ -141,7 +141,6 @@
       slideTitleLabel.textContent = `• ${currentSlide.name}`;
     }
     if (progressBar) {
-      // Progress bar indicates position through the 6 pages
       const pct = ((index + 1) / SLIDES.length) * 100;
       progressBar.style.width = `${pct}%`;
     }
@@ -197,7 +196,7 @@
     exploreBtn.addEventListener('click', (e) => {
       if (isPresentationMode) {
         e.preventDefault();
-        goToSlide(1); // Move to Wishes
+        goToSlide(1);
         if (!audioEngine.isPlaying) {
           audioEngine.start();
         }
@@ -231,102 +230,61 @@
   }
 
   // ===================================================================
-  // 2. USER PHOTO UPLOADER FOR PAGE 3 (GALLERY) & PAGE 4 (MEMORIES)
-  // Supports ALL formats: JPG, PNG, WEBP, GIF, SVG, BMP, AVIF, HEIC, etc.
+  // 2. PAGE 4 MEMORIES: IN-PLACE PHOTO REPLACEMENT (TEXT PRESERVED)
+  // & GALLERY UPLOADER (ALL IMAGE FORMATS SUPPORTED)
   // ===================================================================
   const GALLERY_STORAGE_KEY = 'sri_shananmathi_custom_gallery';
-  const MEMORIES_STORAGE_KEY = 'sri_shananmathi_custom_memories';
+  const MEMORY_CARD_PREFIX = 'sri_memory_card_img_';
 
   function initPhotoUploaders() {
-    // Gallery Uploader Elements
+    // Gallery Elements
     const galleryUploadBtn = document.getElementById('upload-gallery-photo-btn');
     const galleryFileInput = document.getElementById('gallery-file-input');
     const galleryGrid = document.querySelector('.gallery-grid');
 
-    // Memories Uploader Elements
-    const memoryUploadBtn = document.getElementById('upload-memory-photo-btn');
-    const memoryFileInput = document.getElementById('memory-file-input');
-    const memoryAddCard = document.getElementById('add-memory-card');
-    const polaroidGrid = document.querySelector('.polaroid-grid');
-
-    // Load saved photos from LocalStorage
+    // Load saved gallery photos
     loadSavedGalleryPhotos();
-    loadSavedMemoriesPhotos();
 
-    // 1. Gallery File Input trigger
+    // Gallery File Input trigger
     if (galleryUploadBtn && galleryFileInput) {
       galleryUploadBtn.addEventListener('click', () => galleryFileInput.click());
       galleryFileInput.addEventListener('change', (e) => {
-        handleImageUpload(e.target.files, 'gallery');
+        handleGalleryImageUpload(e.target.files);
         galleryFileInput.value = '';
       });
     }
 
-    // 2. Memory File Input trigger
-    if (memoryFileInput) {
-      if (memoryUploadBtn) {
-        memoryUploadBtn.addEventListener('click', () => memoryFileInput.click());
-      }
-      if (memoryAddCard) {
-        memoryAddCard.addEventListener('click', () => memoryFileInput.click());
-      }
-      memoryFileInput.addEventListener('change', (e) => {
-        handleImageUpload(e.target.files, 'memory');
-        memoryFileInput.value = '';
+    if (galleryGrid) {
+      galleryGrid.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        galleryGrid.style.borderColor = '#ffd700';
+      });
+      galleryGrid.addEventListener('dragleave', () => {
+        galleryGrid.style.borderColor = '';
+      });
+      galleryGrid.addEventListener('drop', (e) => {
+        e.preventDefault();
+        galleryGrid.style.borderColor = '';
+        if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+          handleGalleryImageUpload(e.dataTransfer.files);
+        }
       });
     }
 
-    // 3. Drag and Drop support on Gallery Grid
-    if (galleryGrid) {
-      setupDragAndDrop(galleryGrid, 'gallery');
-    }
-    // Drag and Drop support on Polaroid Grid
-    if (polaroidGrid) {
-      setupDragAndDrop(polaroidGrid, 'memory');
-    }
+    // Setup In-Place Polaroid Memory Photo Replacement
+    setupPolaroidCardUploaders();
   }
 
-  function setupDragAndDrop(element, type) {
-    element.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      element.style.borderColor = '#ffd700';
-    });
-    element.addEventListener('dragleave', () => {
-      element.style.borderColor = '';
-    });
-    element.addEventListener('drop', (e) => {
-      e.preventDefault();
-      element.style.borderColor = '';
-      if (e.dataTransfer && e.dataTransfer.files.length > 0) {
-        handleImageUpload(e.dataTransfer.files, type);
-      }
-    });
-  }
-
-  function handleImageUpload(files, targetType) {
+  function handleGalleryImageUpload(files) {
     if (!files || files.length === 0) return;
 
-    Array.from(files).forEach((file, index) => {
-      // Validate that file is an image (all formats accepted)
-      if (!file.type.startsWith('image/') && !file.name.match(/\.(jpg|jpeg|png|webp|gif|svg|bmp|avif|heic)$/i)) {
-        alert(`File "${file.name}" is not a recognized image format. Please select an image.`);
-        return;
-      }
-
+    Array.from(files).forEach((file) => {
       const reader = new FileReader();
       reader.onload = (event) => {
         const dataUrl = event.target.result;
         const defaultTitle = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ') || 'Special Moment';
-
-        if (targetType === 'gallery') {
-          addGalleryItem(dataUrl, defaultTitle, 'Precious Birthday Memory', true);
-          saveCustomPhoto(GALLERY_STORAGE_KEY, { url: dataUrl, title: defaultTitle, subtitle: 'Precious Birthday Memory' });
-        } else {
-          addMemoryItem(dataUrl, defaultTitle, 'A memory etched in time and love.', true);
-          saveCustomPhoto(MEMORIES_STORAGE_KEY, { url: dataUrl, title: defaultTitle, quote: 'A memory etched in time and love.' });
-        }
-
-        // Celebrate upload with sparkles
+        addGalleryItem(dataUrl, defaultTitle, 'Precious Birthday Memory', true);
+        saveCustomPhoto(GALLERY_STORAGE_KEY, { url: dataUrl, title: defaultTitle, subtitle: 'Precious Birthday Memory' });
         launchConfetti(40);
       };
       reader.readAsDataURL(file);
@@ -359,7 +317,6 @@
       </div>
     `;
 
-    // Click to open lightbox
     item.addEventListener('click', (e) => {
       if (e.target.classList.contains('photo-delete-btn')) {
         e.stopPropagation();
@@ -375,59 +332,14 @@
     galleryGrid.prepend(item);
   }
 
-  function addMemoryItem(src, title, quote, isCustom = false) {
-    const polaroidGrid = document.querySelector('.polaroid-grid');
-    if (!polaroidGrid) return;
-
-    const card = document.createElement('div');
-    card.className = 'polaroid-card';
-
-    let deleteBtnHtml = '';
-    if (isCustom) {
-      deleteBtnHtml = `<button class="photo-delete-btn" style="top:12px;right:12px;" title="Remove Memory">✕</button>`;
-    }
-
-    card.innerHTML = `
-      ${deleteBtnHtml}
-      <div class="polaroid-photo-frame">
-        <img src="${src}" alt="${title}">
-      </div>
-      <div class="polaroid-caption">
-        <h4>${title}</h4>
-        <p>${quote}</p>
-      </div>
-    `;
-
-    card.addEventListener('click', (e) => {
-      if (e.target.classList.contains('photo-delete-btn')) {
-        e.stopPropagation();
-        if (confirm(`Remove memory "${title}"?`)) {
-          card.remove();
-          removeCustomPhoto(MEMORIES_STORAGE_KEY, src);
-        }
-        return;
-      }
-      openLightbox(src, title, quote);
-    });
-
-    // Insert right after the upload card if present, otherwise prepend
-    const addCard = document.getElementById('add-memory-card');
-    if (addCard && addCard.nextSibling) {
-      polaroidGrid.insertBefore(card, addCard.nextSibling);
-    } else {
-      polaroidGrid.prepend(card);
-    }
-  }
-
   function saveCustomPhoto(key, item) {
     try {
       const existing = JSON.parse(localStorage.getItem(key) || '[]');
       existing.unshift(item);
-      // Keep up to 20 custom items to prevent quota overflow
       if (existing.length > 20) existing.pop();
       localStorage.setItem(key, JSON.stringify(existing));
     } catch (err) {
-      console.warn('LocalStorage quota reached or unavailable:', err);
+      console.warn('LocalStorage quota reached:', err);
     }
   }
 
@@ -448,15 +360,318 @@
     } catch (e) { /* ignore */ }
   }
 
-  function loadSavedMemoriesPhotos() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(MEMORIES_STORAGE_KEY) || '[]');
-      saved.reverse().forEach(p => addMemoryItem(p.url, p.title, p.quote, true));
-    } catch (e) { /* ignore */ }
+  /**
+   * Page 4 Memories: Click on ANY polaroid photo frame to customize the photo,
+   * WHILE KEEPING THE TEXT DOWN THE IMAGE 100% UNCHANGED!
+   */
+  function setupPolaroidCardUploaders() {
+    const memoryCards = document.querySelectorAll('.polaroid-card:not(.add-memory-card)');
+    const singleFileInput = document.createElement('input');
+    singleFileInput.type = 'file';
+    singleFileInput.accept = 'image/*';
+    singleFileInput.style.display = 'none';
+    document.body.appendChild(singleFileInput);
+
+    let activeCardIndex = null;
+    let activeCardImg = null;
+    let activeResetBtn = null;
+
+    memoryCards.forEach((card, idx) => {
+      const cardId = idx + 1;
+      const photoFrame = card.querySelector('.polaroid-photo-frame');
+      const img = photoFrame ? photoFrame.querySelector('img') : null;
+      if (!photoFrame || !img) return;
+
+      const originalSrc = img.src;
+
+      // Add hover overlay indicating click to change photo
+      if (!photoFrame.querySelector('.polaroid-change-overlay')) {
+        const overlay = document.createElement('div');
+        overlay.className = 'polaroid-change-overlay';
+        overlay.innerHTML = `<span>📷 Click to Change Photo</span>`;
+        photoFrame.appendChild(overlay);
+      }
+
+      // Add reset button
+      let resetBtn = photoFrame.querySelector('.polaroid-reset-photo-btn');
+      if (!resetBtn) {
+        resetBtn = document.createElement('button');
+        resetBtn.className = 'polaroid-reset-photo-btn';
+        resetBtn.title = 'Reset to default illustration';
+        resetBtn.innerHTML = '↺';
+        resetBtn.style.display = 'none';
+        photoFrame.appendChild(resetBtn);
+      }
+
+      // Check LocalStorage for previously saved custom photo for this card
+      const savedCustomImg = localStorage.getItem(MEMORY_CARD_PREFIX + cardId);
+      if (savedCustomImg) {
+        img.src = savedCustomImg;
+        resetBtn.style.display = 'flex';
+      }
+
+      // Clicking photo frame triggers file upload for THIS specific card
+      photoFrame.addEventListener('click', (e) => {
+        if (e.target === resetBtn) {
+          e.stopPropagation();
+          img.src = originalSrc;
+          resetBtn.style.display = 'none';
+          localStorage.removeItem(MEMORY_CARD_PREFIX + cardId);
+          return;
+        }
+
+        activeCardIndex = cardId;
+        activeCardImg = img;
+        activeResetBtn = resetBtn;
+        singleFileInput.click();
+      });
+    });
+
+    singleFileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0] && activeCardImg) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          const dataUrl = evt.target.result;
+          activeCardImg.src = dataUrl;
+          if (activeResetBtn) activeResetBtn.style.display = 'flex';
+          try {
+            localStorage.setItem(MEMORY_CARD_PREFIX + activeCardIndex, dataUrl);
+          } catch (err) {
+            console.warn('LocalStorage error:', err);
+          }
+          launchConfetti(45);
+        };
+        reader.readAsDataURL(file);
+      }
+      singleFileInput.value = '';
+    });
+
+    // Also support "Add Memory" card if clicked
+    const addMemoryCard = document.getElementById('add-memory-card');
+    const memoryFileInput = document.getElementById('memory-file-input');
+    const uploadMemoryBtn = document.getElementById('upload-memory-photo-btn');
+
+    if (memoryFileInput) {
+      if (addMemoryCard) addMemoryCard.addEventListener('click', () => memoryFileInput.click());
+      if (uploadMemoryBtn) uploadMemoryBtn.addEventListener('click', () => memoryFileInput.click());
+
+      memoryFileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+          const reader = new FileReader();
+          reader.onload = (evt) => {
+            const dataUrl = evt.target.result;
+            // Add as new polaroid with default sweet caption
+            addNewCustomPolaroid(dataUrl, 'Golden Moments', 'Laughter and happiness that shine forever.');
+            launchConfetti(50);
+          };
+          reader.readAsDataURL(file);
+        }
+        memoryFileInput.value = '';
+      });
+    }
+  }
+
+  function addNewCustomPolaroid(src, title, quote) {
+    const polaroidGrid = document.querySelector('.polaroid-grid');
+    if (!polaroidGrid) return;
+
+    const card = document.createElement('div');
+    card.className = 'polaroid-card';
+    card.innerHTML = `
+      <button class="photo-delete-btn" style="top:12px;right:12px;" title="Remove Memory">✕</button>
+      <div class="polaroid-photo-frame">
+        <img src="${src}" alt="${title}">
+      </div>
+      <div class="polaroid-caption">
+        <h4>${title}</h4>
+        <p>${quote}</p>
+      </div>
+    `;
+
+    card.querySelector('.photo-delete-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      card.remove();
+    });
+
+    card.addEventListener('click', (e) => {
+      if (e.target.classList.contains('photo-delete-btn')) return;
+      openLightbox(src, title, quote);
+    });
+
+    const addCard = document.getElementById('add-memory-card');
+    if (addCard && addCard.nextSibling) {
+      polaroidGrid.insertBefore(card, addCard.nextSibling);
+    } else {
+      polaroidGrid.prepend(card);
+    }
   }
 
   // ===================================================================
-  // 3. MUSIC STUDIO: USER CUSTOM AUDIO UPLOAD & MELODY CHANGER
+  // 3. PAGE 5: INSTAGRAM-STYLE PROFILE PHOTO CUSTOMIZATION
+  // ===================================================================
+  const PROFILE_PHOTO_STORAGE_KEY = 'sri_shananmathi_custom_profile_photo';
+
+  function initInstagramProfileCustomizer() {
+    const profileTrigger = document.getElementById('profile-avatar-trigger');
+    const profileImg = document.getElementById('profile-avatar-img');
+    const profileFileInput = document.getElementById('profile-photo-input');
+    const uploadProfileBtn = document.getElementById('upload-profile-photo-btn');
+    const resetProfileBtn = document.getElementById('reset-profile-photo-btn');
+
+    if (!profileImg) return;
+
+    const originalSrc = profileImg.src;
+
+    // Load saved profile photo from localStorage
+    const savedProfilePhoto = localStorage.getItem(PROFILE_PHOTO_STORAGE_KEY);
+    if (savedProfilePhoto) {
+      profileImg.src = savedProfilePhoto;
+      if (resetProfileBtn) resetProfileBtn.style.display = 'inline-block';
+    }
+
+    function triggerPhotoPicker() {
+      if (profileFileInput) profileFileInput.click();
+    }
+
+    if (profileTrigger) profileTrigger.addEventListener('click', triggerPhotoPicker);
+    if (uploadProfileBtn) uploadProfileBtn.addEventListener('click', triggerPhotoPicker);
+
+    if (profileFileInput) {
+      profileFileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+          const reader = new FileReader();
+          reader.onload = (evt) => {
+            const dataUrl = evt.target.result;
+            profileImg.src = dataUrl;
+            if (resetProfileBtn) resetProfileBtn.style.display = 'inline-block';
+            try {
+              localStorage.setItem(PROFILE_PHOTO_STORAGE_KEY, dataUrl);
+            } catch (err) {
+              console.warn(err);
+            }
+            launchConfetti(60);
+          };
+          reader.readAsDataURL(file);
+        }
+        profileFileInput.value = '';
+      });
+    }
+
+    if (resetProfileBtn) {
+      resetProfileBtn.addEventListener('click', () => {
+        profileImg.src = originalSrc;
+        resetProfileBtn.style.display = 'none';
+        localStorage.removeItem(PROFILE_PHOTO_STORAGE_KEY);
+      });
+    }
+  }
+
+  // ===================================================================
+  // 4. PAGE 6: USER CUSTOMIZABLE BIRTHDAY LETTER
+  // ===================================================================
+  const LETTER_STORAGE_KEY = 'sri_shananmathi_custom_letter';
+
+  function initLetterCustomizer() {
+    const editBtn = document.getElementById('edit-letter-btn');
+    const saveBtn = document.getElementById('save-letter-btn');
+    const resetBtn = document.getElementById('reset-letter-btn');
+    const letterCard = document.querySelector('.royal-proclamation-card');
+
+    const greetingEl = document.getElementById('proclamation-greeting');
+    const subtitleEl = document.getElementById('proclamation-subtitle');
+    const bodyEl = document.getElementById('proclamation-body');
+    const signoffEl = document.getElementById('proclamation-signoff');
+
+    if (!letterCard || !bodyEl) return;
+
+    // Default template backup
+    const defaultData = {
+      greeting: greetingEl ? greetingEl.innerHTML : 'Dearest Sri Shananmathi,',
+      subtitle: subtitleEl ? subtitleEl.innerHTML : 'A Special Message • 21 November 2007',
+      body: bodyEl.innerHTML,
+      signoff: signoffEl ? signoffEl.innerHTML : 'Happy Birthday, Sri Shananmathi! 🎂✨💖'
+    };
+
+    // Load saved custom letter
+    try {
+      const saved = JSON.parse(localStorage.getItem(LETTER_STORAGE_KEY));
+      if (saved) {
+        if (greetingEl && saved.greeting) greetingEl.innerHTML = saved.greeting;
+        if (subtitleEl && saved.subtitle) subtitleEl.innerHTML = saved.subtitle;
+        if (bodyEl && saved.body) bodyEl.innerHTML = saved.body;
+        if (signoffEl && saved.signoff) signoffEl.innerHTML = saved.signoff;
+        if (resetBtn) resetBtn.style.display = 'inline-flex';
+      }
+    } catch (e) { /* ignore */ }
+
+    // Toggle Edit Mode
+    if (editBtn) {
+      editBtn.addEventListener('click', () => {
+        setLetterEditable(true);
+      });
+    }
+
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        setLetterEditable(false);
+        // Save to LocalStorage
+        const currentData = {
+          greeting: greetingEl ? greetingEl.innerHTML : '',
+          subtitle: subtitleEl ? subtitleEl.innerHTML : '',
+          body: bodyEl.innerHTML,
+          signoff: signoffEl ? signoffEl.innerHTML : ''
+        };
+        try {
+          localStorage.setItem(LETTER_STORAGE_KEY, JSON.stringify(currentData));
+        } catch (err) {
+          console.warn(err);
+        }
+        if (resetBtn) resetBtn.style.display = 'inline-flex';
+        launchConfetti(50);
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (confirm('Restore the original birthday letter?')) {
+          if (greetingEl) greetingEl.innerHTML = defaultData.greeting;
+          if (subtitleEl) subtitleEl.innerHTML = defaultData.subtitle;
+          bodyEl.innerHTML = defaultData.body;
+          if (signoffEl) signoffEl.innerHTML = defaultData.signoff;
+          localStorage.removeItem(LETTER_STORAGE_KEY);
+          resetBtn.style.display = 'none';
+          setLetterEditable(false);
+        }
+      });
+    }
+
+    function setLetterEditable(editable) {
+      const elements = [greetingEl, subtitleEl, bodyEl, signoffEl].filter(Boolean);
+      elements.forEach(el => {
+        el.contentEditable = editable ? 'true' : 'false';
+      });
+
+      const hintEl = document.getElementById('letter-editing-hint');
+
+      if (editable) {
+        if (editBtn) editBtn.style.display = 'none';
+        if (saveBtn) saveBtn.style.display = 'inline-flex';
+        if (resetBtn) resetBtn.style.display = 'inline-flex';
+        if (hintEl) hintEl.style.display = 'inline-block';
+        if (bodyEl) bodyEl.focus();
+      } else {
+        if (editBtn) editBtn.style.display = 'inline-flex';
+        if (saveBtn) saveBtn.style.display = 'none';
+        if (hintEl) hintEl.style.display = 'none';
+      }
+    }
+  }
+
+  // ===================================================================
+  // 5. MUSIC STUDIO: CUSTOM SONG UPLOADER & MELODY CHANGER
   // ===================================================================
   class BirthdayAudioEngine {
     constructor() {
@@ -465,9 +680,8 @@
       this.currentTimeout = null;
       this.tempo = 145;
       this.volume = 0.8;
-      this.currentPreset = 'chimes'; // 'chimes', 'piano', 'harp', 'lullaby', 'custom'
+      this.currentPreset = 'chimes';
 
-      // HTML5 Audio element for custom user-uploaded songs (.mp3, .wav, .m4a, etc.)
       this.customAudio = new Audio();
       this.customAudio.loop = true;
       this.customAudioName = '';
@@ -542,7 +756,6 @@
         gainNode.gain.linearRampToValueAtTime(vol * 0.9, now + 0.06);
         gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration + 1.0);
       } else {
-        // Default: Chimes / Music Box
         osc.type = 'sine';
         osc2.type = 'triangle';
         osc.frequency.setValueAtTime(freq, now);
@@ -660,12 +873,10 @@
 
   const audioEngine = new BirthdayAudioEngine();
 
-  // Music toggle button
   if (musicToggleBtn) {
     musicToggleBtn.addEventListener('click', () => audioEngine.toggle());
   }
 
-  // Music Studio Modal Controller
   function initMusicStudio() {
     const musicModal = document.getElementById('music-studio-modal');
     const musicModalClose = document.getElementById('music-studio-close');
@@ -692,7 +903,6 @@
       });
     }
 
-    // Audio file upload
     if (audioDropZone && audioFileInput) {
       audioDropZone.addEventListener('click', () => audioFileInput.click());
       audioFileInput.addEventListener('change', (e) => {
@@ -703,7 +913,6 @@
       });
     }
 
-    // Presets selection
     presetItems.forEach(item => {
       item.addEventListener('click', () => {
         presetItems.forEach(p => p.classList.remove('active'));
@@ -718,7 +927,6 @@
       });
     });
 
-    // Volume slider
     if (volumeSlider) {
       volumeSlider.addEventListener('input', (e) => {
         audioEngine.setVolume(parseFloat(e.target.value));
@@ -727,7 +935,7 @@
   }
 
   // ===================================================================
-  // 4. BACKGROUND PARTICLES CANVAS
+  // 6. BACKGROUND PARTICLES CANVAS
   // ===================================================================
   function initParticleCanvas() {
     const canvas = document.getElementById('particle-canvas');
@@ -833,7 +1041,7 @@
   }
 
   // ===================================================================
-  // 5. CONFETTI CANNON SYSTEM
+  // 7. CONFETTI CANNON SYSTEM
   // ===================================================================
   let confettiCanvas = null;
   let confettiCtx = null;
@@ -945,7 +1153,7 @@
   }
 
   // ===================================================================
-  // 6. INTERACTIVE BIRTHDAY CAKE & CANDLE
+  // 8. INTERACTIVE BIRTHDAY CAKE & CANDLE
   // ===================================================================
   function initInteractiveCake() {
     const heroCake = document.getElementById('hero-cake-interactive');
@@ -978,7 +1186,7 @@
   }
 
   // ===================================================================
-  // 7. PHOTO GALLERY & LIGHTBOX
+  // 9. PHOTO GALLERY & LIGHTBOX
   // ===================================================================
   function initGalleryLightbox() {
     const galleryItems = document.querySelectorAll('.gallery-item');
@@ -1033,7 +1241,7 @@
   }
 
   // ===================================================================
-  // 8. SPECIAL SURPRISE GIFT BOX
+  // 10. SPECIAL SURPRISE GIFT BOX
   // ===================================================================
   function initSurpriseFeature() {
     const openSurpriseBtn = document.getElementById('open-surprise-btn');
@@ -1093,6 +1301,8 @@
     initSurpriseFeature();
     initPhotoUploaders();
     initMusicStudio();
+    initInstagramProfileCustomizer();
+    initLetterCustomizer();
   });
 
 })();

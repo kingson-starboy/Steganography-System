@@ -85,16 +85,34 @@
     </footer>
   </main>
 
-  <!-- Special Surprise Reveal Modal -->
+  <!-- Special Surprise Reveal Modal (User Customizable Letter) -->
   <div class="surprise-card-reveal" id="surprise-card-reveal">
     <div class="royal-proclamation-card">
       <button class="proclamation-close-btn" id="proclamation-close-btn">✕</button>
       <div class="royal-crown-icon">👑</div>
       
-      <h2 class="proclamation-title">Dearest Sri Shananmathi,</h2>
-      <div class="proclamation-date">A Special Message • 21 November 2007</div>
+      <!-- Letter Customization Toolbar -->
+      <div class="letter-toolbar">
+        <button class="letter-tool-btn edit" id="edit-letter-btn">
+          <span>✏️ Customize Letter</span>
+        </button>
+        <button class="letter-tool-btn save" id="save-letter-btn" style="display:none;">
+          <span>💾 Save Letter</span>
+        </button>
+        <button class="letter-tool-btn reset" id="reset-letter-btn" style="display:none;">
+          <span>↺ Reset Original</span>
+        </button>
+      </div>
 
-      <div class="proclamation-message">
+      <!-- Editing Hint -->
+      <div class="letter-editing-hint" id="letter-editing-hint" style="display:none;">
+        ✍️ You can click and type anywhere to edit the letter text! Click "Save Letter" when done.
+      </div>
+
+      <h2 class="proclamation-title" id="proclamation-greeting">Dearest Sri Shananmathi,</h2>
+      <div class="proclamation-date" id="proclamation-subtitle">A Special Message • 21 November 2007</div>
+
+      <div class="proclamation-message" id="proclamation-body">
         <p>
           On the extraordinary day of <strong>21 November 2007</strong>, a truly remarkable, 
           compassionate, and sparkling soul was gifted to this world.
@@ -113,7 +131,7 @@
         </p>
       </div>
 
-      <div class="proclamation-signoff">
+      <div class="proclamation-signoff" id="proclamation-signoff">
         Happy Birthday, Sri Shananmathi! 🎂✨💖
       </div>
 

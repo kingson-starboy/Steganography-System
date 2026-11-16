@@ -52,15 +52,48 @@
 
       <div class="about-wrapper">
         <div class="profile-card">
+          <!-- Profile Avatar Column with Instagram-Style Story Ring -->
           <div class="profile-avatar-col">
-            <div class="profile-avatar-frame">
-              <img src="images/profile-avatar.svg" alt="Sri Shananmathi Profile Portrait">
+            <div class="profile-avatar-wrapper" id="profile-avatar-trigger" title="Click to customize profile photo (like Instagram)">
+              <!-- Vibrant Instagram Story Gradient Ring -->
+              <div class="instagram-story-ring"></div>
+              
+              <!-- Crown on Top of Avatar -->
+              <div class="avatar-crown-badge">👑</div>
+
+              <!-- Profile Avatar Picture Frame -->
+              <div class="profile-avatar-frame">
+                <img src="images/profile-avatar.svg" alt="Sri Shananmathi Profile Portrait" id="profile-avatar-img">
+                <div class="avatar-hover-overlay">
+                  <span>📷 Change Photo</span>
+                </div>
+              </div>
+
+              <!-- Instagram Style Edit/Camera Badge -->
+              <div class="avatar-edit-badge" title="Upload new profile photo">
+                <span>📷</span>
+              </div>
+
+              <!-- Hidden File Input for Profile Photo -->
+              <input type="file" id="profile-photo-input" accept="image/*" style="display:none;">
             </div>
+
+            <!-- Profile Photo Actions -->
+            <div class="profile-photo-actions">
+              <button class="avatar-action-btn" id="upload-profile-photo-btn">
+                <span>📷 Change Profile Photo</span>
+              </button>
+              <button class="avatar-action-btn secondary" id="reset-profile-photo-btn" style="display:none;">
+                <span>↺ Reset</span>
+              </button>
+            </div>
+
             <div class="dob-badge" style="margin-bottom: 0;">
               <span>👑 Birthday Queen</span>
             </div>
           </div>
 
+          <!-- Profile Details Column -->
           <div class="profile-details-col">
             <h2 class="profile-name">Sri Shananmathi</h2>
             <div class="profile-title-tag">The Star of 21 November</div>
