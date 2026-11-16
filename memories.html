@@ -35,6 +35,12 @@
         </div>
         <span class="music-label">Play Music</span>
       </button>
+
+      <button class="music-change-btn" id="music-change-btn" title="Change song or upload your own audio">
+        <span>Change Music</span>
+        <span>🎵</span>
+      </button>
+
       <button class="menu-toggle" id="menu-toggle">☰</button>
     </div>
   </header>
@@ -44,8 +50,34 @@
       <h1 class="cursive-title">Treasured Memories</h1>
       <p class="section-subtitle">Polaroid snapshots of love, wonder & <span>priceless smiles</span></p>
 
+      <!-- Upload your own memory photos -->
+      <div class="gallery-controls-bar">
+        <div class="gallery-controls-text">
+          <span>🎞️</span>
+          <span>Add your own memories (Supports all image formats: JPG, PNG, WEBP, GIF, SVG, etc.)</span>
+        </div>
+        <div>
+          <input type="file" id="memory-file-input" accept="image/*" multiple style="display:none;">
+          <button class="upload-photo-btn" id="upload-memory-photo-btn">
+            <span>➕ Add New Memory Photo</span>
+          </button>
+        </div>
+      </div>
+
       <div class="memories-container">
         <div class="polaroid-grid">
+          <!-- Upload Polaroid Card -->
+          <div class="polaroid-card add-memory-card" id="add-memory-card" title="Click to upload your own memory photos!">
+            <div class="polaroid-photo-frame add-photo-placeholder">
+              <div class="add-photo-icon">📸 ➕</div>
+              <span>Click or Drag Photos Here</span>
+            </div>
+            <div class="polaroid-caption">
+              <h4>Add Your Memory</h4>
+              <p>Supports all image formats</p>
+            </div>
+          </div>
+
           <div class="polaroid-card">
             <div class="polaroid-photo-frame">
               <img src="images/memory-1.svg" alt="Radiant Smile Polaroid">
@@ -110,8 +142,8 @@
 
       <div class="cta-btn-group" style="margin-top: 3rem;">
         <a href="about.html" class="cta-btn gold">
-          <span>Read About Sri Shananmathi</span>
-          <span>👑</span>
+          <span>Next: Read About Sri Shananmathi</span>
+          <span>▶</span>
         </a>
       </div>
     </section>
@@ -120,6 +152,71 @@
       <p>Celebrating Sri Shananmathi • Born 21 November 2007 • <a href="index.html">View Presentation Mode</a></p>
     </footer>
   </main>
+
+  <!-- Photo Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <div class="lightbox-content-box">
+      <button class="lightbox-close-btn" id="lightbox-close">✕</button>
+      <img src="" alt="" class="lightbox-img" id="lightbox-img">
+      <h3 class="lightbox-caption" id="lightbox-caption"></h3>
+      <p class="lightbox-subcaption" id="lightbox-subcaption"></p>
+    </div>
+  </div>
+
+  <!-- Music Studio Modal -->
+  <div class="music-studio-modal" id="music-studio-modal">
+    <div class="music-studio-card">
+      <button class="proclamation-close-btn" id="music-studio-close">✕</button>
+      <h3>🎵 Birthday Music Studio</h3>
+      <p class="subtitle" id="current-song-label">Choose your favorite melody or upload any song of your choice!</p>
+
+      <input type="file" id="custom-audio-file-input" accept="audio/*" style="display:none;">
+      <div class="music-uploader-zone" id="audio-upload-dropzone">
+        <div class="upload-icon">🎧 ➕</div>
+        <span class="title">Upload Your Own Song</span>
+        <span class="desc">Supports MP3, WAV, M4A, OGG, AAC & all audio formats</span>
+      </div>
+
+      <div class="track-presets-list">
+        <div class="track-preset-item active" data-preset="chimes">
+          <div class="track-name">
+            <span>🎶</span>
+            <span>Crystal Birthday Music Box</span>
+          </div>
+          <span class="track-badge">Chimes</span>
+        </div>
+        <div class="track-preset-item" data-preset="piano">
+          <div class="track-name">
+            <span>🎹</span>
+            <span>Sweet Piano Birthday Serenade</span>
+          </div>
+          <span class="track-badge">Piano</span>
+        </div>
+        <div class="track-preset-item" data-preset="harp">
+          <div class="track-name">
+            <span>✨</span>
+            <span>Enchanted Celestial Harp</span>
+          </div>
+          <span class="track-badge">Harp</span>
+        </div>
+        <div class="track-preset-item" data-preset="lullaby">
+          <div class="track-name">
+            <span>🌙</span>
+            <span>Gentle Lullaby Box</span>
+          </div>
+          <span class="track-badge">Soft</span>
+        </div>
+      </div>
+
+      <div class="volume-control-box">
+        <label for="music-volume-slider">
+          <span>🔊</span>
+          <span>Volume</span>
+        </label>
+        <input type="range" id="music-volume-slider" class="volume-slider" min="0" max="1" step="0.05" value="0.8">
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

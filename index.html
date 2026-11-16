@@ -42,13 +42,18 @@
       <li><a href="#surprise" class="nav-link">Surprise</a></li>
     </ul>
 
-    <!-- Navigation Action Controls (Music & Mobile Hamburger) -->
+    <!-- Navigation Action Controls (Music, Change Music & Mobile Menu) -->
     <div class="nav-actions">
       <button class="music-btn" id="music-toggle-btn" aria-label="Toggle Birthday Music">
         <div class="music-equalizer">
           <span></span><span></span><span></span>
         </div>
         <span class="music-label">Play Music</span>
+      </button>
+
+      <button class="music-change-btn" id="music-change-btn" title="Change song or upload your own audio">
+        <span>Change Music</span>
+        <span>🎵</span>
       </button>
 
       <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
@@ -58,7 +63,7 @@
   </header>
 
   <!-- ===================================================================
-       PRESENTATION CONTAINER (6 FULLSCREEN SECTIONS)
+       MAIN CONTAINER (6 FULLSCREEN SECTIONS - MANUAL NAVIGATION)
        =================================================================== -->
   <main class="presentation-container" role="main">
 
@@ -104,18 +109,18 @@
           <p>
             Welcome to a magical realm curated especially to celebrate <strong>YOU</strong>, Sri Shananmathi! 
             May your special day sparkle with boundless laughter, infinite joy, and every dream your beautiful 
-            heart cherishes. Step in, let the music play, and let this royal celebration unfold!
+            heart cherishes. Click the buttons below or navigate at your own pace!
           </p>
         </div>
 
         <!-- Action Call to Explore -->
         <div class="cta-btn-group">
           <a href="#wishes" class="cta-btn gold" id="explore-btn">
-            <span>Explore Celebration</span>
-            <span>✨</span>
+            <span>Next: Read Wishes</span>
+            <span>▶</span>
           </a>
           <a href="#surprise" class="cta-btn secondary">
-            <span>View Surprise Gift</span>
+            <span>Jump to Surprise Gift</span>
             <span>🎁</span>
           </a>
         </div>
@@ -214,14 +219,35 @@
           </div>
         </article>
       </div>
+
+      <div class="cta-btn-group" style="margin-top: 2.5rem;">
+        <a href="#gallery" class="cta-btn gold">
+          <span>Next: View Photo Gallery</span>
+          <span>▶</span>
+        </a>
+      </div>
     </section>
 
     <!-- ---------------------------------------------------------------
-         PAGE 3: PHOTO GALLERY
+         PAGE 3: PHOTO GALLERY (WITH UNIVERSAL PHOTO UPLOADER)
          --------------------------------------------------------------- -->
     <section id="gallery" class="page-section" aria-labelledby="gallery-heading">
       <h2 id="gallery-heading" class="cursive-title">Celebration Photo Gallery</h2>
-      <p class="section-subtitle">Moments of splendor, flowers, cakes & <span>golden twilights</span></p>
+      <p class="section-subtitle">Moments of splendor, flowers, cakes & <span>golden memories</span></p>
+
+      <!-- Gallery Controls: Upload your own photos in any format -->
+      <div class="gallery-controls-bar">
+        <div class="gallery-controls-text">
+          <span>📸</span>
+          <span>Add your own photos (Supports JPG, PNG, WEBP, GIF, SVG, etc.)</span>
+        </div>
+        <div>
+          <input type="file" id="gallery-file-input" accept="image/*" multiple style="display:none;">
+          <button class="upload-photo-btn" id="upload-gallery-photo-btn">
+            <span>➕ Upload Photos</span>
+          </button>
+        </div>
+      </div>
 
       <div class="gallery-grid">
         <!-- Gallery 1: Cake -->
@@ -278,17 +304,50 @@
           </div>
         </div>
       </div>
+
+      <div class="cta-btn-group" style="margin-top: 2.5rem;">
+        <a href="#memories" class="cta-btn gold">
+          <span>Next: View Polaroid Memories</span>
+          <span>▶</span>
+        </a>
+      </div>
     </section>
 
     <!-- ---------------------------------------------------------------
-         PAGE 4: MEMORIES (POLAROID FRAMES)
+         PAGE 4: MEMORIES (POLAROID FRAMES & UPLOAD)
          --------------------------------------------------------------- -->
     <section id="memories" class="page-section" aria-labelledby="memories-heading">
       <h2 id="memories-heading" class="cursive-title">Treasured Memories</h2>
       <p class="section-subtitle">Polaroid snapshots of love, wonder & <span>priceless smiles</span></p>
 
+      <!-- Memories Controls: Upload photos -->
+      <div class="gallery-controls-bar">
+        <div class="gallery-controls-text">
+          <span>🎞️</span>
+          <span>Add your own memories (Supports all image formats: JPG, PNG, WEBP, etc.)</span>
+        </div>
+        <div>
+          <input type="file" id="memory-file-input" accept="image/*" multiple style="display:none;">
+          <button class="upload-photo-btn" id="upload-memory-photo-btn">
+            <span>➕ Add New Memory Photo</span>
+          </button>
+        </div>
+      </div>
+
       <div class="memories-container">
         <div class="polaroid-grid">
+          <!-- Upload Polaroid Card -->
+          <div class="polaroid-card add-memory-card" id="add-memory-card" title="Click to upload your own memory photos!">
+            <div class="polaroid-photo-frame add-photo-placeholder">
+              <div class="add-photo-icon">📸 ➕</div>
+              <span>Click or Drag Photos Here</span>
+            </div>
+            <div class="polaroid-caption">
+              <h4>Add Your Memory</h4>
+              <p>Supports all image formats</p>
+            </div>
+          </div>
+
           <!-- Memory 1 -->
           <div class="polaroid-card">
             <div class="polaroid-photo-frame">
@@ -355,6 +414,13 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="cta-btn-group" style="margin-top: 2.5rem;">
+        <a href="#about" class="cta-btn gold">
+          <span>Next: Read About Sri Shananmathi</span>
+          <span>▶</span>
+        </a>
       </div>
     </section>
 
@@ -425,6 +491,13 @@
           </div>
         </div>
       </div>
+
+      <div class="cta-btn-group" style="margin-top: 2.5rem;">
+        <a href="#surprise" class="cta-btn gold">
+          <span>Next: Unwrap The Surprise Gift</span>
+          <span>🎁</span>
+        </a>
+      </div>
     </section>
 
     <!-- ---------------------------------------------------------------
@@ -452,16 +525,23 @@
           <span>Open Your Surprise</span>
           <span>🎁</span>
         </button>
+
+        <div class="cta-btn-group" style="margin-top: 2.5rem;">
+          <a href="#home" class="cta-btn secondary">
+            <span>Return to Start (Home)</span>
+            <span>↺</span>
+          </a>
+        </div>
       </div>
     </section>
 
   </main>
 
   <!-- ===================================================================
-       PRESENTATION CONTROLLER BAR (BOTTOM DOCK)
+       MANUAL NAVIGATION CONTROLLER BAR (BOTTOM DOCK)
        =================================================================== -->
-  <footer class="presentation-controller" role="toolbar" aria-label="Presentation Controls">
-    <!-- Countdown Linear Progress Bar (8-10 seconds per slide) -->
+  <footer class="presentation-controller" role="toolbar" aria-label="Page Navigation Controls">
+    <!-- Progress Indicator showing current section out of 6 -->
     <div class="countdown-progress-track">
       <div class="countdown-progress-bar" id="slide-progress-bar"></div>
     </div>
@@ -470,23 +550,20 @@
     <div class="ctrl-info">
       <span class="slide-counter" id="slide-counter">01 / 06</span>
       <span class="slide-title-label" id="slide-title-label">• Home</span>
-      <span class="auto-status-indicator paused" id="auto-status-indicator" title="Explore Mode Active"></span>
+      <button class="autoplay-toggle-btn" id="autoplay-toggle-btn" title="Toggle automatic slideshow">
+        ▶ Auto-Play: OFF
+      </button>
     </div>
 
-    <!-- Presentation Buttons: Prev, Pause/Resume, Skip/Next -->
+    <!-- Manual Navigation Buttons: Prev and Next -->
     <div class="ctrl-buttons">
       <button class="ctrl-btn" id="prev-btn" title="Previous Page (Left Arrow)">
-        <span>Back</span>
         <i style="font-style:normal;">◀</i>
+        <span>Previous</span>
       </button>
 
-      <button class="ctrl-btn" id="pause-resume-btn" title="Toggle Auto Presentation">
-        <span>Auto Play</span>
-        <i style="font-style:normal;">▶</i>
-      </button>
-
-      <button class="ctrl-btn primary" id="skip-btn" title="Next Page (Right Arrow)">
-        <span>Next</span>
+      <button class="ctrl-btn primary" id="next-btn" title="Next Page (Right Arrow)">
+        <span>Next Page</span>
         <i style="font-style:normal;">▶</i>
       </button>
     </div>
@@ -542,6 +619,69 @@
         <button class="celebrate-again-btn" id="celebrate-again-btn">
           <span>Shower More Confetti! 🎊</span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MUSIC STUDIO MODAL (CUSTOM MUSIC CHANGER)
+       =================================================================== -->
+  <div class="music-studio-modal" id="music-studio-modal" role="dialog" aria-modal="true" aria-label="Music Studio">
+    <div class="music-studio-card">
+      <button class="proclamation-close-btn" id="music-studio-close" aria-label="Close Music Studio">✕</button>
+      <h3>🎵 Birthday Music Studio</h3>
+      <p class="subtitle" id="current-song-label">Choose your favorite melody or upload any song of your choice!</p>
+
+      <!-- Custom Audio File Uploader -->
+      <input type="file" id="custom-audio-file-input" accept="audio/*" style="display:none;">
+      <div class="music-uploader-zone" id="audio-upload-dropzone">
+        <div class="upload-icon">🎧 ➕</div>
+        <span class="title">Upload Your Own Song</span>
+        <span class="desc">Supports MP3, WAV, M4A, OGG, AAC & all audio formats</span>
+      </div>
+
+      <!-- Built-in Melody Presets -->
+      <div class="track-presets-list">
+        <div class="track-preset-item active" data-preset="chimes">
+          <div class="track-name">
+            <span>🎶</span>
+            <span>Crystal Birthday Music Box</span>
+          </div>
+          <span class="track-badge">Chimes</span>
+        </div>
+
+        <div class="track-preset-item" data-preset="piano">
+          <div class="track-name">
+            <span>🎹</span>
+            <span>Sweet Piano Birthday Serenade</span>
+          </div>
+          <span class="track-badge">Piano</span>
+        </div>
+
+        <div class="track-preset-item" data-preset="harp">
+          <div class="track-name">
+            <span>✨</span>
+            <span>Enchanted Celestial Harp</span>
+          </div>
+          <span class="track-badge">Harp</span>
+        </div>
+
+        <div class="track-preset-item" data-preset="lullaby">
+          <div class="track-name">
+            <span>🌙</span>
+            <span>Gentle Lullaby Box</span>
+          </div>
+          <span class="track-badge">Soft</span>
+        </div>
+      </div>
+
+      <!-- Volume Slider -->
+      <div class="volume-control-box">
+        <label for="music-volume-slider">
+          <span>🔊</span>
+          <span>Volume</span>
+        </label>
+        <input type="range" id="music-volume-slider" class="volume-slider" min="0" max="1" step="0.05" value="0.8">
       </div>
     </div>
   </div>

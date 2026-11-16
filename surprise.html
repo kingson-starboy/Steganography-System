@@ -35,6 +35,12 @@
         </div>
         <span class="music-label">Play Music</span>
       </button>
+
+      <button class="music-change-btn" id="music-change-btn" title="Change song or upload your own audio">
+        <span>Change Music</span>
+        <span>🎵</span>
+      </button>
+
       <button class="menu-toggle" id="menu-toggle">☰</button>
     </div>
   </header>
@@ -62,8 +68,12 @@
         </button>
 
         <div class="cta-btn-group" style="margin-top: 3rem;">
-          <a href="index.html" class="cta-btn secondary">
-            <span>Watch Full Animated Presentation</span>
+          <a href="home.html" class="cta-btn secondary">
+            <span>Return to Home</span>
+            <span>↺</span>
+          </a>
+          <a href="index.html" class="cta-btn gold">
+            <span>Open Main Presentation</span>
             <span>🎬</span>
           </a>
         </div>
@@ -111,6 +121,61 @@
         <button class="celebrate-again-btn" id="celebrate-again-btn">
           <span>Shower More Confetti! 🎊</span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Music Studio Modal -->
+  <div class="music-studio-modal" id="music-studio-modal">
+    <div class="music-studio-card">
+      <button class="proclamation-close-btn" id="music-studio-close">✕</button>
+      <h3>🎵 Birthday Music Studio</h3>
+      <p class="subtitle" id="current-song-label">Choose your favorite melody or upload any song of your choice!</p>
+
+      <input type="file" id="custom-audio-file-input" accept="audio/*" style="display:none;">
+      <div class="music-uploader-zone" id="audio-upload-dropzone">
+        <div class="upload-icon">🎧 ➕</div>
+        <span class="title">Upload Your Own Song</span>
+        <span class="desc">Supports MP3, WAV, M4A, OGG, AAC & all audio formats</span>
+      </div>
+
+      <div class="track-presets-list">
+        <div class="track-preset-item active" data-preset="chimes">
+          <div class="track-name">
+            <span>🎶</span>
+            <span>Crystal Birthday Music Box</span>
+          </div>
+          <span class="track-badge">Chimes</span>
+        </div>
+        <div class="track-preset-item" data-preset="piano">
+          <div class="track-name">
+            <span>🎹</span>
+            <span>Sweet Piano Birthday Serenade</span>
+          </div>
+          <span class="track-badge">Piano</span>
+        </div>
+        <div class="track-preset-item" data-preset="harp">
+          <div class="track-name">
+            <span>✨</span>
+            <span>Enchanted Celestial Harp</span>
+          </div>
+          <span class="track-badge">Harp</span>
+        </div>
+        <div class="track-preset-item" data-preset="lullaby">
+          <div class="track-name">
+            <span>🌙</span>
+            <span>Gentle Lullaby Box</span>
+          </div>
+          <span class="track-badge">Soft</span>
+        </div>
+      </div>
+
+      <div class="volume-control-box">
+        <label for="music-volume-slider">
+          <span>🔊</span>
+          <span>Volume</span>
+        </label>
+        <input type="range" id="music-volume-slider" class="volume-slider" min="0" max="1" step="0.05" value="0.8">
       </div>
     </div>
   </div>
