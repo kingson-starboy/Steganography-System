@@ -347,51 +347,44 @@
       const reader = new FileReader();
       reader.onload = (event) => {
         const dataUrl = event.target.result;
-        const defaultTitle = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ') || 'Special Moment';
-        addGalleryItem(dataUrl, defaultTitle, 'Precious Birthday Memory', true);
-        saveCustomPhoto(GALLERY_STORAGE_KEY, { url: dataUrl, title: defaultTitle, subtitle: 'Precious Birthday Memory' });
+        addGalleryItem(dataUrl, true);
+        saveCustomPhoto(GALLERY_STORAGE_KEY, { url: dataUrl });
         launchConfetti(40);
       };
       reader.readAsDataURL(file);
     });
   }
 
-  function addGalleryItem(src, title, subtitle, isCustom = false) {
+  function addGalleryItem(src, isCustom = false) {
     const galleryGrid = document.querySelector('.gallery-grid');
     if (!galleryGrid) return;
 
     const item = document.createElement('div');
     item.className = 'gallery-item';
-    item.setAttribute('data-title', title);
-    item.setAttribute('data-subtitle', subtitle);
 
     let deleteBtnHtml = '';
-    let badgeHtml = '';
     if (isCustom) {
-      badgeHtml = `<span class="custom-photo-badge">✨ Added Photo</span>`;
       deleteBtnHtml = `<button class="photo-delete-btn" title="Remove Photo">✕</button>`;
     }
 
     item.innerHTML = `
-      ${badgeHtml}
       ${deleteBtnHtml}
-      <img src="${src}" alt="${title}">
+      <img src="${src}" alt="Celebration Photo">
       <div class="gallery-overlay">
-        <h4>${title}</h4>
-        <p>${subtitle}</p>
+        <span class="gallery-zoom-icon">🔍</span>
       </div>
     `;
 
     item.addEventListener('click', (e) => {
       if (e.target.classList.contains('photo-delete-btn')) {
         e.stopPropagation();
-        if (confirm(`Remove "${title}" from gallery?`)) {
+        if (confirm('Remove this photo from gallery?')) {
           item.remove();
           removeCustomPhoto(GALLERY_STORAGE_KEY, src);
         }
         return;
       }
-      openLightbox(src, title, subtitle);
+      openLightbox(src);
     });
 
     galleryGrid.prepend(item);
@@ -421,7 +414,7 @@
   function loadSavedGalleryPhotos() {
     try {
       const saved = JSON.parse(localStorage.getItem(GALLERY_STORAGE_KEY) || '[]');
-      saved.reverse().forEach(p => addGalleryItem(p.url, p.title, p.subtitle, true));
+      saved.reverse().forEach(p => addGalleryItem(p.url, true));
     } catch (e) { /* ignore */ }
   }
 
@@ -1261,7 +1254,7 @@
   }
 
   // ===================================================================
-  // 9. PHOTO GALLERY & LIGHTBOX
+  // 9. PHOTO GALLERY & LIGHTBOX (CLEAN - NO FILENAME MENTIONED)
   // ===================================================================
   function initGalleryLightbox() {
     const galleryItems = document.querySelectorAll('.gallery-item');
@@ -1274,9 +1267,7 @@
       item.addEventListener('click', (e) => {
         if (e.target.classList.contains('photo-delete-btn')) return;
         const img = item.querySelector('img');
-        const title = item.getAttribute('data-title') || 'Celebration';
-        const subtitle = item.getAttribute('data-subtitle') || 'Birthday Moment';
-        if (img) openLightbox(img.src, title, subtitle);
+        if (img) openLightbox(img.src);
       });
     });
 
@@ -1299,7 +1290,7 @@
     });
   }
 
-  function openLightbox(src, title, subtitle) {
+  function openLightbox(src) {
     const lightboxModal = document.getElementById('lightbox-modal');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxCaption = document.getElementById('lightbox-caption');
@@ -1308,9 +1299,9 @@
     if (!lightboxModal || !lightboxImg) return;
 
     lightboxImg.src = src;
-    lightboxImg.alt = title;
-    if (lightboxCaption) lightboxCaption.textContent = title;
-    if (lightboxSubcaption) lightboxSubcaption.textContent = subtitle;
+    lightboxImg.alt = 'Celebration Moment';
+    if (lightboxCaption) lightboxCaption.textContent = '';
+    if (lightboxSubcaption) lightboxSubcaption.textContent = '';
 
     lightboxModal.classList.add('active');
   }
@@ -1424,10 +1415,59 @@
   }
 
   // ===================================================================
-  // 12. SAVE & SHARE LINK GENERATOR (LOCKS IN VIEWER MODE FOR RECEIVER)
+  // 12. DEDICATED SAVE BUTTON & SHARE LINK GENERATOR
   // ===================================================================
+  function saveAllEdits() {
+    // 1. Current name & DOB
+    try {
+      localStorage.setItem(NAME_STORAGE_KEY, currentCelebrationName);
+      localStorage.setItem(DOB_STORAGE_KEY, currentCelebrationDob);
+    } catch (e) {}
+
+    // 2. Birthday letter
+    const greetingEl = document.getElementById('proclamation-greeting');
+    const subtitleEl = document.getElementById('proclamation-subtitle');
+    const bodyEl = document.getElementById('proclamation-body');
+    const signoffEl = document.getElementById('proclamation-signoff');
+    if (bodyEl) {
+      const letterData = {
+        greeting: greetingEl ? greetingEl.innerHTML : '',
+        subtitle: subtitleEl ? subtitleEl.innerHTML : '',
+        body: bodyEl.innerHTML,
+        signoff: signoffEl ? signoffEl.innerHTML : ''
+      };
+      try {
+        localStorage.setItem(LETTER_STORAGE_KEY, JSON.stringify(letterData));
+      } catch (e) {}
+    }
+
+    // Visual feedback on save buttons
+    const saveLabel = document.getElementById('save-btn-label');
+    const saveIcon = document.getElementById('save-btn-icon');
+    if (saveLabel) saveLabel.textContent = 'Saved!';
+    if (saveIcon) saveIcon.textContent = '✅';
+
+    const bannerSave = document.getElementById('banner-save-btn');
+    if (bannerSave) bannerSave.innerHTML = '<span>✅ Saved!</span>';
+
+    showToast('💾 All changes and photos saved successfully!');
+    launchConfetti(60);
+
+    setTimeout(() => {
+      if (saveLabel) saveLabel.textContent = 'Save';
+      if (saveIcon) saveIcon.textContent = '💾';
+      if (bannerSave) bannerSave.innerHTML = '<span>💾 Save</span>';
+    }, 2500);
+  }
+
   function initShareModal() {
-    const shareBtn = document.getElementById('save-and-share-btn');
+    const navSaveBtn = document.getElementById('nav-save-btn');
+    const bannerSaveBtn = document.getElementById('banner-save-btn');
+
+    const navShareBtn = document.getElementById('nav-share-btn');
+    const bannerShareBtn = document.getElementById('banner-share-btn');
+    const oldShareBtn = document.getElementById('save-and-share-btn');
+
     const shareModal = document.getElementById('share-modal');
     const shareModalClose = document.getElementById('share-modal-close');
     const shareLinkInput = document.getElementById('share-link-input');
@@ -1435,6 +1475,10 @@
     const copyBtnText = document.getElementById('copy-btn-text');
     const previewLink = document.getElementById('preview-receiver-link');
     const whatsappBtn = document.getElementById('whatsapp-share-btn');
+
+    // Attach save handlers
+    if (navSaveBtn) navSaveBtn.addEventListener('click', saveAllEdits);
+    if (bannerSaveBtn) bannerSaveBtn.addEventListener('click', saveAllEdits);
 
     function generateShareUrl() {
       const url = new URL(window.location.href);
@@ -1460,19 +1504,22 @@
       return url.toString();
     }
 
-    if (shareBtn) {
-      shareBtn.addEventListener('click', () => {
-        const shareUrl = generateShareUrl();
-        if (shareLinkInput) shareLinkInput.value = shareUrl;
-        if (previewLink) previewLink.href = shareUrl;
-        if (whatsappBtn) {
-          const text = `👑 A magical royal birthday celebration curated for ${currentCelebrationName}! Open your surprise here: ${shareUrl}`;
-          whatsappBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-        }
-        if (shareModal) shareModal.classList.add('active');
-        launchConfetti(90);
-      });
+    function openShare() {
+      saveAllEdits();
+      const shareUrl = generateShareUrl();
+      if (shareLinkInput) shareLinkInput.value = shareUrl;
+      if (previewLink) previewLink.href = shareUrl;
+      if (whatsappBtn) {
+        const text = `👑 A magical royal birthday celebration curated for ${currentCelebrationName}! Open your surprise here: ${shareUrl}`;
+        whatsappBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+      }
+      if (shareModal) shareModal.classList.add('active');
+      launchConfetti(90);
     }
+
+    if (navShareBtn) navShareBtn.addEventListener('click', openShare);
+    if (bannerShareBtn) bannerShareBtn.addEventListener('click', openShare);
+    if (oldShareBtn) oldShareBtn.addEventListener('click', openShare);
 
     if (shareModalClose && shareModal) {
       shareModalClose.addEventListener('click', () => shareModal.classList.remove('active'));

@@ -16,10 +16,16 @@
 
   <!-- Creator / Editor Studio Notification Banner (Only in Editor Mode) -->
   <div class="editor-mode-banner" id="editor-banner">
-    <span>✏️ <strong>Creator Mode Active:</strong> Customize name, photos, letter &amp; music below. Click <strong>"🎁 Save &amp; Share"</strong> to copy the receiver link!</span>
-    <button class="preview-mode-switch-btn" id="preview-mode-switch-btn" title="Toggle between Editor and Receiver Viewer">
-      <span>👀 Preview Receiver View</span>
-    </button>
+    <div class="banner-content">
+      <span>✏️ <strong>Creator Studio Active:</strong> Customize name, photos &amp; letter</span>
+    </div>
+    <div class="banner-btn-group">
+      <button class="banner-btn save-btn" id="banner-save-btn"><span>💾 Save</span></button>
+      <button class="banner-btn share-btn" id="banner-share-btn"><span>🔗 Share Link</span></button>
+      <button class="preview-mode-switch-btn" id="preview-mode-switch-btn" title="Toggle between Editor and Receiver Viewer">
+        <span>👀 Preview</span>
+      </button>
+    </div>
   </div>
 
   <!-- Ambient Glowing Background Gradient -->
@@ -62,8 +68,7 @@
 
       <!-- Change Music Preset / Upload Audio (Editor only) -->
       <button class="music-change-btn" id="music-change-btn" title="Change song or upload your own audio">
-        <span>Change Music</span>
-        <span>🎵</span>
+        <span>🎵 Music</span>
       </button>
 
       <!-- Customize Name Button (Editor only) -->
@@ -71,9 +76,15 @@
         <span>✏️ Name</span>
       </button>
 
-      <!-- Save & Share Link Button (Editor only) -->
-      <button class="save-and-share-btn" id="save-and-share-btn" title="Save customizations and generate recipient share link">
-        <span>🎁 Save &amp; Share</span>
+      <!-- Dedicated Save Button (Editor only) -->
+      <button class="nav-save-btn" id="nav-save-btn" title="Save all your edits and customizations">
+        <span id="save-btn-icon">💾</span>
+        <span id="save-btn-label">Save</span>
+      </button>
+
+      <!-- Dedicated Share Link Button (Editor only) -->
+      <button class="nav-share-btn" id="nav-share-btn" title="Get shareable link for the receiver">
+        <span>🔗 Share Link</span>
       </button>
 
       <!-- Mobile Hamburger Button -->
@@ -257,11 +268,11 @@
       <h2 id="gallery-heading" class="cursive-title">Celebration Photo Gallery</h2>
       <p class="section-subtitle">Moments of splendor, flowers, cakes &amp; <span>golden memories</span></p>
 
-      <!-- Gallery Controls: Upload your own photos in any format (Editor only) -->
+      <!-- Gallery Controls: Upload your own photos (Editor only) -->
       <div class="gallery-controls-bar">
         <div class="gallery-controls-text">
           <span>📸</span>
-          <span>Add your own photos (Supports JPG, PNG, WEBP, GIF, SVG)</span>
+          <span>Add your own celebration photos</span>
         </div>
         <div>
           <input type="file" id="gallery-file-input" accept="image/*" multiple style="display:none;">
@@ -273,56 +284,50 @@
 
       <div class="gallery-grid">
         <!-- Gallery 1: Cake -->
-        <div class="gallery-item" data-title="The Royal Birthday Cake" data-subtitle="Lavish purple, pink and gold layers crowned with glowing candles">
-          <img src="images/cake.svg" alt="Birthday Cake">
+        <div class="gallery-item">
+          <img src="images/cake.svg" alt="Celebration Moment">
           <div class="gallery-overlay">
-            <h4>Royal Birthday Cake</h4>
-            <p>Golden candles &amp; purple floral tiers</p>
+            <span class="gallery-zoom-icon">🔍</span>
           </div>
         </div>
 
         <!-- Gallery 2: Flowers -->
-        <div class="gallery-item" data-title="Opulent Bouquet of Roses" data-subtitle="Velvet roses, golden sprigs and sweet fragrance">
-          <img src="images/flowers.svg" alt="Velvet Rose Bouquet">
+        <div class="gallery-item">
+          <img src="images/flowers.svg" alt="Celebration Moment">
           <div class="gallery-overlay">
-            <h4>Bouquet of Velvet Roses</h4>
-            <p>Blush pink, violet &amp; gold ribbon</p>
+            <span class="gallery-zoom-icon">🔍</span>
           </div>
         </div>
 
         <!-- Gallery 3: Balloons -->
-        <div class="gallery-item" data-title="Celebration Balloon Flight" data-subtitle="Shimmering metallic gold, violet and rose balloons soaring high">
-          <img src="images/balloons.svg" alt="Celebration Balloons">
+        <div class="gallery-item">
+          <img src="images/balloons.svg" alt="Celebration Moment">
           <div class="gallery-overlay">
-            <h4>Joyful Balloon Skies</h4>
-            <p>Floating wishes into the heavens</p>
+            <span class="gallery-zoom-icon">🔍</span>
           </div>
         </div>
 
         <!-- Gallery 4: Sunset -->
-        <div class="gallery-item" data-title="Dreamy Twilight Sunset" data-subtitle="Golden dusk reflections, serenity and starry purple skies">
-          <img src="images/sunset.svg" alt="Dreamy Twilight Sunset">
+        <div class="gallery-item">
+          <img src="images/sunset.svg" alt="Celebration Moment">
           <div class="gallery-overlay">
-            <h4>Dreamy Sunset Glow</h4>
-            <p>Serene twilight over calm waters</p>
+            <span class="gallery-zoom-icon">🔍</span>
           </div>
         </div>
 
         <!-- Gallery 5: Celebration Toast -->
-        <div class="gallery-item" data-title="Midnight Birthday Cheers" data-subtitle="Sparkling glasses, golden confetti showers and festive joy">
-          <img src="images/celebration.svg" alt="Sparkling Celebration Toast">
+        <div class="gallery-item">
+          <img src="images/celebration.svg" alt="Celebration Moment">
           <div class="gallery-overlay">
-            <h4>Sparkling Cheers</h4>
-            <p>Raise a toast to celebration</p>
+            <span class="gallery-zoom-icon">🔍</span>
           </div>
         </div>
 
         <!-- Gallery 6: Royal Avatar -->
-        <div class="gallery-item" data-title="Portrait of Grace" data-subtitle="Crowned with stars and surrounded by a radiant golden halo">
-          <img src="images/profile-avatar.svg" alt="Portrait">
+        <div class="gallery-item">
+          <img src="images/profile-avatar.svg" alt="Celebration Moment">
           <div class="gallery-overlay">
-            <h4>Radiant Tiara &amp; Halo</h4>
-            <p>Elegance and royal birthday charm</p>
+            <span class="gallery-zoom-icon">🔍</span>
           </div>
         </div>
       </div>

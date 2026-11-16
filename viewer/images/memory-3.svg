@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 580" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
   <defs>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#420952"/>
@@ -15,7 +15,7 @@
   </defs>
 
   <!-- Dark Rich Card Background -->
-  <rect width="500" height="580" rx="24" fill="#180426"/>
+  <rect width="500" height="500" rx="16" fill="#180426"/>
 
   <!-- Inner Picture Frame Area -->
   <rect x="35" y="35" width="430" height="390" rx="18" fill="url(#bgGrad)"/>
@@ -41,8 +41,8 @@
 
 
   <!-- Lower Title / Caption area with gold & cursive text -->
-  <text x="250" y="475" font-family="'Great Vibes', 'Playfair Display', cursive, serif" font-size="34" fill="#ffd700" text-anchor="middle" font-weight="600">Adventures & Joy</text>
-  <text x="250" y="520" font-family="'Montserrat', sans-serif" font-size="14" fill="#e0b8ff" text-anchor="middle" letter-spacing="2">Every Journey Becomes Unforgettable</text>
+  
+  
 
   <!-- Sparkles -->
   <g fill="#ffd700" filter="url(#mBloom)">

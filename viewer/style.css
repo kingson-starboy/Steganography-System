@@ -2250,6 +2250,97 @@ body.standalone .page-section {
   text-align: left;
 }
 
+/* Nav Save & Share Buttons */
+.nav-save-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+.nav-save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+  background: linear-gradient(135deg, #34d399, #10b981);
+}
+
+.nav-share-btn {
+  background: linear-gradient(135deg, #ffd700, #ff9500);
+  color: #0e0216;
+  border: none;
+  padding: 0.5rem 1.15rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+.nav-share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(255, 215, 0, 0.6);
+}
+
+.banner-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.banner-btn {
+  border: none;
+  padding: 0.3rem 0.85rem;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.banner-btn.save-btn {
+  background: #10b981;
+  color: #fff;
+}
+.banner-btn.save-btn:hover {
+  background: #059669;
+  transform: scale(1.05);
+}
+.banner-btn.share-btn {
+  background: #ffd700;
+  color: #0e0216;
+}
+.banner-btn.share-btn:hover {
+  background: #ffea70;
+  transform: scale(1.05);
+}
+
+.gallery-zoom-icon {
+  font-size: 2.2rem;
+  color: #ffd700;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+  transform: scale(0.85);
+  transition: transform 0.3s ease;
+}
+.gallery-item:hover .gallery-zoom-icon {
+  transform: scale(1.2);
+}
+
 /* ===================================================================
    LOCK-DOWN VIEWER MODE (RECEIVER SIDE)
    =================================================================== */
@@ -2257,6 +2348,9 @@ body.viewer-mode .editor-mode-banner,
 body.viewer-mode .edit-name-btn,
 body.viewer-mode .hero-name-edit-btn,
 body.viewer-mode .save-and-share-btn,
+body.viewer-mode .nav-save-btn,
+body.viewer-mode .nav-share-btn,
+body.viewer-mode .banner-btn-group,
 body.viewer-mode .gallery-controls-bar,
 body.viewer-mode .upload-photo-btn,
 body.viewer-mode .avatar-edit-badge,

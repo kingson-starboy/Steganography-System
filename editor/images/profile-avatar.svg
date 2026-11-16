@@ -20,51 +20,47 @@
       <stop offset="100%" stop-color="#f5cbb0"/>
     </linearGradient>
     <filter id="pBloom">
-      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feGaussianBlur stdDeviation="6" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
-  <rect width="600" height="600" rx="30" fill="#150325"/>
-  <circle cx="300" cy="300" r="270" fill="url(#avatarGlow)"/>
+  <!-- Circular background to fit avatar circle seamlessly -->
+  <circle cx="300" cy="300" r="300" fill="#150325"/>
+  <circle cx="300" cy="300" r="280" fill="url(#avatarGlow)"/>
 
-  <!-- Radiant Golden Mandala Halo Ring -->
-  <circle cx="300" cy="300" r="220" fill="none" stroke="url(#haloGold)" stroke-width="3" stroke-dasharray="10 8" filter="url(#pBloom)"/>
-  <circle cx="300" cy="300" r="235" fill="none" stroke="#ff758c" stroke-width="1.5" opacity="0.6"/>
+  <!-- Radiant Golden Halo Ring -->
+  <circle cx="300" cy="300" r="240" fill="none" stroke="url(#haloGold)" stroke-width="3" stroke-dasharray="10 8" filter="url(#pBloom)"/>
+  <circle cx="300" cy="300" r="255" fill="none" stroke="#ff758c" stroke-width="1.5" opacity="0.6"/>
 
-  <!-- Floral Tiara / Crown Base -->
-  <!-- Neck and Shoulders Silhouette -->
-  <path d="M 230 450 C 230 400 250 370 270 360 L 330 360 C 350 370 370 400 370 450 C 390 470 460 520 480 570 L 120 570 C 140 520 210 470 230 450 Z" fill="url(#skinTone)"/>
-  <!-- Elegant Evening Dress Gown -->
-  <path d="M 180 500 C 230 470 270 490 300 490 C 330 490 370 470 420 500 L 480 570 L 120 570 Z" fill="url(#hairGrad)" stroke="url(#haloGold)" stroke-width="3"/>
+  <!-- Silhouette Shoulders & Gown (Centered) -->
+  <path d="M 220 440 C 220 390 245 360 270 350 L 330 350 C 355 360 380 390 380 440 C 405 460 480 500 500 580 L 100 580 C 120 500 195 460 220 440 Z" fill="url(#skinTone)"/>
+  <path d="M 160 490 C 220 460 265 480 300 480 C 335 480 380 460 440 490 L 500 580 L 100 580 Z" fill="url(#hairGrad)" stroke="url(#haloGold)" stroke-width="3"/>
 
-  <!-- Beautiful Long Wavy Hair Behind -->
-  <path d="M 190 270 C 170 350 160 450 200 520 C 220 460 210 380 230 310 Z" fill="url(#hairGrad)"/>
-  <path d="M 410 270 C 430 350 440 450 400 520 C 380 460 390 380 370 310 Z" fill="url(#hairGrad)"/>
+  <!-- Flowing Hair Behind -->
+  <path d="M 180 260 C 160 340 150 440 190 510 C 210 450 200 370 220 300 Z" fill="url(#hairGrad)"/>
+  <path d="M 420 260 C 440 340 450 440 410 510 C 390 450 400 370 380 300 Z" fill="url(#hairGrad)"/>
 
-  <!-- Face Profile / Frontal Grace -->
-  <ellipse cx="300" cy="270" rx="80" ry="105" fill="url(#skinTone)"/>
+  <!-- Face Grace Profile (Centered at cx=300, cy=250) -->
+  <ellipse cx="300" cy="250" rx="80" ry="105" fill="url(#skinTone)"/>
 
   <!-- Front Hair Style -->
-  <path d="M 220 250 C 220 170 260 140 300 140 C 340 140 380 170 380 250 C 360 210 330 190 300 190 C 270 190 240 210 220 250 Z" fill="url(#hairGrad)"/>
-  <!-- Flowing Locks -->
-  <path d="M 220 240 C 205 300 215 360 225 400 C 235 340 230 280 225 240 Z" fill="#2a0845"/>
-  <path d="M 380 240 C 395 300 385 360 375 400 C 365 340 370 280 375 240 Z" fill="#2a0845"/>
+  <path d="M 220 230 C 220 150 260 120 300 120 C 340 120 380 150 380 230 C 360 190 330 170 300 170 C 270 170 240 190 220 230 Z" fill="url(#hairGrad)"/>
+  <path d="M 220 220 C 205 280 215 340 225 380 C 235 320 230 260 225 220 Z" fill="#2a0845"/>
+  <path d="M 380 220 C 395 280 385 340 375 380 C 365 320 370 260 375 220 Z" fill="#2a0845"/>
 
-  <!-- Golden Crown of Stars and Gems -->
-  <g filter="url(#pBloom)" transform="translate(300, 145)">
-    <path d="M -70 10 L -45 -25 L -20 0 L 0 -40 L 20 0 L 45 -25 L 70 10 Z" fill="url(#haloGold)" stroke="#d4af37" stroke-width="2"/>
-    <circle cx="0" cy="-40" r="6" fill="#ffffff"/>
-    <circle cx="-45" cy="-25" r="4.5" fill="#ff758c"/>
-    <circle cx="45" cy="-25" r="4.5" fill="#ff758c"/>
-    <circle cx="-70" cy="10" r="3.5" fill="#ffffff"/>
-    <circle cx="70" cy="10" r="3.5" fill="#ffffff"/>
+  <!-- Golden Tiara on hair -->
+  <g filter="url(#pBloom)" transform="translate(300, 125)">
+    <path d="M -60 10 L -40 -18 L -18 2 L 0 -30 L 18 2 L 40 -18 L 60 10 Z" fill="url(#haloGold)" stroke="#d4af37" stroke-width="2"/>
+    <circle cx="0" cy="-30" r="5" fill="#ffffff"/>
+    <circle cx="-40" cy="-18" r="4" fill="#ff758c"/>
+    <circle cx="40" cy="-18" r="4" fill="#ff758c"/>
   </g>
 
-  <!-- Gentle Sparkles & Rose Accents -->
+  <!-- Gentle Sparkles -->
   <g fill="#ffd700" filter="url(#pBloom)">
-    <circle cx="170" cy="200" r="3"/><circle cx="430" cy="200" r="3"/>
-    <circle cx="150" cy="380" r="4"/><circle cx="450" cy="380" r="4"/>
-    <path d="M 300 80 Q 308 80 308 72 Q 308 80 316 80 Q 308 80 308 88 Q 308 80 300 80"/>
+    <circle cx="160" cy="180" r="3.5"/><circle cx="440" cy="180" r="3.5"/>
+    <circle cx="140" cy="360" r="4"/><circle cx="460" cy="360" r="4"/>
+    <circle cx="300" cy="65" r="4"/>
   </g>
 </svg>
