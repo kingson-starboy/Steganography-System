@@ -1948,3 +1948,342 @@ body.standalone .page-section {
     align-items: stretch;
   }
 }
+
+/* ===================================================================
+   UNIFIED DUAL-MODE (EDITOR VS VIEWER) & NAME CUSTOMIZER
+   =================================================================== */
+
+/* Top Editor Banner */
+.editor-mode-banner {
+  background: linear-gradient(90deg, rgba(157, 46, 201, 0.95), rgba(255, 77, 121, 0.95));
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  position: relative;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.editor-mode-banner span {
+  font-weight: 500;
+}
+
+.preview-mode-switch-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.preview-mode-switch-btn:hover {
+  background: #fff;
+  color: #0e0216;
+}
+
+/* Edit Name & Share Buttons in Navbar */
+.edit-name-btn {
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  color: #ffd700;
+  padding: 0.5rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.edit-name-btn:hover {
+  background: rgba(255, 215, 0, 0.3);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.save-and-share-btn {
+  background: linear-gradient(135deg, #ffd700, #ff9500);
+  color: #0e0216;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.35);
+}
+.save-and-share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(255, 215, 0, 0.55);
+}
+
+.hero-name-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px dashed rgba(255, 215, 0, 0.6);
+  color: #ffd700;
+  font-size: 0.72rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 15px;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.hero-name-edit-btn:hover {
+  background: rgba(255, 215, 0, 0.3);
+  transform: scale(1.05);
+}
+
+/* Modals: Name Customizer & Share Link */
+.name-customizer-modal,
+.share-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 1, 16, 0.88);
+  backdrop-filter: blur(18px);
+  z-index: 2500;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.name-customizer-modal.active,
+.share-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.name-modal-card,
+.share-modal-card {
+  position: relative;
+  max-width: 520px;
+  width: 100%;
+  background: linear-gradient(180deg, #2a0845 0%, #150223 100%);
+  border: 1px solid var(--gold-primary);
+  border-radius: 26px;
+  padding: 2.4rem 2rem;
+  box-shadow: 0 0 50px rgba(255, 215, 0, 0.35);
+  animation: modalZoom 0.35s ease;
+  text-align: center;
+  color: #fff;
+}
+
+.modal-crown-icon {
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.name-modal-card h3,
+.share-modal-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--gold-primary);
+  margin-bottom: 0.3rem;
+}
+
+.modal-subtitle {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.8rem;
+  line-height: 1.4;
+}
+
+.name-form-group {
+  text-align: left;
+  margin-bottom: 1.4rem;
+}
+
+.name-form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffd700;
+  margin-bottom: 0.4rem;
+}
+
+.name-input {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  outline: none;
+  transition: all 0.3s ease;
+}
+.name-input:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.save-name-btn {
+  background: linear-gradient(135deg, #ffd700, #ff9500);
+  color: #0e0216;
+  border: none;
+  width: 100%;
+  padding: 0.95rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+.save-name-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.45);
+}
+
+/* Share link elements */
+.share-link-box {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.share-link-input {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 12px;
+  color: #ffd700;
+  font-size: 0.85rem;
+  font-family: monospace;
+  outline: none;
+}
+
+.copy-link-btn {
+  background: linear-gradient(135deg, #ffd700, #ff9500);
+  color: #0e0216;
+  border: none;
+  padding: 0.85rem 1.3rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.copy-link-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+.share-actions-row {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.share-action-pill {
+  padding: 0.65rem 1.2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+}
+.share-action-pill.preview {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.share-action-pill.preview:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+.share-action-pill.whatsapp {
+  background: #25D366;
+  color: #fff;
+  border: none;
+}
+.share-action-pill.whatsapp:hover {
+  background: #20BA5A;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+}
+
+.share-info-hint {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border-left: 3px solid #ffd700;
+  text-align: left;
+}
+
+/* ===================================================================
+   LOCK-DOWN VIEWER MODE (RECEIVER SIDE)
+   =================================================================== */
+body.viewer-mode .editor-mode-banner,
+body.viewer-mode .edit-name-btn,
+body.viewer-mode .hero-name-edit-btn,
+body.viewer-mode .save-and-share-btn,
+body.viewer-mode .gallery-controls-bar,
+body.viewer-mode .upload-photo-btn,
+body.viewer-mode .avatar-edit-badge,
+body.viewer-mode .avatar-action-btn,
+body.viewer-mode .polaroid-change-overlay,
+body.viewer-mode .polaroid-reset-photo-btn,
+body.viewer-mode .photo-delete-btn,
+body.viewer-mode .custom-photo-badge,
+body.viewer-mode .music-change-btn,
+body.viewer-mode .add-memory-card,
+body.viewer-mode #add-memory-card,
+body.viewer-mode .letter-toolbar,
+body.viewer-mode .letter-editing-hint,
+body.viewer-mode .music-studio-modal,
+body.viewer-mode .name-customizer-modal,
+body.viewer-mode .share-modal {
+  display: none !important;
+}
+
+body.viewer-mode .profile-avatar-wrapper {
+  cursor: default !important;
+}
+
+body.viewer-mode .profile-avatar-wrapper:hover .avatar-hover-overlay {
+  opacity: 0 !important;
+}
+
+body.viewer-mode .polaroid-photo-frame {
+  cursor: pointer !important;
+}

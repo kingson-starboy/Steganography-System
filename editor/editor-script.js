@@ -39,6 +39,71 @@
   const navMenu = document.getElementById('nav-menu');
 
   // ===================================================================
+  // 0. DUAL-MODE DETECTION & NAME/DOB SYNCHRONIZATION
+  // ===================================================================
+  const NAME_STORAGE_KEY = 'sri_birthday_custom_name';
+  const DOB_STORAGE_KEY = 'sri_birthday_custom_dob';
+  let currentCelebrationName = 'Sri Shananmathi';
+  let currentCelebrationDob = '21 November 2007';
+  let isViewerMode = false;
+
+  function initModeAndName() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Check viewer mode: ?view=1 or ?mode=view or hash #view
+    if (urlParams.get('view') === '1' || urlParams.get('mode') === 'view' || window.location.hash === '#view') {
+      isViewerMode = true;
+      document.body.classList.add('viewer-mode');
+    }
+
+    // Name priority: 1) URL param (n or name), 2) localStorage, 3) default
+    const urlName = urlParams.get('n') || urlParams.get('name');
+    const savedName = localStorage.getItem(NAME_STORAGE_KEY);
+    if (urlName) {
+      currentCelebrationName = decodeURIComponent(urlName).trim();
+    } else if (savedName) {
+      currentCelebrationName = savedName.trim();
+    }
+
+    // DOB priority: 1) URL param, 2) localStorage, 3) default
+    const urlDob = urlParams.get('dob');
+    const savedDob = localStorage.getItem(DOB_STORAGE_KEY);
+    if (urlDob) {
+      currentCelebrationDob = decodeURIComponent(urlDob).trim();
+    } else if (savedDob) {
+      currentCelebrationDob = savedDob.trim();
+    }
+
+    applyCelebrationNameAndDob(currentCelebrationName, currentCelebrationDob);
+  }
+
+  function applyCelebrationNameAndDob(name, dob) {
+    currentCelebrationName = name;
+    currentCelebrationDob = dob;
+
+    // Update document title
+    document.title = `Happy Birthday ${name}! ✨ Royal Birthday Celebration`;
+    const pageTitleEl = document.getElementById('page-title');
+    if (pageTitleEl) pageTitleEl.textContent = document.title;
+
+    // Update all elements with class .birthday-person-name
+    document.querySelectorAll('.birthday-person-name').forEach(el => {
+      el.textContent = name;
+    });
+
+    // Update all elements with class .birthday-dob-text
+    document.querySelectorAll('.birthday-dob-text').forEach(el => {
+      el.textContent = dob;
+    });
+
+    // Update inputs in modals if they exist
+    const nameInput = document.getElementById('custom-name-input');
+    if (nameInput) nameInput.value = name;
+    const dobInput = document.getElementById('custom-dob-input');
+    if (dobInput) dobInput.value = dob;
+  }
+
+  // ===================================================================
   // 1. MANUAL PAGE NAVIGATION (STOPPED RUNNING PAGE LOAD)
   // ===================================================================
   function initPresentation() {
@@ -595,15 +660,25 @@
       signoff: signoffEl ? signoffEl.innerHTML : 'Happy Birthday, Sri Shananmathi! 🎂✨💖'
     };
 
-    // Load saved custom letter
+    // Load saved custom letter (from URL param or localStorage)
     try {
-      const saved = JSON.parse(localStorage.getItem(LETTER_STORAGE_KEY));
+      const urlParams = new URLSearchParams(window.location.search);
+      let saved = null;
+      if (urlParams.get('l')) {
+        saved = JSON.parse(decodeURIComponent(urlParams.get('l')));
+      } else {
+        saved = JSON.parse(localStorage.getItem(LETTER_STORAGE_KEY));
+      }
+
       if (saved) {
         if (greetingEl && saved.greeting) greetingEl.innerHTML = saved.greeting;
         if (subtitleEl && saved.subtitle) subtitleEl.innerHTML = saved.subtitle;
         if (bodyEl && saved.body) bodyEl.innerHTML = saved.body;
         if (signoffEl && saved.signoff) signoffEl.innerHTML = saved.signoff;
         if (resetBtn) resetBtn.style.display = 'inline-flex';
+      } else if (currentCelebrationName !== 'Sri Shananmathi') {
+        if (greetingEl) greetingEl.innerHTML = `Dearest <span class="birthday-person-name">${currentCelebrationName}</span>,`;
+        if (signoffEl) signoffEl.innerHTML = `Happy Birthday, <span class="birthday-person-name">${currentCelebrationName}</span>! 🎂✨💖`;
       }
     } catch (e) { /* ignore */ }
 
@@ -1290,67 +1365,194 @@
   }
 
   // ===================================================================
-  // EXPORT / GENERATE VIEWER PACKAGE
+  // 11. NAME & DATE OF BIRTH CUSTOMIZER
   // ===================================================================
-  function initExportButton() {
-    const exportBtn = document.getElementById('export-viewer-btn');
-    if (!exportBtn) return;
+  function initNameCustomizer() {
+    const editNameBtn = document.getElementById('edit-name-btn');
+    const heroNameEditBtn = document.getElementById('hero-name-edit-btn');
+    const nameModal = document.getElementById('name-modal');
+    const nameModalClose = document.getElementById('name-modal-close');
+    const saveNameBtn = document.getElementById('save-name-btn');
+    const nameInput = document.getElementById('custom-name-input');
+    const dobInput = document.getElementById('custom-dob-input');
 
-    exportBtn.addEventListener('click', () => {
-      const data = {};
-      const keys = [
-        'sri_shananmathi_custom_gallery',
-        'sri_shananmathi_custom_profile_photo',
-        'sri_shananmathi_custom_letter',
-        'sri_shananmathi_custom_memories',
-        'sri_memory_card_img_1',
-        'sri_memory_card_img_2',
-        'sri_memory_card_img_3',
-        'sri_memory_card_img_4',
-        'sri_memory_card_img_5',
-        'sri_memory_card_img_6'
-      ];
+    function openNameModal() {
+      if (nameModal) {
+        if (nameInput) nameInput.value = currentCelebrationName;
+        if (dobInput) dobInput.value = currentCelebrationDob;
+        nameModal.classList.add('active');
+        if (nameInput) setTimeout(() => nameInput.focus(), 150);
+      }
+    }
 
-      let itemsCount = 0;
-      keys.forEach(key => {
-        const val = localStorage.getItem(key);
-        if (val) {
-          data[key] = val;
-          itemsCount++;
+    function closeNameModal() {
+      if (nameModal) nameModal.classList.remove('active');
+    }
+
+    if (editNameBtn) editNameBtn.addEventListener('click', openNameModal);
+    if (heroNameEditBtn) heroNameEditBtn.addEventListener('click', openNameModal);
+    if (nameModalClose) nameModalClose.addEventListener('click', closeNameModal);
+
+    if (nameModal) {
+      nameModal.addEventListener('click', (e) => {
+        if (e.target === nameModal) closeNameModal();
+      });
+    }
+
+    if (saveNameBtn) {
+      saveNameBtn.addEventListener('click', () => {
+        const newName = nameInput ? nameInput.value.trim() : '';
+        const newDob = dobInput ? dobInput.value.trim() : '';
+
+        if (!newName) {
+          alert('Please enter a celebration name!');
+          return;
+        }
+
+        applyCelebrationNameAndDob(newName, newDob || currentCelebrationDob);
+        try {
+          localStorage.setItem(NAME_STORAGE_KEY, newName);
+          if (newDob) localStorage.setItem(DOB_STORAGE_KEY, newDob);
+        } catch (e) {
+          console.warn(e);
+        }
+
+        closeNameModal();
+        launchConfetti(80);
+      });
+    }
+  }
+
+  // ===================================================================
+  // 12. SAVE & SHARE LINK GENERATOR (LOCKS IN VIEWER MODE FOR RECEIVER)
+  // ===================================================================
+  function initShareModal() {
+    const shareBtn = document.getElementById('save-and-share-btn');
+    const shareModal = document.getElementById('share-modal');
+    const shareModalClose = document.getElementById('share-modal-close');
+    const shareLinkInput = document.getElementById('share-link-input');
+    const copyBtn = document.getElementById('copy-share-link-btn');
+    const copyBtnText = document.getElementById('copy-btn-text');
+    const previewLink = document.getElementById('preview-receiver-link');
+    const whatsappBtn = document.getElementById('whatsapp-share-btn');
+
+    function generateShareUrl() {
+      const url = new URL(window.location.href);
+      url.search = '';
+      url.hash = '';
+
+      url.searchParams.set('view', '1');
+      if (currentCelebrationName && currentCelebrationName !== 'Sri Shananmathi') {
+        url.searchParams.set('n', currentCelebrationName);
+      }
+      if (currentCelebrationDob && currentCelebrationDob !== '21 November 2007') {
+        url.searchParams.set('dob', currentCelebrationDob);
+      }
+
+      // Encode custom letter if any
+      try {
+        const savedLetter = localStorage.getItem(LETTER_STORAGE_KEY);
+        if (savedLetter) {
+          url.searchParams.set('l', encodeURIComponent(savedLetter));
+        }
+      } catch (e) {}
+
+      return url.toString();
+    }
+
+    if (shareBtn) {
+      shareBtn.addEventListener('click', () => {
+        const shareUrl = generateShareUrl();
+        if (shareLinkInput) shareLinkInput.value = shareUrl;
+        if (previewLink) previewLink.href = shareUrl;
+        if (whatsappBtn) {
+          const text = `👑 A magical royal birthday celebration curated for ${currentCelebrationName}! Open your surprise here: ${shareUrl}`;
+          whatsappBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+        }
+        if (shareModal) shareModal.classList.add('active');
+        launchConfetti(90);
+      });
+    }
+
+    if (shareModalClose && shareModal) {
+      shareModalClose.addEventListener('click', () => shareModal.classList.remove('active'));
+    }
+
+    if (shareModal) {
+      shareModal.addEventListener('click', (e) => {
+        if (e.target === shareModal) shareModal.classList.remove('active');
+      });
+    }
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        if (!shareLinkInput) return;
+        shareLinkInput.select();
+        shareLinkInput.setSelectionRange(0, 99999);
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(shareLinkInput.value).then(() => {
+            showCopiedFeedback();
+          }).catch(() => {
+            document.execCommand('copy');
+            showCopiedFeedback();
+          });
+        } else {
+          document.execCommand('copy');
+          showCopiedFeedback();
         }
       });
+    }
 
-      const jsContent = `/* Birthday Viewer Data - Generated from Editor */\nwindow.BIRTHDAY_DATA = ${JSON.stringify(data, null, 2)};\n`;
-      const blob = new Blob([jsContent], { type: 'application/javascript' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'viewer-data.js';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-
-      // Toast notification
-      const toast = document.createElement('div');
-      toast.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg, #ffd700, #ff9500);color:#0e0216;padding:1.2rem 2.2rem;border-radius:16px;font-weight:700;z-index:99999;box-shadow:0 12px 36px rgba(0,0,0,0.4);text-align:center;max-width:90vw;font-size:0.95rem;line-height:1.5;animation:slideDown 0.4s ease;';
-      toast.innerHTML = itemsCount > 0 
-        ? '🎉 <strong>Viewer Package Exported!</strong><br><span style="font-weight:500;font-size:0.85rem;">Downloaded <code>viewer-data.js</code>. Save/replace it in the <code>viewer/</code> folder, then Sri Shananmathi can explore all your saved photos & letter!</span>'
-        : '⚠️ <strong>Saved Data Exported</strong><br><span style="font-weight:500;font-size:0.85rem;">Default theme exported. Add custom photos or edit the letter anytime and click again to update!</span>';
-      document.body.appendChild(toast);
-      launchConfetti(80);
+    function showCopiedFeedback() {
+      if (copyBtnText) copyBtnText.textContent = '✅ Copied!';
+      copyBtn.style.background = '#25D366';
+      copyBtn.style.color = '#fff';
       setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => toast.remove(), 500);
-      }, 5000);
+        if (copyBtnText) copyBtnText.textContent = 'Copy Link';
+        copyBtn.style.background = '';
+        copyBtn.style.color = '';
+      }, 2500);
+    }
+  }
+
+  // ===================================================================
+  // 13. PREVIEW MODE SWITCHER (EDITOR BANNER)
+  // ===================================================================
+  function initPreviewModeSwitch() {
+    const switchBtn = document.getElementById('preview-mode-switch-btn');
+    if (!switchBtn) return;
+
+    switchBtn.addEventListener('click', () => {
+      const isNowViewer = document.body.classList.toggle('viewer-mode');
+      const span = switchBtn.querySelector('span');
+      if (isNowViewer) {
+        if (span) span.textContent = '✏️ Return to Editor Mode';
+        showToast('👀 Switched to Receiver Viewer Mode! Edit buttons hidden.');
+      } else {
+        if (span) span.textContent = '👀 Preview Receiver View';
+        showToast('✏️ Returned to Editor Mode!');
+      }
     });
+  }
+
+  function showToast(text) {
+    const t = document.createElement('div');
+    t.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(255,215,0,0.95);color:#0e0216;padding:0.75rem 1.6rem;border-radius:25px;font-weight:700;font-size:0.85rem;z-index:99999;box-shadow:0 8px 30px rgba(0,0,0,0.4);animation:fadeIn 0.3s ease;';
+    t.textContent = text;
+    document.body.appendChild(t);
+    setTimeout(() => {
+      t.style.opacity = '0';
+      t.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => t.remove(), 400);
+    }, 3000);
   }
 
   // ===================================================================
   // INITIALIZATION ON DOM READY
   // ===================================================================
   document.addEventListener('DOMContentLoaded', () => {
+    initModeAndName();
     initPresentation();
     initParticleCanvas();
     initConfetti();
@@ -1361,7 +1563,9 @@
     initMusicStudio();
     initInstagramProfileCustomizer();
     initLetterCustomizer();
-    initExportButton();
+    initNameCustomizer();
+    initShareModal();
+    initPreviewModeSwitch();
   });
 
 })();

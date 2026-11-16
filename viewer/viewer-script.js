@@ -23,6 +23,19 @@
   }
 
   function loadCustomizations() {
+    // 0. Custom Name & DOB (from URL params, window.BIRTHDAY_DATA or localStorage)
+    const urlParams = new URLSearchParams(window.location.search);
+    const customName = urlParams.get('n') || urlParams.get('name') || getCustomValue('sri_birthday_custom_name');
+    const customDob = urlParams.get('dob') || getCustomValue('sri_birthday_custom_dob');
+
+    if (customName) {
+      document.title = `Happy Birthday ${customName}! ✨ Royal Birthday Celebration`;
+      document.querySelectorAll('.birthday-person-name').forEach(el => el.textContent = customName);
+    }
+    if (customDob) {
+      document.querySelectorAll('.birthday-dob-text').forEach(el => el.textContent = customDob);
+    }
+
     // 1. Profile avatar photo (Page 5)
     const profileImg = document.getElementById('profile-avatar-img');
     const customProfilePhoto = getCustomValue('sri_shananmathi_custom_profile_photo');

@@ -3,58 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Sri Shananmathi! ✨ Royal Birthday Celebration</title>
-  <meta name="description" content="A luxurious, heartfelt birthday wishing website celebrating Sri Shananmathi, born on 21 November 2007.">
+  <title id="page-title">Happy Birthday Sri Shananmathi! ✨ Royal Birthday Celebration</title>
+  <meta name="description" content="A luxurious, heartfelt birthday celebration website for Sri Shananmathi, born on 21 November 2007.">
   
   <!-- Favicon Icon -->
   <link rel="icon" href="images/cake.svg" type="image/svg+xml">
   
   <!-- Common Stylesheet -->
   <link rel="stylesheet" href="style.css">
-
-  <style>
-  .export-btn {
-    background: linear-gradient(135deg, #ffd700, #ff9500);
-    color: #0e0216;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-  .export-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,215,0,0.4); }
-  .preview-viewer-btn {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffd700;
-    border: 1px solid rgba(255, 215, 0, 0.4);
-    padding: 0.5rem 0.9rem;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-  .preview-viewer-btn:hover {
-    background: rgba(255, 215, 0, 0.2);
-    border-color: #ffd700;
-    transform: translateY(-2px);
-    color: #fff;
-  }
-  </style>
 </head>
 <body>
+
+  <!-- Creator / Editor Studio Notification Banner (Only in Editor Mode) -->
+  <div class="editor-mode-banner" id="editor-banner">
+    <span>✏️ <strong>Creator Mode Active:</strong> Customize name, photos, letter &amp; music below. Click <strong>"🎁 Save &amp; Share"</strong> to copy the receiver link!</span>
+    <button class="preview-mode-switch-btn" id="preview-mode-switch-btn" title="Toggle between Editor and Receiver Viewer">
+      <span>👀 Preview Receiver View</span>
+    </button>
+  </div>
 
   <!-- Ambient Glowing Background Gradient -->
   <div class="ambient-background"></div>
@@ -69,9 +35,9 @@
        NAVIGATION BAR
        =================================================================== -->
   <header class="navbar" role="banner">
-    <a href="#home" class="nav-brand" aria-label="Sri Shananmathi Home">
+    <a href="#home" class="nav-brand" aria-label="Home">
       <span class="tiara-icon">👑</span>
-      <span>Sri Shananmathi</span>
+      <span class="nav-brand-name birthday-person-name">Sri Shananmathi</span>
     </a>
 
     <!-- Desktop & Mobile Navigation Links -->
@@ -84,8 +50,9 @@
       <li><a href="#surprise" class="nav-link">Surprise</a></li>
     </ul>
 
-    <!-- Navigation Action Controls (Music, Change Music & Mobile Menu) -->
+    <!-- Navigation Action Controls -->
     <div class="nav-actions">
+      <!-- Music Play / Pause (Available in both Editor & Viewer) -->
       <button class="music-btn" id="music-toggle-btn" aria-label="Toggle Birthday Music">
         <div class="music-equalizer">
           <span></span><span></span><span></span>
@@ -93,19 +60,23 @@
         <span class="music-label">Play Music</span>
       </button>
 
+      <!-- Change Music Preset / Upload Audio (Editor only) -->
       <button class="music-change-btn" id="music-change-btn" title="Change song or upload your own audio">
         <span>Change Music</span>
         <span>🎵</span>
       </button>
 
-      <button class="export-btn" id="export-viewer-btn" title="Generate a package for the birthday girl to view">
-        <span>🎁 Save & Export</span>
+      <!-- Customize Name Button (Editor only) -->
+      <button class="edit-name-btn" id="edit-name-btn" title="Change the birthday person's name">
+        <span>✏️ Name</span>
       </button>
 
-      <a href="../viewer/index.html" class="preview-viewer-btn" title="Open the clean explorer view for Sri Shananmathi">
-        <span>👀 View Mode</span>
-      </a>
+      <!-- Save & Share Link Button (Editor only) -->
+      <button class="save-and-share-btn" id="save-and-share-btn" title="Save customizations and generate recipient share link">
+        <span>🎁 Save &amp; Share</span>
+      </button>
 
+      <!-- Mobile Hamburger Button -->
       <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu">
         ☰
       </button>
@@ -125,17 +96,18 @@
         <!-- Date of Birth Glowing Badge -->
         <div class="dob-badge">
           <span>✨</span>
-          <span>Date of Birth: 21 November 2007</span>
+          <span>Date of Birth: <span class="birthday-dob-text">21 November 2007</span></span>
           <span>✨</span>
         </div>
 
-        <!-- Main Birthday Heading -->
+        <!-- Main Birthday Heading with inline name edit button -->
         <h1 id="home-heading" class="cursive-title hero-birthday-title">
-          Happy Birthday Sri Shananmathi!
+          Happy Birthday <span class="birthday-person-name">Sri Shananmathi</span>!
+          <button class="hero-name-edit-btn" id="hero-name-edit-btn" title="Click to customize name">✏️ Edit</button>
         </h1>
 
         <p class="section-subtitle">
-          Celebrating <span>A Truly Radiant & Beautiful Soul</span>
+          Celebrating <span>A Truly Radiant &amp; Beautiful Soul</span>
         </p>
 
         <!-- Visual Centerpiece: Birthday Cake, Candles, Balloons, Flowers & Gift -->
@@ -144,20 +116,20 @@
           <img src="images/flowers.svg" alt="Opulent Rose Bouquet" class="floating-home-flowers">
           
           <img src="images/cake.svg" 
-               alt="Sri Shananmathi's Birthday Cake with Candles" 
+               alt="Birthday Cake with Candles" 
                class="hero-cake-img" 
                id="hero-cake-interactive" 
                title="Click to blow out candles and make a birthday wish!">
                
           <div class="cake-click-hint" id="cake-hint-text">
-            🎂 Click the cake to make a wish & blow candles!
+            🎂 Click the cake to make a wish &amp; blow candles!
           </div>
         </div>
 
         <!-- Warm Welcome Birthday Message -->
         <div class="welcome-message-box">
           <p>
-            Welcome to a magical realm curated especially to celebrate <strong>YOU</strong>, Sri Shananmathi! 
+            Welcome to a magical realm curated especially to celebrate <strong><span class="birthday-person-name">Sri Shananmathi</span></strong>! 
             May your special day sparkle with boundless laughter, infinite joy, and every dream your beautiful 
             heart cherishes. Click the buttons below or navigate at your own pace!
           </p>
@@ -182,27 +154,27 @@
          --------------------------------------------------------------- -->
     <section id="wishes" class="page-section" aria-labelledby="wishes-heading">
       <h2 id="wishes-heading" class="cursive-title">Heartfelt Birthday Wishes</h2>
-      <p class="section-subtitle">Golden blessings crafted for <span>Sri Shananmathi</span></p>
+      <p class="section-subtitle">Golden blessings crafted for <span><span class="birthday-person-name">Sri Shananmathi</span></span></p>
 
       <div class="wishes-grid">
         <!-- Card 1: Happiness -->
         <article class="wish-card">
           <div class="wish-icon-box">💖</div>
-          <h3>Happiness & Sunshine</h3>
+          <h3>Happiness &amp; Sunshine</h3>
           <p>
             May every single second of your year ahead be wrapped in warm sunshine, pure genuine smiles, 
             and laughter that echoes straight from the soul. May sorrow never find your doorstep.
           </p>
           <div class="wish-card-footer">
             <span>Boundless Joy</span>
-            <span>✨ Always & Forever</span>
+            <span>✨ Always &amp; Forever</span>
           </div>
         </article>
 
         <!-- Card 2: Success -->
         <article class="wish-card">
           <div class="wish-icon-box">⭐</div>
-          <h3>Success & Brilliance</h3>
+          <h3>Success &amp; Brilliance</h3>
           <p>
             May your extraordinary intellect and talents shine like constellations in the night sky, 
             opening golden doors to triumph and bringing fulfillment to every ambition you pursue.
@@ -216,7 +188,7 @@
         <!-- Card 3: Dreams -->
         <article class="wish-card">
           <div class="wish-icon-box">🪄</div>
-          <h3>Dreams & Magic</h3>
+          <h3>Dreams &amp; Magic</h3>
           <p>
             Never stop believing in the breathtaking magic of your dreams. May you soar to heights unimagined 
             and find that reality becomes even sweeter than your fondest imaginations.
@@ -230,7 +202,7 @@
         <!-- Card 4: Health & Harmony -->
         <article class="wish-card">
           <div class="wish-icon-box">🌸</div>
-          <h3>Health & Serenity</h3>
+          <h3>Health &amp; Serenity</h3>
           <p>
             Wishing you vibrant health, glowing vitality, inner tranquility, and serene peace in mind, body, 
             and spirit through every season of your life.
@@ -244,7 +216,7 @@
         <!-- Card 5: Blessings & Love -->
         <article class="wish-card">
           <div class="wish-icon-box">🎁</div>
-          <h3>Divine Blessings & Love</h3>
+          <h3>Divine Blessings &amp; Love</h3>
           <p>
             May divine grace, protection, warm companionship, and unconditional affection accompany you on 
             every step of your journey. You are deeply cherished by all who know you.
@@ -260,7 +232,7 @@
           <div class="wish-icon-box">👑</div>
           <h3>Eternal Radiance</h3>
           <p>
-            Continue to be the kind, compassionate, radiant, and inspiring young woman you are today. The world 
+            Continue to be the kind, compassionate, radiant, and inspiring person you are today. The world 
             is undeniably a brighter, more wonderful place with you in it!
           </p>
           <div class="wish-card-footer">
@@ -283,13 +255,13 @@
          --------------------------------------------------------------- -->
     <section id="gallery" class="page-section" aria-labelledby="gallery-heading">
       <h2 id="gallery-heading" class="cursive-title">Celebration Photo Gallery</h2>
-      <p class="section-subtitle">Moments of splendor, flowers, cakes & <span>golden memories</span></p>
+      <p class="section-subtitle">Moments of splendor, flowers, cakes &amp; <span>golden memories</span></p>
 
-      <!-- Gallery Controls: Upload your own photos in any format -->
+      <!-- Gallery Controls: Upload your own photos in any format (Editor only) -->
       <div class="gallery-controls-bar">
         <div class="gallery-controls-text">
           <span>📸</span>
-          <span>Add your own photos (Supports JPG, PNG, WEBP, GIF, SVG, etc.)</span>
+          <span>Add your own photos (Supports JPG, PNG, WEBP, GIF, SVG)</span>
         </div>
         <div>
           <input type="file" id="gallery-file-input" accept="image/*" multiple style="display:none;">
@@ -305,16 +277,16 @@
           <img src="images/cake.svg" alt="Birthday Cake">
           <div class="gallery-overlay">
             <h4>Royal Birthday Cake</h4>
-            <p>Golden candles & purple floral tiers</p>
+            <p>Golden candles &amp; purple floral tiers</p>
           </div>
         </div>
 
         <!-- Gallery 2: Flowers -->
-        <div class="gallery-item" data-title="Opulent Bouquet of Roses" data-subtitle="Velvet roses, golden sprigs and sweet fragrance for Sri Shananmathi">
+        <div class="gallery-item" data-title="Opulent Bouquet of Roses" data-subtitle="Velvet roses, golden sprigs and sweet fragrance">
           <img src="images/flowers.svg" alt="Velvet Rose Bouquet">
           <div class="gallery-overlay">
             <h4>Bouquet of Velvet Roses</h4>
-            <p>Blush pink, violet & gold ribbon</p>
+            <p>Blush pink, violet &amp; gold ribbon</p>
           </div>
         </div>
 
@@ -341,15 +313,15 @@
           <img src="images/celebration.svg" alt="Sparkling Celebration Toast">
           <div class="gallery-overlay">
             <h4>Sparkling Cheers</h4>
-            <p>Raise a toast to 21 November 2007</p>
+            <p>Raise a toast to celebration</p>
           </div>
         </div>
 
         <!-- Gallery 6: Royal Avatar -->
         <div class="gallery-item" data-title="Portrait of Grace" data-subtitle="Crowned with stars and surrounded by a radiant golden halo">
-          <img src="images/profile-avatar.svg" alt="Portrait of Sri Shananmathi">
+          <img src="images/profile-avatar.svg" alt="Portrait">
           <div class="gallery-overlay">
-            <h4>Radiant Tiara & Halo</h4>
+            <h4>Radiant Tiara &amp; Halo</h4>
             <p>Elegance and royal birthday charm</p>
           </div>
         </div>
@@ -368,9 +340,9 @@
          --------------------------------------------------------------- -->
     <section id="memories" class="page-section" aria-labelledby="memories-heading">
       <h2 id="memories-heading" class="cursive-title">Treasured Memories</h2>
-      <p class="section-subtitle">Polaroid snapshots of love, wonder & <span>priceless smiles</span></p>
+      <p class="section-subtitle">Polaroid snapshots of love, wonder &amp; <span>priceless smiles</span></p>
 
-      <!-- Memories Controls: Upload photos -->
+      <!-- Memories Controls: Upload photos (Editor only) -->
       <div class="gallery-controls-bar">
         <div class="gallery-controls-text">
           <span>💡</span>
@@ -445,13 +417,13 @@
           <!-- Memory 5: Radiant & Bold -->
           <div class="polaroid-card">
             <div class="polaroid-photo-frame" title="Click to customize photo (Text stays unchanged)">
-              <img src="images/memory-5.svg" alt="Radiant &amp; Bold" id="memory-img-5">
+              <img src="images/memory-5.svg" alt="Radiant & Bold" id="memory-img-5">
               <div class="polaroid-change-overlay">
                 <span>📷 Click to Change Photo</span>
               </div>
             </div>
             <div class="polaroid-caption">
-              <h4>Radiant & Bold</h4>
+              <h4>Radiant &amp; Bold</h4>
               <p>Walking with grace, poise, courage and infinite confidence.</p>
             </div>
           </div>
@@ -470,7 +442,7 @@
             </div>
           </div>
 
-          <!-- Upload Polaroid Card -->
+          <!-- Upload Polaroid Card (Editor only) -->
           <div class="polaroid-card add-memory-card" id="add-memory-card" title="Click to upload an additional memory photo!">
             <div class="polaroid-photo-frame add-photo-placeholder">
               <div class="add-photo-icon">📸 ➕</div>
@@ -486,18 +458,18 @@
 
       <div class="cta-btn-group" style="margin-top: 2.5rem;">
         <a href="#about" class="cta-btn gold">
-          <span>Next: Read About Sri Shananmathi</span>
+          <span>Next: Read About <span class="birthday-person-name">Sri Shananmathi</span></span>
           <span>▶</span>
         </a>
       </div>
     </section>
 
     <!-- ---------------------------------------------------------------
-         PAGE 5: ABOUT SRI SHANANMATHI (INSTAGRAM PROFILE AVATAR)
+         PAGE 5: ABOUT (INSTAGRAM PROFILE AVATAR)
          --------------------------------------------------------------- -->
     <section id="about" class="page-section" aria-labelledby="about-heading">
-      <h2 id="about-heading" class="cursive-title">About Sri Shananmathi</h2>
-      <p class="section-subtitle">Celebrating the birthday queen • <span>21 November 2007</span></p>
+      <h2 id="about-heading" class="cursive-title">About <span class="birthday-person-name">Sri Shananmathi</span></h2>
+      <p class="section-subtitle">Celebrating the birthday star • <span class="birthday-dob-text">21 November 2007</span></p>
 
       <div class="about-wrapper">
         <div class="profile-card">
@@ -512,13 +484,13 @@
 
               <!-- Profile Avatar Picture Frame -->
               <div class="profile-avatar-frame">
-                <img src="images/profile-avatar.svg" alt="Sri Shananmathi Profile Portrait" id="profile-avatar-img">
+                <img src="images/profile-avatar.svg" alt="Profile Portrait" id="profile-avatar-img">
                 <div class="avatar-hover-overlay">
                   <span>📷 Change Photo</span>
                 </div>
               </div>
 
-              <!-- Instagram Style Edit/Camera Badge -->
+              <!-- Instagram Style Edit/Camera Badge (Editor only) -->
               <div class="avatar-edit-badge" title="Upload new profile photo">
                 <span>📷</span>
               </div>
@@ -527,7 +499,7 @@
               <input type="file" id="profile-photo-input" accept="image/*" style="display:none;">
             </div>
 
-            <!-- Profile Photo Actions -->
+            <!-- Profile Photo Actions (Editor only) -->
             <div class="profile-photo-actions">
               <button class="avatar-action-btn" id="upload-profile-photo-btn">
                 <span>📷 Change Profile Photo</span>
@@ -538,14 +510,14 @@
             </div>
 
             <div class="dob-badge" style="margin-bottom: 0;">
-              <span>👑 Birthday Queen</span>
+              <span>👑 Birthday Royalty</span>
             </div>
           </div>
 
           <!-- Profile Details Column -->
           <div class="profile-details-col">
-            <h3 class="profile-name">Sri Shananmathi</h3>
-            <div class="profile-title-tag">The Star of 21 November</div>
+            <h3 class="profile-name birthday-person-name">Sri Shananmathi</h3>
+            <div class="profile-title-tag">The Star of <span class="birthday-dob-text">21 November</span></div>
 
             <!-- Profile Info Grid -->
             <div class="profile-info-grid">
@@ -553,7 +525,7 @@
                 <span class="info-item-icon">🎂</span>
                 <div class="info-item-text">
                   <span class="info-item-label">Date of Birth</span>
-                  <span class="info-item-val">21 November 2007</span>
+                  <span class="info-item-val birthday-dob-text">21 November 2007</span>
                 </div>
               </div>
 
@@ -561,7 +533,7 @@
                 <span class="info-item-icon">🎉</span>
                 <div class="info-item-text">
                   <span class="info-item-label">Celebration Day</span>
-                  <span class="info-item-val">21 November</span>
+                  <span class="info-item-val birthday-celebration-day">21 November</span>
                 </div>
               </div>
 
@@ -569,7 +541,7 @@
                 <span class="info-item-icon">♏</span>
                 <div class="info-item-text">
                   <span class="info-item-label">Zodiac Sign</span>
-                  <span class="info-item-val">Scorpio (Passionate & Intuitive)</span>
+                  <span class="info-item-val" id="profile-zodiac-text">Scorpio (Passionate &amp; Intuitive)</span>
                 </div>
               </div>
 
@@ -577,7 +549,7 @@
                 <span class="info-item-icon">💎</span>
                 <div class="info-item-text">
                   <span class="info-item-label">Birth Gem</span>
-                  <span class="info-item-val">Golden Citrine & Topaz</span>
+                  <span class="info-item-val">Golden Citrine &amp; Topaz</span>
                 </div>
               </div>
             </div>
@@ -605,11 +577,11 @@
     <section id="surprise" class="page-section" aria-labelledby="surprise-heading">
       <div class="surprise-content">
         <div class="dob-badge">
-          <span>🎁 Exclusive Gift For Sri Shananmathi</span>
+          <span>🎁 Exclusive Gift For <span class="birthday-person-name">Sri Shananmathi</span></span>
         </div>
 
         <h2 id="surprise-heading" class="cursive-title">A Special Surprise Awaits!</h2>
-        <p class="section-subtitle">Wrapped with royal purple ribbon, golden sparkles & <span>endless love</span></p>
+        <p class="section-subtitle">Wrapped with royal purple ribbon, golden sparkles &amp; <span>endless love</span></p>
 
         <!-- 3D Interactive Animated Gift Box -->
         <div class="gift-stage-wrapper">
@@ -688,7 +660,7 @@
       <button class="proclamation-close-btn" id="proclamation-close-btn" aria-label="Close Surprise Message">✕</button>
       <div class="royal-crown-icon">👑</div>
       
-      <!-- Letter Customization Toolbar -->
+      <!-- Letter Customization Toolbar (Editor only) -->
       <div class="letter-toolbar">
         <button class="letter-tool-btn edit" id="edit-letter-btn">
           <span>✏️ Customize Letter</span>
@@ -707,13 +679,13 @@
       </div>
 
       <!-- Customizable Letter Header / Greeting -->
-      <h3 class="proclamation-title" id="proclamation-greeting">Dearest Sri Shananmathi,</h3>
-      <div class="proclamation-date" id="proclamation-subtitle">A Special Message • 21 November 2007</div>
+      <h3 class="proclamation-title" id="proclamation-greeting">Dearest <span class="birthday-person-name">Sri Shananmathi</span>,</h3>
+      <div class="proclamation-date" id="proclamation-subtitle">A Special Message • <span class="birthday-dob-text">21 November 2007</span></div>
 
       <!-- Customizable Letter Body -->
       <div class="proclamation-message" id="proclamation-body">
         <p>
-          On the extraordinary day of <strong>21 November 2007</strong>, a truly remarkable, 
+          On the extraordinary day of <strong><span class="birthday-dob-text">21 November 2007</span></strong>, a truly remarkable, 
           compassionate, and sparkling soul was gifted to this world.
         </p>
         <br>
@@ -732,7 +704,7 @@
 
       <!-- Customizable Sign-off -->
       <div class="proclamation-signoff" id="proclamation-signoff">
-        Happy Birthday, Sri Shananmathi! 🎂✨💖
+        Happy Birthday, <span class="birthday-person-name">Sri Shananmathi</span>! 🎂✨💖
       </div>
 
       <div style="margin-top: 1.8rem;">
@@ -744,7 +716,7 @@
   </div>
 
   <!-- ===================================================================
-       MUSIC STUDIO MODAL (CUSTOM MUSIC CHANGER)
+       MUSIC STUDIO MODAL (CUSTOM MUSIC CHANGER - EDITOR ONLY)
        =================================================================== -->
   <div class="music-studio-modal" id="music-studio-modal" role="dialog" aria-modal="true" aria-label="Music Studio">
     <div class="music-studio-card">
@@ -757,7 +729,7 @@
       <div class="music-uploader-zone" id="audio-upload-dropzone">
         <div class="upload-icon">🎧 ➕</div>
         <span class="title">Upload Your Own Song</span>
-        <span class="desc">Supports MP3, WAV, M4A, OGG, AAC & all audio formats</span>
+        <span class="desc">Supports MP3, WAV, M4A, OGG, AAC &amp; all audio formats</span>
       </div>
 
       <!-- Built-in Melody Presets -->
@@ -806,7 +778,69 @@
     </div>
   </div>
 
-  <!-- Editor Script File -->
-  <script src="editor-script.js"></script>
+  <!-- ===================================================================
+       NAME CUSTOMIZATION MODAL (EDITOR ONLY)
+       =================================================================== -->
+  <div class="name-customizer-modal" id="name-modal" role="dialog" aria-modal="true" aria-label="Customize Birthday Name">
+    <div class="name-modal-card">
+      <button class="proclamation-close-btn" id="name-modal-close" aria-label="Close">✕</button>
+      <div class="modal-crown-icon">👑</div>
+      <h3>Customize Celebration Name</h3>
+      <p class="modal-subtitle">Change whose birthday is being celebrated across the entire page!</p>
+      
+      <div class="name-form-group">
+        <label for="custom-name-input">Birthday Person's Name</label>
+        <input type="text" id="custom-name-input" class="name-input" placeholder="e.g. Sri Shananmathi" value="Sri Shananmathi" maxlength="40">
+      </div>
+
+      <div class="name-form-group">
+        <label for="custom-dob-input">Date of Birth (e.g. 21 November 2007)</label>
+        <input type="text" id="custom-dob-input" class="name-input" placeholder="e.g. 21 November 2007" value="21 November 2007" maxlength="35">
+      </div>
+
+      <button class="save-name-btn" id="save-name-btn">
+        <span>💾 Update Name Everywhere</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       SAVE & SHARE MODAL (EDITOR ONLY)
+       =================================================================== -->
+  <div class="share-modal" id="share-modal" role="dialog" aria-modal="true" aria-label="Share Celebration Link">
+    <div class="share-modal-card">
+      <button class="proclamation-close-btn" id="share-modal-close" aria-label="Close">✕</button>
+      <div class="modal-crown-icon">🎁</div>
+      <h3>Ready to Share!</h3>
+      <p class="modal-subtitle">
+        Send this link to <strong class="birthday-person-name" style="color:#ffd700;">Sri Shananmathi</strong>.<br>
+        They will open it in <strong>clean Viewer Mode</strong> with zero edit buttons!
+      </p>
+
+      <div class="share-link-box">
+        <input type="text" id="share-link-input" readonly class="share-link-input">
+        <button class="copy-link-btn" id="copy-share-link-btn">
+          <span id="copy-btn-icon">📋</span>
+          <span id="copy-btn-text">Copy Link</span>
+        </button>
+      </div>
+
+      <div class="share-actions-row">
+        <a href="#" id="preview-receiver-link" target="_blank" class="share-action-pill preview">
+          <span>👀 Test Receiver View</span>
+        </a>
+        <a href="#" id="whatsapp-share-btn" target="_blank" class="share-action-pill whatsapp">
+          <span>💬 Send on WhatsApp</span>
+        </a>
+      </div>
+
+      <div class="share-info-hint">
+        🔒 <strong>Receiver Protection:</strong> This link opens in <strong>Viewer Mode</strong>. All edit buttons, upload prompts, and camera badges will be hidden for the recipient!
+      </div>
+    </div>
+  </div>
+
+  <!-- Common Script File -->
+  <script src="script.js"></script>
 </body>
 </html>
