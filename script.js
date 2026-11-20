@@ -12,7 +12,6 @@
   const SLIDES = [
     { id: 'home', name: 'Home', title: 'Happy Birthday Sri Shananmathi' },
     { id: 'wishes', name: 'Wishes', title: 'Heartfelt Birthday Wishes' },
-    { id: 'gallery', name: 'Gallery', title: 'Celebration Moments' },
     { id: 'memories', name: 'Memories', title: 'Polaroid Memories' },
     { id: 'about', name: 'About', title: 'About Sri Shananmathi' },
     { id: 'surprise', name: 'Surprise', title: 'Special Birthday Surprise' }
@@ -131,9 +130,32 @@
       autoPlayToggleBtn.addEventListener('click', toggleAutoPlay);
     }
 
-    // Keyboard navigation (Arrow keys)
+    // Keyboard navigation (Strict guard to prevent slide jumping during editing or modals)
     document.addEventListener('keydown', (e) => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+      // Check if typing inside any form field, contenteditable, or card container
+      if (
+        e.target.tagName === 'INPUT' ||
+        e.target.tagName === 'TEXTAREA' ||
+        e.target.tagName === 'SELECT' ||
+        e.target.isContentEditable ||
+        (e.target.closest && (
+          e.target.closest('[contenteditable="true"]') ||
+          e.target.closest('.royal-proclamation-card') ||
+          e.target.closest('.name-modal-card') ||
+          e.target.closest('.music-studio-card') ||
+          e.target.closest('.share-modal-card') ||
+          e.target.closest('.polaroid-card')
+        ))
+      ) {
+        return;
+      }
+
+      // Block keyboard slide navigation if ANY modal is currently open
+      const anyModalOpen = document.querySelector(
+        '.name-customizer-modal.active, .music-studio-modal.active, .surprise-card-reveal.active, .lightbox-modal.active, .share-modal.active'
+      );
+      if (anyModalOpen) return;
+
       if (e.key === 'ArrowRight' || e.key === 'PageDown') {
         nextSlide();
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
@@ -141,25 +163,54 @@
       }
     });
 
-    // Touch swipe navigation for mobile
+    // Touch swipe navigation with strict filtering (prevents vertical scrolling or text selection from jumping slides)
     let touchStartX = 0;
-    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    let isTouchValid = false;
+
     document.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
+      if (!e.touches || e.touches.length !== 1) {
+        isTouchValid = false;
+        return;
+      }
+      // Ignore swipe if inside editable element, modal, card, or button
+      if (
+        (e.target.closest && (
+          e.target.closest('[contenteditable="true"]') ||
+          e.target.closest('input, textarea, select, button, a') ||
+          e.target.closest('.name-customizer-modal, .music-studio-modal, .surprise-card-reveal, .lightbox-modal, .share-modal, .royal-proclamation-card, .polaroid-card')
+        ))
+      ) {
+        isTouchValid = false;
+        return;
+      }
+      isTouchValid = true;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
     }, { passive: true });
 
     document.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
+      if (!isTouchValid || !e.changedTouches || e.changedTouches.length === 0) return;
+      const touch = e.changedTouches[0];
+      const diffX = touchStartX - touch.clientX;
+      const diffY = touchStartY - touch.clientY;
+      const duration = Date.now() - touchStartTime;
 
-    function handleSwipe() {
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 60) {
-        if (diff > 0) nextSlide();
-        else prevSlide();
+      // Must be a quick, deliberate horizontal swipe:
+      // - Under 500ms
+      // - Horizontal distance > 85px
+      // - Horizontal distance > 2.5x vertical distance (to never trigger on vertical scrolling)
+      if (duration < 500 && Math.abs(diffX) > 85 && Math.abs(diffX) > Math.abs(diffY) * 2.5) {
+        if (diffX > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
       }
-    }
+      isTouchValid = false;
+    }, { passive: true });
 
     // Hash sync
     window.addEventListener('hashchange', () => {
@@ -739,8 +790,81 @@
   }
 
   // ===================================================================
-  // 5. MUSIC STUDIO: CUSTOM SONG UPLOADER & MELODY CHANGER
+  // 5. MUSIC STUDIO: CUSTOM SONG UPLOADER & MELODY CHANGER (WITH INDEXEDDB PERSISTENCE)
   // ===================================================================
+
+  // IndexedDB Helper for Storing Large Custom Audio Files
+  const AudioStorage = {
+    DB_NAME: 'SriBirthdayAudioDB',
+    STORE_NAME: 'audio_tracks',
+    DB_VERSION: 1,
+
+    openDB() {
+      return new Promise((resolve, reject) => {
+        if (!window.indexedDB) {
+          return reject(new Error('IndexedDB not supported'));
+        }
+        const req = indexedDB.open(this.DB_NAME, this.DB_VERSION);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains(this.STORE_NAME)) {
+            db.createObjectStore(this.STORE_NAME, { keyPath: 'id' });
+          }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    },
+
+    async saveTrack(id, dataUrl, name) {
+      try {
+        const db = await this.openDB();
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(this.STORE_NAME, 'readwrite');
+          const store = tx.objectStore(this.STORE_NAME);
+          store.put({ id, dataUrl, name, updatedAt: Date.now() });
+          tx.oncomplete = () => resolve(true);
+          tx.onerror = () => reject(tx.error);
+        });
+      } catch (err) {
+        console.warn('AudioStorage save failed:', err);
+        return false;
+      }
+    },
+
+    async getTrack(id) {
+      try {
+        const db = await this.openDB();
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(this.STORE_NAME, 'readonly');
+          const store = tx.objectStore(this.STORE_NAME);
+          const req = store.get(id);
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => reject(req.error);
+        });
+      } catch (err) {
+        console.warn('AudioStorage get failed:', err);
+        return null;
+      }
+    },
+
+    async deleteTrack(id) {
+      try {
+        const db = await this.openDB();
+        return new Promise((resolve, reject) => {
+          const tx = db.transaction(this.STORE_NAME, 'readwrite');
+          const store = tx.objectStore(this.STORE_NAME);
+          store.delete(id);
+          tx.oncomplete = () => resolve(true);
+          tx.onerror = () => reject(tx.error);
+        });
+      } catch (err) {
+        console.warn('AudioStorage delete failed:', err);
+        return false;
+      }
+    }
+  };
+
   class BirthdayAudioEngine {
     constructor() {
       this.ctx = null;
@@ -750,13 +874,67 @@
       this.volume = 0.8;
       this.currentPreset = 'chimes';
 
-      this.customAudio = new Audio();
+      // Use the audio element in DOM or fallback
+      this.customAudio = document.getElementById('main-custom-audio') || new Audio();
       this.customAudio.loop = true;
       this.customAudioName = '';
 
       this.customAudio.addEventListener('ended', () => {
-        if (this.isPlaying) this.customAudio.play();
+        if (this.isPlaying && this.currentPreset === 'custom') {
+          this.customAudio.currentTime = 0;
+          this.customAudio.play().catch(e => console.log('Audio loop prevented:', e));
+        }
       });
+
+      this.customAudio.addEventListener('play', () => {
+        this.updateCustomSongUI(true);
+      });
+
+      this.customAudio.addEventListener('pause', () => {
+        this.updateCustomSongUI(false);
+      });
+
+      // Load previously saved song from IndexedDB
+      this.loadPersistedAudio();
+    }
+
+    async loadPersistedAudio() {
+      try {
+        const saved = await AudioStorage.getTrack('custom_song');
+        if (saved && saved.dataUrl) {
+          this.customAudio.src = saved.dataUrl;
+          this.customAudioName = saved.name || 'Custom Song';
+          this.showCustomSongBox(this.customAudioName);
+          const songLabel = document.getElementById('current-song-label');
+          if (songLabel) {
+            songLabel.textContent = `🎵 Selected: ${this.customAudioName}`;
+          }
+        }
+      } catch (err) {
+        console.warn('Could not restore persisted audio:', err);
+      }
+    }
+
+    showCustomSongBox(name) {
+      const box = document.getElementById('custom-song-status-box');
+      const title = document.getElementById('custom-song-title-text');
+      if (box && title) {
+        title.textContent = name;
+        box.style.display = 'flex';
+      }
+    }
+
+    hideCustomSongBox() {
+      const box = document.getElementById('custom-song-status-box');
+      if (box) box.style.display = 'none';
+    }
+
+    updateCustomSongUI(isPlaying) {
+      const testBtn = document.getElementById('custom-song-play-test-btn');
+      if (testBtn) {
+        testBtn.textContent = isPlaying ? '⏸ Pause Song' : '▶ Play Song';
+      }
+      this.updateUI(isPlaying);
     }
 
     initContext() {
@@ -845,14 +1023,25 @@
 
     start() {
       this.isPlaying = true;
-      this.updateUI(true);
+      clearTimeout(this.currentTimeout);
 
-      if (this.currentPreset === 'custom' && this.customAudio.src) {
+      if (this.currentPreset === 'custom' && this.customAudio && this.customAudio.src) {
         this.customAudio.volume = this.volume;
-        this.customAudio.play().catch(e => console.log('Audio playback prevented:', e));
+        this.customAudio.play().then(() => {
+          this.updateUI(true);
+          this.updateCustomSongUI(true);
+        }).catch(e => {
+          console.warn('Audio playback prevented:', e);
+          this.updateUI(false);
+          this.updateCustomSongUI(false);
+        });
       } else {
+        if (this.customAudio) {
+          this.customAudio.pause();
+        }
         this.initContext();
         this.playSequence(0);
+        this.updateUI(true);
       }
     }
 
@@ -887,6 +1076,7 @@
         this.customAudio.pause();
       }
       this.updateUI(false);
+      this.updateCustomSongUI(false);
     }
 
     toggle() {
@@ -907,15 +1097,65 @@
 
     loadCustomFile(file) {
       if (!file) return;
-      const objectUrl = URL.createObjectURL(file);
-      this.customAudio.src = objectUrl;
+      this.stop(); // Stop ongoing synth or audio
+
       this.customAudioName = file.name;
       this.currentPreset = 'custom';
-      this.start();
 
+      // Instant blob URL for immediate playback feedback
+      const blobUrl = URL.createObjectURL(file);
+      this.customAudio.src = blobUrl;
+      this.customAudio.volume = this.volume;
+      this.customAudio.load();
+
+      this.showCustomSongBox(file.name);
       const songLabel = document.getElementById('current-song-label');
       if (songLabel) {
         songLabel.textContent = `🎵 Playing: ${file.name}`;
+      }
+
+      this.start();
+
+      // Read as DataURL in background and persist in IndexedDB
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const dataUrl = e.target.result;
+        await AudioStorage.saveTrack('custom_song', dataUrl, file.name);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async removeCustomAudio() {
+      this.stop();
+      if (this.customAudio) {
+        this.customAudio.pause();
+        this.customAudio.src = '';
+      }
+      this.customAudioName = '';
+      this.currentPreset = 'chimes';
+      this.hideCustomSongBox();
+      await AudioStorage.deleteTrack('custom_song');
+
+      const songLabel = document.getElementById('current-song-label');
+      if (songLabel) {
+        songLabel.textContent = '🎵 Playing: Celebration Chimes';
+      }
+      const presetItems = document.querySelectorAll('.track-preset-item');
+      presetItems.forEach(p => {
+        if (p.getAttribute('data-preset') === 'chimes') p.classList.add('active');
+        else p.classList.remove('active');
+      });
+    }
+
+    toggleCustomPlayback() {
+      if (!this.customAudio.src) return;
+      if (this.currentPreset !== 'custom') {
+        this.setPreset('custom');
+      }
+      if (this.customAudio.paused) {
+        this.start();
+      } else {
+        this.stop();
       }
     }
 
@@ -952,6 +1192,8 @@
     const audioDropZone = document.getElementById('audio-upload-dropzone');
     const presetItems = document.querySelectorAll('.track-preset-item');
     const volumeSlider = document.getElementById('music-volume-slider');
+    const customTestBtn = document.getElementById('custom-song-play-test-btn');
+    const customRemoveBtn = document.getElementById('custom-song-remove-btn');
 
     if (musicChangeBtn && musicModal) {
       musicChangeBtn.addEventListener('click', () => {
@@ -973,11 +1215,45 @@
 
     if (audioDropZone && audioFileInput) {
       audioDropZone.addEventListener('click', () => audioFileInput.click());
+
+      audioDropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        audioDropZone.style.borderColor = '#ffd700';
+      });
+
+      audioDropZone.addEventListener('dragleave', () => {
+        audioDropZone.style.borderColor = '';
+      });
+
+      audioDropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        audioDropZone.style.borderColor = '';
+        if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+          const file = e.dataTransfer.files[0];
+          audioEngine.loadCustomFile(file);
+          presetItems.forEach(p => p.classList.remove('active'));
+        }
+      });
+
       audioFileInput.addEventListener('change', (e) => {
         if (e.target.files && e.target.files[0]) {
           audioEngine.loadCustomFile(e.target.files[0]);
           presetItems.forEach(p => p.classList.remove('active'));
         }
+      });
+    }
+
+    // Play/Pause test button for uploaded custom song
+    if (customTestBtn) {
+      customTestBtn.addEventListener('click', () => {
+        audioEngine.toggleCustomPlayback();
+      });
+    }
+
+    // Remove custom song button
+    if (customRemoveBtn) {
+      customRemoveBtn.addEventListener('click', () => {
+        audioEngine.removeCustomAudio();
       });
     }
 

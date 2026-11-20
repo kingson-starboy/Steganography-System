@@ -1726,6 +1726,73 @@ body.standalone .page-section {
   color: var(--pink-light);
 }
 
+.custom-song-status-box {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  border-radius: 14px;
+  padding: 0.8rem 1.1rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.custom-song-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #a7f3d0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60%;
+}
+
+.custom-song-info .status-indicator {
+  color: #10b981;
+  font-size: 1.1rem;
+  animation: pulse 1.5s infinite;
+}
+
+.custom-song-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.custom-song-btn {
+  border: none;
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.custom-song-btn.play {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+}
+.custom-song-btn.play:hover {
+  background: #059669;
+  transform: scale(1.05);
+}
+
+.custom-song-btn.remove {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffd700;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+.custom-song-btn.remove:hover {
+  background: rgba(255, 77, 121, 0.3);
+  color: #ff4d79;
+}
+
 .track-presets-list {
   display: flex;
   flex-direction: column;

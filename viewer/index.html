@@ -50,7 +50,6 @@
     <ul class="nav-menu" id="nav-menu" role="navigation">
       <li><a href="#home" class="nav-link active">Home</a></li>
       <li><a href="#wishes" class="nav-link">Wishes</a></li>
-      <li><a href="#gallery" class="nav-link">Gallery</a></li>
       <li><a href="#memories" class="nav-link">Memories</a></li>
       <li><a href="#about" class="nav-link">About</a></li>
       <li><a href="#surprise" class="nav-link">Surprise</a></li>
@@ -152,10 +151,6 @@
             <span>Next: Read Wishes</span>
             <span>▶</span>
           </a>
-          <a href="#surprise" class="cta-btn secondary">
-            <span>Jump to Surprise Gift</span>
-            <span>🎁</span>
-          </a>
         </div>
       </div>
     </section>
@@ -251,85 +246,6 @@
             <span>💎 Queen of Hearts</span>
           </div>
         </article>
-      </div>
-
-      <div class="cta-btn-group" style="margin-top: 2.5rem;">
-        <a href="#gallery" class="cta-btn gold">
-          <span>Next: View Photo Gallery</span>
-          <span>▶</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ---------------------------------------------------------------
-         PAGE 3: PHOTO GALLERY (WITH UNIVERSAL PHOTO UPLOADER)
-         --------------------------------------------------------------- -->
-    <section id="gallery" class="page-section" aria-labelledby="gallery-heading">
-      <h2 id="gallery-heading" class="cursive-title">Celebration Photo Gallery</h2>
-      <p class="section-subtitle">Moments of splendor, flowers, cakes &amp; <span>golden memories</span></p>
-
-      <!-- Gallery Controls: Upload your own photos (Editor only) -->
-      <div class="gallery-controls-bar">
-        <div class="gallery-controls-text">
-          <span>📸</span>
-          <span>Add your own celebration photos</span>
-        </div>
-        <div>
-          <input type="file" id="gallery-file-input" accept="image/*" multiple style="display:none;">
-          <button class="upload-photo-btn" id="upload-gallery-photo-btn">
-            <span>➕ Upload Photos</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="gallery-grid">
-        <!-- Gallery 1: Cake -->
-        <div class="gallery-item">
-          <img src="images/cake.svg" alt="Celebration Moment">
-          <div class="gallery-overlay">
-            <span class="gallery-zoom-icon">🔍</span>
-          </div>
-        </div>
-
-        <!-- Gallery 2: Flowers -->
-        <div class="gallery-item">
-          <img src="images/flowers.svg" alt="Celebration Moment">
-          <div class="gallery-overlay">
-            <span class="gallery-zoom-icon">🔍</span>
-          </div>
-        </div>
-
-        <!-- Gallery 3: Balloons -->
-        <div class="gallery-item">
-          <img src="images/balloons.svg" alt="Celebration Moment">
-          <div class="gallery-overlay">
-            <span class="gallery-zoom-icon">🔍</span>
-          </div>
-        </div>
-
-        <!-- Gallery 4: Sunset -->
-        <div class="gallery-item">
-          <img src="images/sunset.svg" alt="Celebration Moment">
-          <div class="gallery-overlay">
-            <span class="gallery-zoom-icon">🔍</span>
-          </div>
-        </div>
-
-        <!-- Gallery 5: Celebration Toast -->
-        <div class="gallery-item">
-          <img src="images/celebration.svg" alt="Celebration Moment">
-          <div class="gallery-overlay">
-            <span class="gallery-zoom-icon">🔍</span>
-          </div>
-        </div>
-
-        <!-- Gallery 6: Royal Avatar -->
-        <div class="gallery-item">
-          <img src="images/profile-avatar.svg" alt="Celebration Moment">
-          <div class="gallery-overlay">
-            <span class="gallery-zoom-icon">🔍</span>
-          </div>
-        </div>
       </div>
 
       <div class="cta-btn-group" style="margin-top: 2.5rem;">
@@ -624,7 +540,7 @@
 
     <!-- Slide Information Indicators -->
     <div class="ctrl-info">
-      <span class="slide-counter" id="slide-counter">01 / 06</span>
+      <span class="slide-counter" id="slide-counter">01 / 05</span>
       <span class="slide-title-label" id="slide-title-label">• Home</span>
       <button class="autoplay-toggle-btn" id="autoplay-toggle-btn" title="Toggle automatic slideshow">
         ▶ Auto-Play: OFF
@@ -731,10 +647,24 @@
 
       <!-- Custom Audio File Uploader -->
       <input type="file" id="custom-audio-file-input" accept="audio/*" style="display:none;">
+      <audio id="main-custom-audio" preload="auto" loop style="display:none;"></audio>
+      
       <div class="music-uploader-zone" id="audio-upload-dropzone">
         <div class="upload-icon">🎧 ➕</div>
         <span class="title">Upload Your Own Song</span>
-        <span class="desc">Supports MP3, WAV, M4A, OGG, AAC &amp; all audio formats</span>
+        <span class="desc">Click or drag &amp; drop any MP3, WAV, M4A song</span>
+      </div>
+
+      <!-- Custom Song Status & Controller Box -->
+      <div class="custom-song-status-box" id="custom-song-status-box" style="display:none;">
+        <div class="custom-song-info">
+          <span class="status-indicator">●</span>
+          <span class="song-title-text" id="custom-song-title-text">My Song.mp3</span>
+        </div>
+        <div class="custom-song-controls">
+          <button type="button" class="custom-song-btn play" id="custom-song-play-test-btn">▶ Play Song</button>
+          <button type="button" class="custom-song-btn remove" id="custom-song-remove-btn" title="Remove custom song">✕ Reset</button>
+        </div>
       </div>
 
       <!-- Built-in Melody Presets -->
