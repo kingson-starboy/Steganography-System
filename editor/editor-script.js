@@ -909,12 +909,17 @@
         const saved = await AudioStorage.getTrack('custom_song');
         if (saved && saved.dataUrl) {
           this.customAudio.src = saved.dataUrl;
+          this.customAudio.volume = this.volume;
           this.customAudioName = saved.name || 'Custom Song';
+          this.currentPreset = 'custom'; // ← critical: tell engine to use custom audio on play
           this.showCustomSongBox(this.customAudioName);
           const songLabel = document.getElementById('current-song-label');
           if (songLabel) {
-            songLabel.textContent = `🎵 Selected: ${this.customAudioName}`;
+            songLabel.textContent = `🎵 Custom: ${this.customAudioName}`;
           }
+          // Also mark custom preset item as active in Music Studio UI if open
+          const presetItems = document.querySelectorAll('.track-preset-item');
+          presetItems.forEach(p => p.classList.remove('active'));
         }
       } catch (err) {
         console.warn('Could not restore persisted audio:', err);
