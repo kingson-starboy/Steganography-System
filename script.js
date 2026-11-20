@@ -10,10 +10,10 @@
 
   // --- Presentation Configuration ---
   const SLIDES = [
-    { id: 'home', name: 'Home', title: 'Happy Birthday Sri Shananmathi' },
+    { id: 'home', name: 'Home', title: 'Happy Birthday' },
     { id: 'wishes', name: 'Wishes', title: 'Heartfelt Birthday Wishes' },
     { id: 'memories', name: 'Memories', title: 'Polaroid Memories' },
-    { id: 'about', name: 'About', title: 'About Sri Shananmathi' },
+    { id: 'about', name: 'About', title: 'About' },
     { id: 'surprise', name: 'Surprise', title: 'Special Birthday Surprise' }
   ];
 
@@ -94,6 +94,12 @@
     document.querySelectorAll('.birthday-dob-text').forEach(el => {
       el.textContent = dob;
     });
+
+    // Update cake hint if wish was already granted
+    const hint = document.getElementById('cake-hint-text');
+    if (hint && hint.textContent.includes('Wish Granted')) {
+      hint.textContent = `🎉 Happy Birthday ${name}! Wish Granted!`;
+    }
 
     // Update inputs in modals if they exist
     const nameInput = document.getElementById('custom-name-input');
@@ -1523,7 +1529,7 @@
       if (hint) {
         isBlownOut = !isBlownOut;
         hint.textContent = isBlownOut 
-          ? "🎉 Happy Birthday Sri Shananmathi! Wish Granted!" 
+          ? `🎉 Happy Birthday ${currentCelebrationName}! Wish Granted!` 
           : "✨ Click the cake again to send more wishes!";
       }
     });
@@ -1762,7 +1768,7 @@
       url.hash = '';
 
       url.searchParams.set('view', '1');
-      if (currentCelebrationName && currentCelebrationName !== 'Sri Shananmathi') {
+      if (currentCelebrationName) {
         url.searchParams.set('n', currentCelebrationName);
       }
       if (currentCelebrationDob && currentCelebrationDob !== '21 November 2007') {
